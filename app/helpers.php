@@ -1,5 +1,9 @@
 <?php
 
+function isUserAdmin(): bool{
+    return Auth::user()->funcao == \App\Util\Parametro::FUNCAO_ADMIN;
+}
+
 function helperIndexGenero($value){
     return array_search(ucfirst($value), retornaArrayGenero());
 }

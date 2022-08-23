@@ -17,7 +17,7 @@ class CreateTbPessoaTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('sobrenome');
-            $table->string('nome_social');
+            $table->string('nome_social')->nullable();
             $table->string('telefone', 11)->unique();
             $table->string('cpf', 11)->unique();
             $table->string('email')->unique();

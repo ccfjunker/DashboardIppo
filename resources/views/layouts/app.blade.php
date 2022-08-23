@@ -13,6 +13,7 @@
     <link rel="icon" type="image/x-icon" href="{{asset('storage/img/favicon.ico')}}"/>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js" type="text/javascript" ></script>
 
     <!-- Styles -->
     @include('inc.styles')

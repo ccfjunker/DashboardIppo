@@ -22,6 +22,16 @@ Route::group(['middleware' => 'auth'] , function() {
 
     // $this->middleware
 
+    Route::group(['prefix' => 'admin'], function(){
+        Route::get('/dataFilteredForTheCharts', 'Admin\DashboardController@dataFilteredForTheCharts')->name('admin.dataFilteredForTheCharts')->middleware('funcao');
+        Route::get('/home', 'Admin\DashboardController@index')->name('admin.home')->middleware('funcao');
+    });
+
+    Route::get('/dataFilteredForTheCharts', 'DashboardController@dataFilteredForTheCharts')->name('dataFilteredForTheCharts');
+    Route::get('/', 'DashboardController@index');
+    Route::get('/home', 'DashboardController@index')->name('home');
+
+
     Route::get('/analytics', function() {
         // $category_name = '';
         $data = [
@@ -1412,9 +1422,7 @@ Route::group(['middleware' => 'auth'] , function() {
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
-Route::get('/home', 'HomeController@index');
-Route::get('/dataFilteredForTheCharts', 'HomeController@dataFilteredForTheCharts')->name('dataFilteredForTheCharts');
+
 
 Route::get('/register', function() {
     return redirect('/login');

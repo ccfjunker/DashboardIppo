@@ -13,18 +13,35 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::group([
+    'prefix' => 'auth'
+], function () {
+    Route::post('login', 'API\AuthAPIController@login');
+    Route::post('register', 'API\AuthAPIController@signup');
+
+    Route::group([
+        'middleware' => 'auth:api'
+    ], function() {
+        Route::middleware(['funcao'])->group(function () {
+            Route::get('logout', 'API\AuthAPIController@logout');
+            Route::get('user', 'API\AuthAPIController@user');
+
+            Route::get('funcionarios', 'API\Pessoa\FuncionarioAPIController@index');
+            Route::get('funcionario/{id}', 'API\Pessoa\FuncionarioAPIController@show');
+            Route::post('funcionario', 'API\Pessoa\FuncionarioAPIController@store');
+            Route::put('funcionario/{id}', 'API\Pessoa\FuncionarioAPIController@update');
+            Route::delete('funcionario/{id}', 'API\Pessoa\FuncionarioAPIController@delete');
+
+            Route::get('anamneses', 'API\Dashboard\AnamneseAPIController@index');
+            Route::get('import-export-excel', 'API\ImportExportExcel\ImportExportExcelController@index');
+            Route::post('import-export-excel', 'API\ImportExportExcel\ImportExportExcelController@import');
+            Route::get('export-excel', 'API\ImportExportExcel\ImportExportExcelController@export');
+        });
+    });
+});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('funcionarios', 'API\Pessoa\FuncionarioAPIController@index');
-Route::get('funcionario/{id}', 'API\Pessoa\FuncionarioAPIController@show');
-Route::post('funcionario', 'API\Pessoa\FuncionarioAPIController@store');
-Route::put('funcionario/{id}', 'API\Pessoa\FuncionarioAPIController@update');
-Route::delete('funcionario/{id}', 'API\Pessoa\FuncionarioAPIController@delete');
 
-Route::get('anamneses', 'API\Dashboard\AnamneseAPIController@index');
-Route::get('import-export-excel', 'API\ImportExportExcel\ImportExportExcelController@index');
-Route::post('import-export-excel', 'API\ImportExportExcel\ImportExportExcelController@import');
-Route::get('export-excel', 'API\ImportExportExcel\ImportExportExcelController@export');

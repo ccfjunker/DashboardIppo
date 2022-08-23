@@ -23,8 +23,7 @@
       <script src="{{asset('../../../src/plugins/src/flatpickr/custom-flatpickr.js')}}"></script>
       <script src="{{asset('../../../src/assets/js/forms/bootstrap_validation/bs_validation_script.js')}}"></script>
 
-      <script src="{{asset('../../../src/plugins/src/apex/apexcharts.min.js')}}"></script>
-      <script src="{{asset('../../../src/plugins/src/apex/custom-apexcharts.js?4345')}}"></script>
+
       @break
 
     @case('sales')

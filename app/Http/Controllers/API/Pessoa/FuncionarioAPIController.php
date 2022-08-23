@@ -4,8 +4,10 @@ namespace App\Http\Controllers\API\Pessoa;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FuncionarioRequest;
-use App\Model\Pessoa\Funcionario;
+use App\Models\Pessoa\Funcionario;
+use App\Services\FuncionarioService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FuncionarioAPIController extends Controller
 {
@@ -22,10 +24,24 @@ class FuncionarioAPIController extends Controller
     {
         $validated = $request->validated();
         if($validated){
-            return Funcionario::inserirRequest($request);
+            try {
+                DB::beginTransaction();
+                FuncionarioService::insereRequest($request);
+                DB::commit();
+                return response()->json([
+                    'message' => 'Successfully created Funcionario!'
+                ], 201);
+            }catch (\Exception $exception){
+                DB::rollBack();
+                return response()->json([
+                    'message' => 'Error create Funcionario!',
+                    'error'=> $exception->getMessage()
+                ], 500);
+            }
+
         }
 
-        return null;
+
 
     }
 

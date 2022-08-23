@@ -17,8 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('id_pessoa');
             $table->foreign('id_pessoa')->references('id')->on('tb_pessoa')->onDelete('cascade');
-            $table->unsignedBigInteger('id_empresa');
-            $table->foreign('id_empresa')->references('id')->on('tb_empresa')->onDelete('cascade');
+            $table->string('funcao')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('email');
@@ -26,12 +25,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('users', function ($table) {
-            $table->string('api_token', 80)->after('password')
-                ->unique()
-                ->nullable()
-                ->default(null);
-        });
+
     }
 
     /**

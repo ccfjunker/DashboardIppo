@@ -11,7 +11,7 @@ class FiltroDashboardEmpresaRequest extends FormRequest{
      * @return bool
      */
     public function authorize(){
-        return false;
+        return true;
     }
 
     /**
@@ -21,12 +21,7 @@ class FiltroDashboardEmpresaRequest extends FormRequest{
      */
     public function rules(){
         return [
-            'inputIdEmpresa'=>'numeric|required',
-            'inputDataInicial'=>'required|date',
-            'inputDataFinal'=>'date|after:inputDataInicial',
-            'inputIdade'=>'numeric',
-            'selectGenero'=>'in:H,M',
-            'selectTrabalho'=>'in:HO,HI,PS',
+
         ];
     }
 }

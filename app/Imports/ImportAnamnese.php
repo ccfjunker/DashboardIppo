@@ -2,10 +2,12 @@
 
 namespace App\Imports;
 
-use App\Model\Dashboard\Anamnese;
-use App\Model\Empresa\Empresa;
-use App\Model\Pessoa\Funcionario;
-use App\Model\Pessoa\Pessoa;
+use App\Models\Dashboard\Anamnese;
+use App\Models\Empresa\Empresa;
+use App\Models\Pessoa\Funcionario;
+use App\Models\Pessoa\Pessoa;
+use App\Services\PessoaService;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class ImportAnamnese implements ToModel
@@ -17,17 +19,26 @@ class ImportAnamnese implements ToModel
     */
     public function model(array $row)
     {
-        return new Anamnese([
-            'data_atualizacao'=>dateTimeDB($row[1]),
-            'data_criacao'=>dateTimeDB($row[2]),
-            'proprietario'=>$row[3],
-            'cronicos'=>$row[5],
-            'mental'=>$row[6],
-            'alimentacao'=>$row[7],
-            'fisico'=>$row[8],
-            'id_funcionario'=>$this->retornaFuncionarioModelDoExcel($row)->id,
-            'id_empresa'=>$this->retornaEmpresaModelDoExcel($row)->id
-        ]);
+        try {
+            DB::beginTransaction();
+            $anamnese = new Anamnese([
+                'data_atualizacao'=>dateTimeDB($row[1]),
+                'data_criacao'=>dateTimeDB($row[2]),
+                'proprietario'=>$row[3],
+                'cronicos'=>$row[5],
+                'mental'=>$row[6],
+                'alimentacao'=>$row[7],
+                'fisico'=>$row[8],
+                'id_empresa'=>$this->retornaEmpresaModelDoExcel($row)->id,
+                'id_funcionario'=>$this->retornaFuncionarioModelDoExcel($row)->id,
+            ]);
+            DB::commit();
+            return $anamnese;
+        }catch (\Exception $e){
+
+            DB::rollBack();
+        }
+
     }
 
     private function retornaEmpresaModelDoExcel(array $row){
@@ -57,9 +68,9 @@ class ImportAnamnese implements ToModel
     }
 
     private function retornaPessoaModelDoExcel(array $row){
-        $pessoa = Pessoa::findByCPF($row[4]);
+        $pessoa = PessoaService::findByCPF($row[4]);
         if(!$pessoa){
-            return Pessoa::inserirArray([
+           return PessoaService::inserePessoaArray([
                 'cpf'=>$row[4],
                 'nome'=>$row[9],
                 'email'=>$row[10],

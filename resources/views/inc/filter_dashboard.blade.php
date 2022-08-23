@@ -30,21 +30,21 @@
 
                     <div id="iconAccordionOne" class="collapse" aria-labelledby="headingOne3" data-bs-parent="#iconsAccordion">
                         <div class="card-body">
-                            <form id="formFiltroAnamnese" method="GET" action="{{ route('dataFilteredForTheCharts') }}">
+                            <form id="formFiltroAnamnese"  action="{{ route($route) }}">
                                 @csrf
                                 <div class="form-group ">
 
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="inputDataInicial">Data inicial: </label>
-                                            <input name="inputDataInicial" id="inputDataInicial" value="2022-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Data inicial...">
+                                            <input name="inputDataInicial" id="inputDataInicial" value="" class="form-control flatpickr flatpickr-input active" type="date" placeholder="Data inicial..."/>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="inputDataFinal">Data final: </label>
-                                            <input name="inputDataFinal" id="inputDataFinal" value="2022-09-04" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Data final...">
+                                            <input name="inputDataFinal" id="inputDataFinal" value="" class="form-control flatpickr flatpickr-input active" type="date" placeholder="Data final..."/>
                                         </div>
                                     </div>
-                                    <br>
+                                    <br/>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="inputIdade">Idade: </label>
@@ -70,14 +70,29 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <br>
+                                    <br/>
+                                    @if(isUserAdmin())
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="selectEmpresa">Empresa: </label>
+                                            <select class="form-select" id="selectEmpresa" name="selectEmpresa" >
+                                                <option selected="" disabled="" value="">Selecione...</option>
+                                                @foreach($options_empresa as $empresa )
+                                                    <option value="{{ $empresa['id'] }}">{{ $empresa['nome'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    @endif
                                     <div class="row">
                                         <div class="col-12">
-                                            <button class="btn btn-primary" type="submit">Filtrar</button>
+                                            <button class="btn btn-primary">Filtrar</button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
