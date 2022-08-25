@@ -7,7 +7,7 @@ class Parametro
     const FUNCAO_ADMIN = 'A';
     const FUNCAO_EMPRESA = 'E';
     const OPCOES_SAUDE_CRONICA = [
-        "Obesidade", "Hipertensão", "Outro", "Diabetes", "Não possuo doenças crônicas", "Doença Respiratória DPOC", "Colesterol Alto", "Doença Cardiovascular"
+        "Obesidade", "Colesterol Alto", "Diabetes", "Doença Cardiovascular", "Doença Respiratória DPOC", "Hipertensão", "Outro", "Não possuo doenças crônicas"
     ];
 
     const OPCOES_SAUDE_MENTAL = [

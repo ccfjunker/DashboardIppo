@@ -18,4 +18,13 @@ class FuncionarioService
         }
         return self::insereArray($funcionarioArray);
     }
+
+    public static function buscaLista($id_empresa = null){
+        if($id_empresa != null){
+            return Funcionario::whereIdEmpresa($id_empresa)->with('pessoa')->get();
+        }else{
+            return Funcionario::with('pessoa')->get();
+        }
+
+    }
 }
