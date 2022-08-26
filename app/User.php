@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Empresa\Empresa;
 use App\Models\Pessoa\Pessoa;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -77,6 +78,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function pessoa(){
         return $this->belongsTo('App\Models\Pessoa\Pessoa', 'id_pessoa');
+    }
+
+    public function empresas(){
+        return $this->belongsToMany(Empresa::class, 'tb_user_empresa', 'id_usuario', 'id_empresa');
     }
 
 

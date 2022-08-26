@@ -17,6 +17,7 @@
 
     <!-- Styles -->
     @include('inc.styles')
+    @include('inc.scripts_ippo')
 </head>
 <body {{ ($has_scrollspy) ? scrollspy($scrollspy_offset) : '' }} class=" {{ ($alt_menu) ? 'alt-menu' : '' }} {{ ($page_name === 'error404') ? 'error404 text-center' : '' }} {{ ($page_name === 'error500') ? 'error500 text-center' : '' }} {{ ($page_name === 'error503') ? 'error503 text-center' : '' }} {{ ($page_name === 'maintenence') ? 'maintanence text-center' : '' }} layout-boxed">
 
@@ -25,8 +26,9 @@
          <div class="spinner-grow align-self-center"></div>
     </div></div></div>
     <!--  END LOADER -->
-
-    @include('inc.navbar')
+    @include('inc.modal_loading')
+    @include('inc.modal_error')
+    @include('inc.modal_info')
 
     <!--  BEGIN MAIN CONTAINER  -->
     <div class="main-container" id="container">
@@ -37,7 +39,7 @@
         @include('inc.sidebar')
 
         <!--  BEGIN CONTENT PART  -->
-        <div id="content" class="main-content">
+        <div id="content" class="main-content" style="margin-top: 0">
 
             @yield('content')
 

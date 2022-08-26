@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="graficoSaudeCronica" class="col-xl-12 layout-spacing">
+                <div id="graficoSaudeCronica" class="col-xl-6 layout-spacing">
                     <div class="statbox widget box box-shadow">
                         <div class="widget-header">
                             <div class="row">
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="graficoSaudeMental" class="col-xl-12 layout-spacing">
+                <div id="graficoSaudeMental" class="col-xl-6 layout-spacing">
                     <div class="statbox widget box box-shadow">
                         <div class="widget-header">
                             <div class="row">
@@ -108,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="graficoAlimentacao" class="col-xl-12 layout-spacing">
+                <div id="graficoAlimentacao" class="col-xl-6 layout-spacing">
                     <div class="statbox widget box box-shadow">
                         <div class="widget-header">
                             <div class="row">
@@ -128,7 +128,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="graficoAtividadeFisica" class="col-xl-12 layout-spacing">
+                <div id="graficoAtividadeFisica" class="col-xl-6 layout-spacing">
                     <div class="statbox widget box box-shadow">
                         <div class="widget-header">
                             <div class="row">
@@ -148,75 +148,18 @@
                         </div>
                     </div>
                 </div>
-                <script src="{{asset('../../../src/plugins/src/apex/apexcharts.min.js')}}"></script>
-                <script src="{{asset('../../../src/plugins/src/apex/custom-apexcharts.js?434s5')}}" type="text/javascript"></script>
-                <script src="{{asset('assets/js/chart.js')}}" type="text/javascript"></script>
 
-                <script>
+                <script type="module">
 
-                    function loadCharts(){
-                        $.ajax({
-                            url: '{{ route('dataFilteredForTheCharts') }}',
-                            type: 'GET',
-                            data: {
-                                _token: "{{ csrf_token() }}",
-                                @if(isUserAdmin())
-                                selectEmpresa:$("#selectEmpresa").val(),
-                                @endif
-                                inputDataInicial:$("#inputDataInicial").val(),
-                                inputDataFinal:$("#inputDataFinal").val(),
-                                inputIdade:$("#inputIdade").val(),
-                                selectGenero:$("#selectGenero").val(),
-                                selectTrabalho:$("#selectTrabalho").val(),
-                            },
-                            dataType: 'JSON',
 
-                            success: function(data){
+                    import {Dashboard} from "../../js/dashboard/dashboard.js";
 
-                                chart.renderColaboradoresCadastradosTotal(data.colaboradores);
-                                chart.renderColaboradoresCadastradosEngajamento(data.colaboradores);
-                                dashboard.preencherTabelaFuncionario(data.colaboradores.lista_cadastro);
-                                chart.renderSaudeCronica(data.saude_cronica);
-                                chart.renderSaudeMental(data.saude_mental);
-                                chart.renderSaudeAlimentar(data.saude_alimentar);
-                                chart.renderAtividadeFisica(data.atividade_fisica);
 
-                            }
-                        });
-                    }
-                    function updateCharts(){
-                        $.ajax({
-                            url: '{{ route('dataFilteredForTheCharts') }}',
-                            type: 'GET',
-                            data: {
-                                _token: "{{ csrf_token() }}",
-                                @if(isUserAdmin())
-                                selectEmpresa:$("#selectEmpresa").val(),
-                                @endif
-                                inputDataInicial:$("#inputDataInicial").val(),
-                                inputDataFinal:$("#inputDataFinal").val(),
-                                inputIdade:$("#inputIdade").val(),
-                                selectGenero:$("#selectGenero").val(),
-                                selectTrabalho:$("#selectTrabalho").val(),
-                            },
-                            dataType: 'JSON',
-
-                            success: function(data){
-
-                                chart.updateColaboradoresCadastradosTotal(data.colaboradores);
-                                chart.updateColaboradoresCadastradosEngajamento(data.colaboradores);
-                                dashboard.preencherTabelaFuncionario(data.colaboradores.lista_cadastro);
-                                chart.updateSaudeCronica(data.saude_cronica);
-                                chart.updateSaudeMental(data.saude_mental);
-                                chart.updateSaudeAlimentar(data.saude_alimentar);
-                                chart.updateAtividadeFisica(data.atividade_fisica);
-
-                            }
-                        });
-                    }
-                    loadCharts();
+                    var dashboard = new Dashboard();
+                    dashboard.loadDashboard($('#formFiltroAnamnese').serialize());
                     $('#formFiltroAnamnese').submit(function() {
-                        updateCharts();
+                        $("#iconAccordionOne").collapse('hide');
+                        dashboard.refreshDashboard($('#formFiltroAnamnese').serialize());
                         return false;
                     });
 

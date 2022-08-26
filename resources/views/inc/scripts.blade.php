@@ -1,13 +1,14 @@
 <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-<script src="{{asset('../../../src/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('../../../src/plugins/src/mousetrap/mousetrap.min.js')}}"></script>
-<script src="{{asset('../../../src/plugins/src/highlight/highlight.pack.js')}}"></script>
+<script src="{{asset('src/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('src/plugins/src/mousetrap/mousetrap.min.js')}}"></script>
+<script src="{{asset('src/plugins/src/highlight/highlight.pack.js')}}"></script>
 <script src="{{asset('assets/js/util.js')}}"></script>
+
 
 @if ($page_name != 'coming_soon' && $page_name != 'contact_us' && $page_name != 'error404' && $page_name != 'error500' && $page_name != 'error503' && $page_name != 'faq' && $page_name != 'helpdesk' && $page_name != 'maintenence' && $page_name != 'privacy' && $page_name != 'auth_boxed' && $page_name != 'auth_default')
 
-<script src="{{asset('../../../src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
-<script src="{{asset('../../../layouts/vertical-light-menu/app.js')}}"></script>
+<script src="{{asset('src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+<script src="{{asset('layouts/vertical-light-menu/app.js')}}"></script>
 
 @endif
 <!-- END GLOBAL MANDATORY SCRIPTS -->
@@ -18,12 +19,12 @@
       {{-- Dashboard --}}
       <script src="{{asset('plugins/apex/apexcharts.min.js')}}"></script>
       <script src="{{asset('plugins/table/datatable/datatables.js')}}"></script>
-      <script src="{{asset('../../../src/assets/js/dashboard/dash_1.js')}}"></script>
-      <script src="{{asset('../../../src/assets/js/scrollspyNav.js')}}"></script>
-      <script src="{{asset('../../../src/plugins/src/flatpickr/flatpickr.js')}}"></script>
+      <script src="{{asset('src/assets/js/dashboard/dash_1.js')}}"></script>
+      <script src="{{asset('src/assets/js/scrollspyNav.js')}}"></script>
+      <script src="{{asset('src/plugins/src/flatpickr/flatpickr.js')}}"></script>
 
-      <script src="{{asset('../../../src/plugins/src/flatpickr/custom-flatpickr.js')}}"></script>
-      <script src="{{asset('../../../src/assets/js/forms/bootstrap_validation/bs_validation_script.js')}}"></script>
+      <script src="{{asset('src/plugins/src/flatpickr/custom-flatpickr.js')}}"></script>
+      <script src="{{asset('src/assets/js/forms/bootstrap_validation/bs_validation_script.js')}}"></script>
 
 
       @break

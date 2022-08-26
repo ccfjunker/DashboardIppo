@@ -1,4 +1,5 @@
  <link href="{{asset('assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
+ <link href="{{asset('src/plugins/css/loaders/custom-loader.css')}}" rel="stylesheet" type="text/css" />
 <script src="{{asset('assets/js/loader.js')}}"></script>
 
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -35,6 +36,12 @@
       <link href="../../../src/plugins/css/apex/custom-apexcharts.css" rel="stylesheet" type="text/css">
 
       @break
+
+    @case('users')
+        <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/src/table/datatable/datatables.css') }}">
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/css/light/table/datatable/dt-global_style.css') }}">
+    @break
 
     @case('sales')
       {{-- Dashboard 2 --}}

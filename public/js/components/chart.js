@@ -6,20 +6,20 @@ var emptyChart = {
     offsetY: 0
 };
 
-var barAtividadeFisica = null;
-var donutAtividadeFisica = null;
-var barSaudeCronica = null;
-var donutSaudeCronica = null;
-var barSaudeMental = null;
-var donutSaudeMental = null;
-var barAlimentacao = null;
-var donutAlimentacao = null;
-var donutColaboradoresCadastradosTotal = null;
-var donutColaboradoresCadastradosEngajamento = null;
 
 
-var chart = {
-    renderAtividadeFisica : function(data) {
+export class ChartIppo{
+    constructor() {
+        this.barSaudeCronica = null;
+        this.donutSaudeCronica = null;
+        this.barSaudeMental = null;
+        this.donutSaudeMental = null;
+        this.barAlimentacao = null;
+        this.donutAlimentacao = null;
+        this.donutColaboradoresCadastradosTotal = null;
+        this.donutColaboradoresCadastradosEngajamento = null;
+    }
+    renderAtividadeFisica(data) {
         var arrayLabels = [];
         var arrayDataLabels = Object.keys(data.opcoes);
         for(var i=0; i<arrayDataLabels.length; i++){
@@ -48,8 +48,8 @@ var chart = {
             }
         }
 
-        barAtividadeFisica = new ApexCharts(document.querySelector("#barAtividadeFisica"), barOptionAtividadeFisica);
-        barAtividadeFisica.render();
+        this.barAtividadeFisica = new ApexCharts(document.querySelector("#barAtividadeFisica"), barOptionAtividadeFisica);
+        this.barAtividadeFisica.render();
 
         var donutOptionAtividadeFisica = {
             chart: {
@@ -85,22 +85,22 @@ var chart = {
             }]
         }
 
-        donutAtividadeFisica = new ApexCharts(
+        this.donutAtividadeFisica = new ApexCharts(
             document.querySelector("#donutAtividadeFisica"),
             donutOptionAtividadeFisica
         );
-        donutAtividadeFisica.render();
-    },
-    updateAtividadeFisica : function (data) {
+        this.donutAtividadeFisica.render();
+    }
+    updateAtividadeFisica (data) {
         console.log(Object.values(data.opcoes));
-        barAtividadeFisica.updateSeries([{
+        this.barAtividadeFisica.updateSeries([{
             data: Object.values(data.opcoes)
         }]);
-        donutAtividadeFisica.updateSeries(
+        this.donutAtividadeFisica.updateSeries(
             [data.totais.indicaram, data.totais.nao_indicaram]
         );
-    },
-    renderSaudeAlimentar : function(data) {
+    }
+    renderSaudeAlimentar(data) {
         var arrayLabels = [];
         var arrayDataLabels = Object.keys(data.opcoes);
         for(var i=0; i<arrayDataLabels.length; i++){
@@ -129,8 +129,8 @@ var chart = {
             }
         }
 
-        barAlimentacao = new ApexCharts(document.querySelector("#barAlimentacao"), barOptionAlimentacao);
-        barAlimentacao.render();
+        this.barAlimentacao = new ApexCharts(document.querySelector("#barAlimentacao"), barOptionAlimentacao);
+        this.barAlimentacao.render();
 
         var donutOptionAlimentacao = {
             chart: {
@@ -166,19 +166,19 @@ var chart = {
             }]
         }
 
-        donutAlimentacao = new ApexCharts(
+        this.donutAlimentacao = new ApexCharts(
             document.querySelector("#donutAlimentacao"),
             donutOptionAlimentacao
         );
-        donutAlimentacao.render();
-    },
-    updateSaudeAlimentar : function (data) {
-        barAlimentacao.updateSeries([{
+        this.donutAlimentacao.render();
+    }
+    updateSaudeAlimentar (data) {
+        this.barAlimentacao.updateSeries([{
             data: Object.values(data.opcoes)
         }]);
-        donutAlimentacao.updateSeries([data.totais.indicaram, data.totais.nao_indicaram]);
-    },
-    renderSaudeCronica : function(data) {
+        this.donutAlimentacao.updateSeries([data.totais.indicaram, data.totais.nao_indicaram]);
+    }
+    renderSaudeCronica(data) {
         var arrayLabels = [];
         var arrayDataLabels = Object.keys(data.opcoes);
         for(var i=0; i<arrayDataLabels.length; i++){
@@ -207,8 +207,8 @@ var chart = {
             }
         }
 
-        barSaudeCronica = new ApexCharts(document.querySelector("#barSaudeCronica"), barOptionSaudeCronica);
-        barSaudeCronica.render();
+        this.barSaudeCronica = new ApexCharts(document.querySelector("#barSaudeCronica"), barOptionSaudeCronica);
+        this.barSaudeCronica.render();
 
         var donutOptionSaudeCronica = {
             chart: {
@@ -244,19 +244,19 @@ var chart = {
             }]
         }
 
-        donutSaudeCronica = new ApexCharts(
+         this.donutSaudeCronica = new ApexCharts(
             document.querySelector("#donutSaudeCronica"),
             donutOptionSaudeCronica
         );
-        donutSaudeCronica.render();
-},
-    updateSaudeCronica : function (data) {
-        barSaudeCronica.updateSeries([{
+         this.donutSaudeCronica.render();
+}
+    updateSaudeCronica (data) {
+        this.barSaudeCronica.updateSeries([{
             data: Object.values(data.opcoes)
         }]);
-        donutSaudeCronica.updateSeries([data.totais.indicaram, data.totais.nao_indicaram]);
-    },
-    renderSaudeMental : function(data) {
+         this.donutSaudeCronica.updateSeries([data.totais.indicaram, data.totais.nao_indicaram]);
+    }
+    renderSaudeMental(data) {
         var arrayLabels = [];
         var arrayDataLabels = Object.keys(data.opcoes);
         for(var i=0; i<arrayDataLabels.length; i++){
@@ -285,8 +285,8 @@ var chart = {
             }
         }
 
-        barSaudeMental = new ApexCharts(document.querySelector("#barSaudeMental"), barOptionSaudeMental);
-        barSaudeMental.render();
+         this.barSaudeMental = new ApexCharts(document.querySelector("#barSaudeMental"), barOptionSaudeMental);
+         this.barSaudeMental.render();
 
         var donutOptionSaudeMental = {
             chart: {
@@ -322,19 +322,19 @@ var chart = {
             }]
         }
 
-        donutSaudeMental = new ApexCharts(
+        this.donutSaudeMental = new ApexCharts(
             document.querySelector("#donutSaudeMental"),
             donutOptionSaudeMental
         );
-        donutSaudeMental.render();
-    },
-    updateSaudeMental : function (data) {
-        barSaudeMental.updateSeries([{
+        this.donutSaudeMental.render();
+    }
+    updateSaudeMental (data) {
+         this.barSaudeMental.updateSeries([{
             data: Object.values(data.opcoes)
         }]);
-        donutSaudeMental.updateSeries([data.totais.indicaram, data.totais.nao_indicaram]);
-    },
-    renderColaboradoresCadastradosTotal : function(data) {
+        this.donutSaudeMental.updateSeries([data.totais.indicaram, data.totais.nao_indicaram]);
+    }
+    renderColaboradoresCadastradosTotal(data) {
         var cadastrados = data.cadastrados_total.s;
         var naoCadastrados = data.cadastrados_total.n;
 
@@ -372,18 +372,18 @@ var chart = {
             }]
         }
 
-        donutColaboradoresCadastradosTotal = new ApexCharts(
+        this.donutColaboradoresCadastradosTotal = new ApexCharts(
             document.querySelector("#donutColaboradoresCadastradosTotal"),
             donutOptionColaboradoresCadastradosTotal
         );
-        donutColaboradoresCadastradosTotal.render();
-    },
-    updateColaboradoresCadastradosTotal : function (data) {
+        this.donutColaboradoresCadastradosTotal.render();
+    }
+    updateColaboradoresCadastradosTotal (data) {
         var cadastrados = data.cadastrados_total.s;
         var naoCadastrados = data.cadastrados_total.n;
-        donutColaboradoresCadastradosTotal.updateSeries([cadastrados, naoCadastrados]);
-    },
-    renderColaboradoresCadastradosEngajamento : function(data) {
+        this.donutColaboradoresCadastradosTotal.updateSeries([cadastrados, naoCadastrados]);
+    }
+    renderColaboradoresCadastradosEngajamento(data) {
         var cadastrados = data.cadastrados_engajamento.s;
         var naoCadastrados = data.cadastrados_engajamento.n;
 
@@ -421,15 +421,15 @@ var chart = {
             }]
         }
 
-        donutColaboradoresCadastradosEngajamento = new ApexCharts(
+        this.donutColaboradoresCadastradosEngajamento = new ApexCharts(
             document.querySelector("#donutColaboradoresCadastradosEngajamento"),
             donutOptionColaboradoresCadastradosEngajamento
         );
-        donutColaboradoresCadastradosEngajamento.render();
-    },
-    updateColaboradoresCadastradosEngajamento : function (data) {
+        this.donutColaboradoresCadastradosEngajamento.render();
+    }
+    updateColaboradoresCadastradosEngajamento (data) {
         var cadastrados = data.cadastrados_total.s;
         var naoCadastrados = data.cadastrados_total.n;
-        donutColaboradoresCadastradosEngajamento.updateSeries([cadastrados, naoCadastrados]);
-    },
-};
+        this.donutColaboradoresCadastradosEngajamento.updateSeries([cadastrados, naoCadastrados]);
+    }
+}

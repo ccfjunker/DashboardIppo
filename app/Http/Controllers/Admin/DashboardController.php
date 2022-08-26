@@ -37,6 +37,8 @@ class DashboardController extends Controller
     }
 
     public function dataFilteredForTheCharts(FiltroDashboardEmpresaRequest $request){
-       return DashboardService::getDataFilteredForTheCharts($request);
+        $dashboardService =  new DashboardService();
+
+        return response()->json( $dashboardService->getDataFilteredForTheCharts($request) );
     }
 }

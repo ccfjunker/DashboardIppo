@@ -5,12 +5,10 @@
 // });
 
 var inputDataInicial = flatpickr(document.getElementById('inputDataInicial'), {
-    defaultDate: new Date(),
     dateFormat: "d/m/Y"
 });
 
 var inputDataFinal = flatpickr(document.getElementById('inputDataFinal'), {
-    defaultDate: new Date(),
     dateFormat: "d/m/Y"
 });
 

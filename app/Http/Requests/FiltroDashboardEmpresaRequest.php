@@ -21,7 +21,12 @@ class FiltroDashboardEmpresaRequest extends FormRequest{
      */
     public function rules(){
         return [
-
+            'selectEmpresa'=>'numeric',
+            'inputDataInicial'=>'nullable|sometimes|date_format:d/m/Y',
+            'inputDataFinal'=>'nullable|sometimes|date_format:d/m/Y',
+            'inputIdade'=>'nullable|sometimes|numeric',
+            'selectGenero'=>'nullable|sometimes|in:H,M',
+            'selectTrabalho'=>'nullable|sometimes|in:HO,HI,PS'
         ];
     }
 }

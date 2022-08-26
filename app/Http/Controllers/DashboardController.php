@@ -7,7 +7,7 @@ use App\Models\BaseModel;
 use App\Models\Dashboard\Anamnese;
 use App\Models\Empresa\Empresa;
 use App\Models\Pessoa\Funcionario;
-use App\Services\Admin\DashboardService;
+use App\Services\DashboardService;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller

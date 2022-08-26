@@ -6,7 +6,6 @@ use App\Http\Requests\FiltroDashboardEmpresaRequest;
 use App\Models\Dashboard\Anamnese;
 use App\Services\FuncionarioService;
 use App\Util\Parametro;
-use phpDocumentor\Reflection\Utils;
 
 class DashboardService
 {
@@ -145,15 +144,15 @@ class DashboardService
             $anamneses->whereBetween('data_atualizacao', [$request->input('inputDataInicial'), $request->input('inputDataFinal')]);
         }
 
-        if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
-            $anamneses->where('id_empresa', $request->input('selectEmpresa'));
+        if($request->has('selectTrabalho') && !empty($request->input('selectTrabalho'))){
+            $anamneses->whereHas('funcionario', function ($query) use ($request) {
+                return $query->where('trabalho', $request->input('selectTrabalho'));
+            })->get();
         }
 
         if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
             $anamneses->where('id_empresa', $request->input('selectEmpresa'));
         }
-
-
 
         return $anamneses->get();
     }

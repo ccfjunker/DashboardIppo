@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth'] , function() {
     Route::group(['prefix' => 'admin'], function(){
         Route::get('/dataFilteredForTheCharts', 'Admin\DashboardController@dataFilteredForTheCharts')->name('admin.dataFilteredForTheCharts')->middleware('funcao');
         Route::get('/home', 'Admin\DashboardController@index')->name('admin.home')->middleware('funcao');
+        Route::get('/users', 'Admin\UserController@index')->name('admin.users')->middleware('funcao');
     });
 
     Route::get('/dataFilteredForTheCharts', 'DashboardController@dataFilteredForTheCharts')->name('dataFilteredForTheCharts');
