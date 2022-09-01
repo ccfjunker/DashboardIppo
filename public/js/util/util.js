@@ -92,6 +92,8 @@ export class UtilIppo{
     }
 
     static dataFormatada(data) {
+	if (!data)
+	    return "";
         var dia  = data.split("-")[2];
         var mes  = data.split("-")[1];
         var ano  = data.split("-")[0];
