@@ -38,7 +38,8 @@ function retornaArrayTrabalho(): array
     return array(
         'HO'=>'Home Office',
         'HI'=>'Hibrido',
-        'PS'=>'Presencial'
+        'PS'=>'Presencial',
+	null =>'Sem informacao'
     );
 }
 
@@ -46,7 +47,8 @@ function retornaArrayGenero(): array
 {
     return array(
         'H'=>'Homem',
-        'M'=>'Mulher'
+        'M'=>'Mulher',
+	null =>'Sem informacao'
     );
 }
 
