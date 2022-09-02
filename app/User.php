@@ -53,9 +53,53 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'id_pessoa', 'password', 'email', 'funcao'
+        'id_pessoa', 'password', 'email', 'funcao',
     ];
 
+    protected $appends = [
+        'cpf',
+        'nome',
+        'sobrenome',
+        'nome_social',
+        'telefone',
+        'email_contato',
+        'data_nascimento',
+    ];
+
+    protected function getCpfAttribute()
+    {
+        return $this->pessoa->cpf;
+    }
+
+    protected function getNomeAttribute()
+    {
+        return $this->pessoa->nome;
+    }
+
+    protected function getSobrenomeAttribute()
+    {
+        return $this->pessoa->sobrenome;
+    }
+
+    protected function getNomeSocialAttribute()
+    {
+        return $this->pessoa->nome_social;
+    }
+
+    protected function getTelefoneAttribute()
+    {
+        return $this->pessoa->telefone;
+    }
+
+    protected function getEmailContatoAttribute()
+    {
+        return $this->pessoa->email;
+    }
+
+    protected function getDataNascimentoAttribute()
+    {
+        return $this->pessoa->data_nascimento;
+    }
 
 
     /**

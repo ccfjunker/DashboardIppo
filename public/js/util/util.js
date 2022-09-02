@@ -15,9 +15,34 @@ export class UtilIppo{
         $("#messageModalError").html(message);
     }
 
-    static showModalError(errors){
+    static showUserMessagesErrorValidation(errors){
+        var e = errors['errors'];
+        if(e.cpf !== undefined){
 
-        this.setMessageModalError('Ops! Houve um erro ao processar os dados. Tente novamente.')
+        }
+
+        if(e.cpf !== undefined){
+
+        }
+
+        if(e.cpf !== undefined){
+
+        }
+
+        if(e.cpf !== undefined){
+
+        }
+
+
+    }
+
+
+    static showModalError(errors){
+        var mensagem = '';
+
+        mensagem = 'Ops! Houve um erro ao processar os dados. Tente novamente.';
+
+        this.setMessageModalError(mensagem)
         this.showModal('#modalError');
     }
 

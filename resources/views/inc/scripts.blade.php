@@ -4,6 +4,13 @@
 <script src="{{asset('src/plugins/src/highlight/highlight.pack.js')}}"></script>
 <script src="{{asset('assets/js/util.js')}}"></script>
 
+<script src="{{asset('src/plugins/src/global/vendors.min.js')}}"></script>
+<script src="{{asset('layouts/vertical-light-menu/app.js')}}"></script>
+<script src="{{asset('src/assets/js/custom.js')}}"></script>
+<!-- END GLOBAL MANDATORY SCRIPTS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
 
 @if ($page_name != 'coming_soon' && $page_name != 'contact_us' && $page_name != 'error404' && $page_name != 'error500' && $page_name != 'error503' && $page_name != 'faq' && $page_name != 'helpdesk' && $page_name != 'maintenence' && $page_name != 'privacy' && $page_name != 'auth_boxed' && $page_name != 'auth_default')
 

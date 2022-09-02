@@ -26,6 +26,9 @@ Route::group(['middleware' => 'auth'] , function() {
         Route::get('/dataFilteredForTheCharts', 'Admin\DashboardController@dataFilteredForTheCharts')->name('admin.dataFilteredForTheCharts')->middleware('funcao');
         Route::get('/home', 'Admin\DashboardController@index')->name('admin.home')->middleware('funcao');
         Route::get('/users', 'Admin\UserController@index')->name('admin.users')->middleware('funcao');
+        Route::get('/usersList', 'Admin\UserController@getUsersList')->name('admin.usersList')->middleware('funcao');
+        Route::get('/userCreate', 'Admin\UserController@create')->name('admin.userCreate')->middleware('funcao');
+        Route::post('/userStore', 'Admin\UserController@store')->name('admin.userStore')->middleware('funcao');
     });
 
     Route::get('/dataFilteredForTheCharts', 'DashboardController@dataFilteredForTheCharts')->name('dataFilteredForTheCharts');

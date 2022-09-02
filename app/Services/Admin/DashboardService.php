@@ -2,10 +2,13 @@
 
 namespace App\Services\Admin;
 
+use App\Exceptions\DashboardIppoException;
 use App\Http\Requests\FiltroDashboardEmpresaRequest;
 use App\Models\Dashboard\Anamnese;
+use App\Services\AnamneseService;
 use App\Services\FuncionarioService;
 use App\Util\Parametro;
+use Illuminate\Support\Collection;
 
 class DashboardService
 {
@@ -134,8 +137,13 @@ class DashboardService
         return $data;
     }
 
-    public function getFilteredsAnamneses(FiltroDashboardEmpresaRequest $request){
+    /**
+     * @throws DashboardIppoException
+     */
+    public function getFilteredsAnamneses(FiltroDashboardEmpresaRequest $request): Collection
+    {
         $anamneses = Anamnese::whereNotNull('data_criacao');
+
         if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
             $anamneses->where('id_empresa', $request->input('selectEmpresa'));
         }

@@ -21,4 +21,8 @@ class UserService
         }
         return self::insereArray($userArray);
     }
+
+    public static function getUsersList(){
+        return User::with('pessoa')->get();
+    }
 }

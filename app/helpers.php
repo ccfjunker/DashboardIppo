@@ -20,6 +20,10 @@ function helperDescricaoTabalho($value){
     return retornaArrayTrabalho()[$value];
 }
 
+function helperDescricaoFuncao($value){
+    return retornaArrayFuncao()[$value];
+}
+
 function retornaArrayTrabalho(){
     return array(
         'HO'=>'Home Office',
@@ -32,6 +36,13 @@ function retornaArrayGenero(){
     return array(
         'H'=>'Homem',
         'M'=>'Mulher'
+    );
+}
+
+function retornaArrayFuncao(){
+    return array(
+        'A'=>'Admin',
+        'E'=>'Empresa'
     );
 }
 
@@ -51,5 +62,25 @@ function cast($instance, $className)
         $className,
         strstr(strstr(serialize($instance), '"'), ':')
     ));
+}
+
+function maskTelefone($str){
+    return mask(\App\Util\Parametro::MASK_CELULAR, $str);
+}
+
+function maskCPF($str){
+    return mask(\App\Util\Parametro::MASK_CPF, $str);
+}
+
+function mask($mask,$str){
+
+    $str = str_replace(" ","",$str);
+
+    for($i=0;$i<strlen($str);$i++){
+        $mask[strpos($mask,"#")] = $str[$i];
+    }
+
+    return $mask;
+
 }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exceptions\DashboardIppoException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FiltroDashboardEmpresaRequest;
 use App\Models\Empresa\Empresa;
@@ -37,8 +38,11 @@ class DashboardController extends Controller
     }
 
     public function dataFilteredForTheCharts(FiltroDashboardEmpresaRequest $request){
-        $dashboardService =  new DashboardService();
-
-        return response()->json( $dashboardService->getDataFilteredForTheCharts($request) );
+        try{
+            $dashboardService =  new DashboardService();
+            return response()->json($dashboardService->getDataFilteredForTheCharts($request) );
+        }catch (\Throwable $exception){
+            return response($exception->getMessage(), 500);
+        }
     }
 }

@@ -48,13 +48,9 @@ class DashboardController extends Controller
      * @param  FiltroDashboardEmpresaRequest  $request
      */
     public function dataFilteredForTheCharts(FiltroDashboardEmpresaRequest $request){
-
-
         $dashboardService =  new DashboardService();
 
         return response()->json( $dashboardService->getDataFilteredForTheCharts($request) );
-
-
     }
 
 
