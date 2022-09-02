@@ -13,59 +13,86 @@
                    @csrf
                    <div class="col-md-4">
                        <label for="inputNome">Nome</label>
-                       <input type="text" class="form-control" id="inputNome" name="inputNome" placeholder="Primeiro nome">
+                       <input type="text" class="form-control" id="inputNome" name="nome" placeholder="Primeiro nome">
+                       <div class="invalid-feedback" id="inputNomeError">
+                           O campo nome é obrigatório.
+                       </div>
                    </div>
                    <div class="col-md-4">
                        <label for="inputNome">Sobrenome</label>
-                       <input type="text" class="form-control" id="inputSobrenome" name="inputSobrenome" placeholder="Sobrenome">
+                       <input type="text" class="form-control" id="inputSobrenome" name="sobrenome" placeholder="Sobrenome">
+                       <div class="invalid-feedback" id="inputSobrenomeError">
+                           O campo sobrenome é obrigatório.
+                       </div>
                    </div>
                    <div class="col-md-4">
                        <label for="inputNome">Nome social</label>
-                       <input type="text" class="form-control" id="inputNomeSocial" name="inputNomeSocial" placeholder="Nome Social">
+                       <input type="text" class="form-control" id="inputNomeSocial" name="nome_social" placeholder="Nome Social">
                    </div>
                    <div class="col-md-4">
                        <label for="inputNome">CPF</label>
-                       <input type="text" class="form-control" id="inputCPF" name="inputCPF" placeholder="CPF">
+                       <input type="text" class="form-control" id="inputCPF" name="cpf" placeholder="CPF">
+                       <div class="invalid-feedback" id="inputCPFError">
+                           O campo CPF é obrigatório.
+                       </div>
                    </div>
                    <div class="col-md-4">
                        <label for="inputNome">Telefone</label>
-                       <input type="text" class="form-control" id="inputTelefone" name="inputTelefone" placeholder="Telefone">
+                       <input type="text" class="form-control" id="inputTelefone" name="telefone" placeholder="Telefone">
+                       <div class="invalid-feedback" id="inputTelefoneError">
+                           O campo telefone é obrigatório.
+                       </div>
                    </div>
                    <div class="col-md-4">
                        <label for="inputNome">E-mail</label>
-                       <input type="text" class="form-control" id="inputEmail" name="inputEmail" placeholder="E-mail">
+                       <input type="text" class="form-control" id="inputEmail" name="email" placeholder="E-mail">
+                       <div class="invalid-feedback" id="inputEmailError"></div>
                    </div>
-                   <div class="col-md-8">
+                   <div class="col-md-4">
+                       <label for="inputDataInicial">Data de nascimento: </label>
+                       <input name="data_nascimento" id="inputDataNascimento" value="" class="form-control flatpickr flatpickr-input active" type="date" placeholder="Data de nascimento..."/>
+                       <div class="invalid-feedback" id="inputDataNascimentoError"></div>
+                   </div>
+
+                   <label for="funcao">Função</label>
+                   <div class="col-md-12">
                        <div class="form-check form-check-primary form-check-inline">
-                           <input class="form-check-input" type="radio" name="radio-checked" id="form-check-radio-default">
+                           <input value="A" class="form-check-input" type="radio" name="funcao" id="form-check-radio-default">
                            <label class="form-check-label" for="form-check-radio-default">
                                Admin
                            </label>
                        </div>
                        <div class="form-check form-check-primary form-check-inline">
-                           <input class="form-check-input" type="radio" name="radio-checked" id="form-check-radio-default" checked>
+                           <input value="E" class="form-check-input" type="radio" name="funcao" id="form-check-radio-default" checked>
                            <label class="form-check-label" for="form-check-radio-default">
                                Empresa
                            </label>
                        </div>
-
                    </div>
                     <div class="col-md-4">
                         <label for="selectEmpresa" class="form-label">Empresa</label>
-                        <select name="selectEmpresa" class="form-select" id="selectEmpresa">
-                            <option value="" selected disabled>Selecione uma empresa</option>
+                        <select name="id_empresa" class="form-select" id="selectEmpresa">
+                            <option selected disabled>Selecione uma empresa</option>
                             @foreach($empresas as $empresa)
                                 <option value="{{ $empresa->id }}">{{$empresa->nome}}</option>
                             @endforeach
                         </select>
+                        <div class="invalid-feedback" id="selectEmpresaError"></div>
                     </div>
+                   <hr/>
                    <div class="col-md-4">
                        <label for="inputNome">Senha</label>
-                       <input type="text" class="form-control" id="inputPassword" name="inputPassword" placeholder="Senha">
+                       <input type="text" class="form-control" id="inputPassword" name="password" placeholder="Senha">
+                       <div class="invalid-feedback" id="inputPasswordError">
+                           O campo senha é obrigatório.
+                       </div>
                    </div>
                    <div class="col-md-4">
                        <label for="inputNome">Confirmação de senha</label>
-                       <input type="text" class="form-control" id="inputConfirmPassword" name="inputConfirmPassword" placeholder="Confirmação de senha">
+                       <input type="text" class="form-control" id="inputConfirmPassword" name="password_confirmation" placeholder="Confirmação de senha">
+                       <div class="invalid-feedback" id="inputConfirmPasswordError">
+                           O campo nome é obrigatório.
+                       </div>
                    </div>
                </form>
             </div>
@@ -86,6 +113,15 @@
 
         $("#btnSalvarNovoUsuario").click(function(){
             $('#formModalAddUsuario').submit();
+        });
+
+        $('input[type=radio][name=funcao]').change(function() {
+            if (this.value === 'A') {
+                $("#selectEmpresa").hide();
+            }
+            else if (this.value === 'E') {
+                $("#selectEmpresa").show();
+            }
         });
     </script>
 </div>

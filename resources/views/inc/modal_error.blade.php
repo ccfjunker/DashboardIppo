@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="modalError" tabindex="-1" role="dialog" aria-labelledby="modalErrorLabel" aria-hidden="true">
+<div class="modal fade" id="modalError" tabindex="-1" role="dialog" aria-labelledby="modalErrorLabel" aria-hidden="true" style="z-index: 2000">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body" style="text-align: center">

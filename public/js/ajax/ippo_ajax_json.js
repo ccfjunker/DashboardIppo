@@ -1,10 +1,10 @@
 import {UtilIppo} from "../util/util.js";
-import * as url from "url";
 
 export class IppoAjaxJSON{
-    constructor(url, method) {
+    constructor(url, method, context) {
         this.url = window.location.origin+url;
         this.method = method;
+        this.context = context;
     }
 
     createRequest(data){
@@ -20,12 +20,12 @@ export class IppoAjaxJSON{
         }).fail(function (jqXHR, textStatus, errorThrown) {
             UtilIppo.hideModalLoading();
             var data = jqXHR.responseJSON;
-
-            if(self.url === '/admin/userStore'){
-
+            if(self.context === "admin.user.create"){
+                UtilIppo.showUserMessagesErrorValidation(data);
+            }else{
+                UtilIppo.showModalError(data);
             }
 
-            UtilIppo.showModalError(data);
         });
     }
 

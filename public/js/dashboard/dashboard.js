@@ -8,7 +8,7 @@ export class Dashboard{
     }
 
     loadDashboardAdmin(request){
-        let ippoAjax = new IppoAjaxJSON("/admin/dataFilteredForTheCharts", "GET").createRequest(request);
+        let ippoAjax = new IppoAjaxJSON("/admin/dataFilteredForTheCharts", "GET", "admin.dashboard").createRequest(request);
         var escopo = this;
         ippoAjax.done(function (data){
             escopo.setDataDashboard(data);
@@ -17,7 +17,7 @@ export class Dashboard{
 
     refreshDashboardAdmin(request){
         UtilIppo.showModalLoading();
-        let ippoAjax = new IppoAjaxJSON("/admin/dataFilteredForTheCharts", "GET").createRequest(request);
+        let ippoAjax = new IppoAjaxJSON("/admin/dataFilteredForTheCharts", "GET", "admin.dashboard").createRequest(request);
         var escopo = this;
         ippoAjax.done(function (data){
             UtilIppo.hideModalLoading();
@@ -26,7 +26,7 @@ export class Dashboard{
     }
 
     loadDashboard(request){
-        let ippoAjax = new IppoAjaxJSON("/dataFilteredForTheCharts", "GET").createRequest(request);
+        let ippoAjax = new IppoAjaxJSON("/dataFilteredForTheCharts", "GET", "dashboard").createRequest(request);
         var escopo = this;
         ippoAjax.done(function (data){
             escopo.setDataDashboard(data);
@@ -35,7 +35,7 @@ export class Dashboard{
 
     refreshDashboard(request){
         UtilIppo.showModalLoading();
-        let ippoAjax = new IppoAjaxJSON("/dataFilteredForTheCharts", "GET").createRequest(request);
+        let ippoAjax = new IppoAjaxJSON("/dataFilteredForTheCharts", "GET", "dashboard").createRequest(request);
         var escopo = this;
         ippoAjax.done(function (data){
             UtilIppo.hideModalLoading();

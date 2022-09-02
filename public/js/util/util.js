@@ -17,22 +17,55 @@ export class UtilIppo{
 
     static showUserMessagesErrorValidation(errors){
         var e = errors['errors'];
-        if(e.cpf !== undefined){
+        if(e.nome !== undefined){
+            $("#inputNomeError").html(e.nome);
+            $("#inputNomeError").show();
+        }
 
+        if(e.sobrenome !== undefined){
+            $("#inputSobrenomeError").html(e.sobrenome);
+            $("#inputSobrenomeError").show();
+        }
+
+        if(e.nome_social !== undefined){
+            $("#inputNomeSocialError").html(e.nome_social);
+            $("#inputNomeSocialError").show();
         }
 
         if(e.cpf !== undefined){
-
+            $("#inputCPFError").html(e.cpf);
+            $("#inputCPFError").show();
         }
 
-        if(e.cpf !== undefined){
-
+        if(e.telefone !== undefined){
+            $("#inputTelefoneError").html(e.telefone);
+            $("#inputTelefoneError").show();
         }
 
-        if(e.cpf !== undefined){
-
+        if(e.email !== undefined){
+            $("#inputEmailError").html(e.email);
+            $("#inputEmailError").show();
         }
 
+        if(e.password !== undefined){
+            $("#inputPasswordError").html(e.password);
+            $("#inputPasswordError").show();
+        }
+
+        if(e.password_confirmation !== undefined){
+            $("#inputConfirmPasswordError").html(e.password_confirmation);
+            $("#inputConfirmPasswordError").show();
+        }
+
+        if(e.id_empresa !== undefined){
+            $("#selectEmpresaError").html(e.id_empresa);
+            $("#selectEmpresaError").show();
+        }
+
+        if(e.data_nascimento !== undefined){
+            $("#inputDataNascimentoError").html(e.data_nascimento);
+            $("#inputDataNascimentoError").show();
+        }
 
     }
 

@@ -27,15 +27,16 @@ class UserRequest extends FormRequest
             "email" => "required|string|email|unique:users|unique:tb_pessoa",
             "password" => "required|string|confirmed|min:8",
             "funcao"=>"required|in:A,E",
-            "id"=>"numeric",
-            "id_pessoa"=>"numeric",
-            "genero" => "required|max:2",
+            "id"=>"nullable|sometimes|numeric",
+            "id_pessoa"=>"nullable|sometimes|numeric",
+            "genero" => "nullable|sometimes|required|max:2",
             "nome" => "required|max:40",
             "sobrenome" => "required|max:100",
-            "nome_social" => "required|max:40",
+            "nome_social" => "nullable|sometimes|max:40",
             "telefone" => "required|digits:11|unique:tb_pessoa",
             "cpf" => "required|digits:11|unique:tb_pessoa",
             "data_nascimento" => "required",
+            "id_empresa"=>"required_if:funcao,E|numeric"
         ];
     }
 
