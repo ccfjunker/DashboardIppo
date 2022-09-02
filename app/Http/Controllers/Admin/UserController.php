@@ -50,7 +50,11 @@ class UserController extends Controller
     }
 
     public function store(UserRequest $request){
-
+        if($request->has("id")){
+            UserService::updateRequest($request);
+        }else{
+            UserService::insereRequest($request);
+        }
     }
 
     public function getUsersList(DataTableRequest $request){

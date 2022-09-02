@@ -22,6 +22,18 @@ class UserService
         return self::insereArray($userArray);
     }
 
+    public static function updateRequest(UserRequest $request){
+        $userArray = $request->all();
+
+        $pessoa = PessoaService::findByCPF($request->input('cpf'));
+        $pessoa->update($userArray);
+        $user = User::find($request->input("id"));
+        $user->update($userArray);
+
+
+        return self::insereArray($userArray);
+    }
+
     public static function getUsersList(){
         return User::with('pessoa')->get();
     }
