@@ -33,12 +33,8 @@
 
                         <div class="widget-content widget-content-area">
                             <div class="row">
-                                <div id="donutColaboradoresCadastradosTotal" class="col-xl-3 chart-ippo" style="display: inline-block">
-                                    <label class="titulo_chart">Cadastrados x Base total</label>
-                                </div>
-                                <div id="donutColaboradoresCadastradosEngajamento" class="col-xl-3 chart-ippo" style="display: inline-block">
-                                    <label class="titulo_chart">Cadastrados x Engajamento</label>
-                                </div>
+                                <div id="donutColaboradoresCadastradosTotal" class="col-xl-3 chart-ippo" style="display: inline-block"></div>
+                                <div id="donutColaboradoresCadastradosEngajamento" class="col-xl-3 chart-ippo" style="display: inline-block"></div>
                                 <div id="tableColaboradores" class="col-xl-6 chart-ippo" style="display: inline-block">
                                     <label class="titulo_chart">Colaboradores cadastrados</label>
                                     <div class="table-responsive">

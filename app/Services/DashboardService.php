@@ -20,12 +20,14 @@ class DashboardService
         $anamneses = $this->getFilteredsAnamneses($request);
 
         $colaboradores = $this->getListaFuncionarios($request);
+        $colaboradoresAnamnese = $this->getListaFuncionariosAnamnese($request);
+        $colaboradoresEngajados = $this->getListaFuncionariosEngajados($request);
 
         $data['saude_cronica'] = $this->generateArrayDataChartSaudeCronica($anamneses);
         $data['saude_mental'] = $this->generateArrayDataChartSaudeMental($anamneses);
         $data['saude_alimentar'] = $this->generateArrayDataChartSaudeAlimentar($anamneses);
         $data['atividade_fisica'] = $this->generateArrayDataChartAtividadeFisica($anamneses);
-        $data['colaboradores'] = $this->generateArrayDataChartColaboradores($colaboradores);
+        $data['colaboradores'] = $this->generateArrayDataChartColaboradores($colaboradores, $colaboradoresAnamnese, $colaboradoresEngajados);
 
         return $data;
     }
@@ -38,6 +40,32 @@ class DashboardService
                 return FuncionarioService::buscaLista($request->input('selectEmpresa'));
             }else{
                 return FuncionarioService::buscaLista();
+            }
+        }
+
+    }
+
+    public function getListaFuncionariosAnamnese(FiltroDashboardEmpresaRequest $request){
+        if(!isUserAdmin()){
+            return FuncionarioService::buscaListaAnamnese(auth()->user()->empresas[0]->id);
+        }else{
+            if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
+                return FuncionarioService::buscaListaAnamnese($request->input('selectEmpresa'));
+            }else{
+                return FuncionarioService::buscaListaAnamnese();
+            }
+        }
+
+    }
+
+    public function getListaFuncionariosEngajados(FiltroDashboardEmpresaRequest $request){
+        if(!isUserAdmin()){
+            return FuncionarioService::buscaListaEngajados(auth()->user()->empresas[0]->id);
+        }else{
+            if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
+                return FuncionarioService::buscaListaEngajados($request->input('selectEmpresa'));
+            }else{
+                return FuncionarioService::buscaListaEngajados();
             }
         }
 
@@ -170,17 +198,19 @@ class DashboardService
             $anamneses->where('id_empresa', $request->input('selectEmpresa'));
         }
 
-
-
         return $anamneses->get();
     }
 
-    private function generateArrayDataChartColaboradores($colaboradores){
+    private function generateArrayDataChartColaboradores($colaboradores, $colaboradoresAnamnese, $colaboradoresEngajados){
+        $colaboradoresTotal = count($colaboradores);
+        $colaboradoresTotalAnamnese = count($colaboradoresAnamnese);
+        $colaboradoresTotalEngajados = count($colaboradoresEngajados);
+
         $data = array();
-        $data['cadastrados_total']['s'] = count($colaboradores);
-        $data['cadastrados_total']['n'] = 0;
-        $data['cadastrados_engajamento']['s'] = count($colaboradores);
-        $data['cadastrados_engajamento']['n'] = 0;
+        $data['cadastrados_total']['s'] = $colaboradoresTotalAnamnese;
+        $data['cadastrados_total']['n'] = $colaboradoresTotal;
+        $data['cadastrados_engajamento']['s'] = $colaboradoresTotalEngajados;
+        $data['cadastrados_engajamento']['n'] = $colaboradoresTotalAnamnese;
         $data['lista_cadastro'] = $colaboradores;
 
         return $data;

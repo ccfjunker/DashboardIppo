@@ -336,7 +336,7 @@ export class ChartIppo{
     }
     renderColaboradoresCadastradosTotal(data) {
         var cadastrados = data.cadastrados_total.s;
-        var naoCadastrados = data.cadastrados_total.n;
+        var baseTotal = data.cadastrados_total.n;
 
 
         var donutOptionColaboradoresCadastradosTotal = {
@@ -347,6 +347,20 @@ export class ChartIppo{
                     show: false,
                 }
             },
+            title:{
+                text: 'Cadastrados X Base Total',
+                align: 'center',
+                margin: 10,
+                offsetX: 0,
+                offsetY: 0,
+                floating: false,
+                style: {
+                    fontSize:  '14px',
+                    fontWeight:  'bold',
+                    fontFamily:  undefined,
+                    color:  '#263238'
+                }
+            },
             legend: {
                 show:true,
                 position: 'bottom',
@@ -354,8 +368,8 @@ export class ChartIppo{
                 align:'center'
             },
             colors: ['#009688', '#bfc9d4'],
-            series: [cadastrados, naoCadastrados],
-            labels: ["Cadastrados","Não cadastrados"],
+            series: [cadastrados, baseTotal],
+            labels: ["Cadastrados","Base Total"],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -380,12 +394,12 @@ export class ChartIppo{
     }
     updateColaboradoresCadastradosTotal (data) {
         var cadastrados = data.cadastrados_total.s;
-        var naoCadastrados = data.cadastrados_total.n;
-        this.donutColaboradoresCadastradosTotal.updateSeries([cadastrados, naoCadastrados]);
+        var baseTotaal = data.cadastrados_total.n;
+        this.donutColaboradoresCadastradosTotal.updateSeries([cadastrados, baseTotaal]);
     }
     renderColaboradoresCadastradosEngajamento(data) {
-        var cadastrados = data.cadastrados_engajamento.s;
-        var naoCadastrados = data.cadastrados_engajamento.n;
+        var engajados = data.cadastrados_engajamento.s;
+        var cadastrados = data.cadastrados_engajamento.n;
 
 
         var donutOptionColaboradoresCadastradosEngajamento = {
@@ -396,6 +410,20 @@ export class ChartIppo{
                     show: false,
                 }
             },
+            title:{
+                text: 'Engajamento X Cadastrados',
+                align: 'center',
+                margin: 10,
+                offsetX: 0,
+                offsetY: 0,
+                floating: false,
+                style: {
+                    fontSize:  '14px',
+                    fontWeight:  'bold',
+                    fontFamily:  undefined,
+                    color:  '#263238'
+                }
+            },
             legend: {
                 show:true,
                 position: 'bottom',
@@ -403,8 +431,8 @@ export class ChartIppo{
                 align:'center'
             },
             colors: ['#009688', '#bfc9d4'],
-            series: [cadastrados, naoCadastrados],
-            labels: ["Cadastrados","Não cadastrados"],
+            series: [engajados, cadastrados],
+            labels: ["Engajamento", "Cadastrados"],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -428,8 +456,8 @@ export class ChartIppo{
         this.donutColaboradoresCadastradosEngajamento.render();
     }
     updateColaboradoresCadastradosEngajamento (data) {
-        var cadastrados = data.cadastrados_total.s;
-        var naoCadastrados = data.cadastrados_total.n;
-        this.donutColaboradoresCadastradosEngajamento.updateSeries([cadastrados, naoCadastrados]);
+        var engajamento = data.cadastrados_engajamento.s;
+        var cadastrados = data.cadastrados_engajamento.n;
+        this.donutColaboradoresCadastradosEngajamento.updateSeries([engajamento, cadastrados]);
     }
 }

@@ -19,6 +19,7 @@ class CreateTbFuncionarioTable extends Migration
             $table->foreign('id_pessoa')->references('id')->on('tb_pessoa')->onDelete('cascade');
             $table->unsignedBigInteger('id_empresa');
             $table->foreign('id_empresa')->references('id')->on('tb_empresa')->onDelete('cascade');
+            $table->char('engajou')->default('N');
             $table->char('genero');
             $table->char('trabalho', 2);
             $table->timestamps();

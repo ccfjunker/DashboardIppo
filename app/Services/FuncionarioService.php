@@ -25,6 +25,21 @@ class FuncionarioService
         }else{
             return Funcionario::with('pessoa')->get();
         }
+    }
 
+    public static function buscaListaAnamnese($id_empresa = null){
+        if($id_empresa != null){
+            return Funcionario::whereIdEmpresa($id_empresa)->with('anamneses')->with('pessoa')->get();
+        }else{
+            return Funcionario::with('anamneses')->with('pessoa')->get();
+        }
+    }
+
+    public static function buscaListaEngajados($id_empresa = null){
+        if($id_empresa != null){
+            return Funcionario::whereIdEmpresa($id_empresa)->where('engajou', '=', 'S')->with('anamneses')->with('pessoa')->get();
+        }else{
+            return Funcionario::with('anamneses')->where('engajou', '=', 'S')->with('pessoa')->get();
+        }
     }
 }

@@ -46,7 +46,7 @@ class Funcionario extends BaseModel
     }
 
     public function anamneses(){
-        return $this->hasMany('App\Models\Dashboard\Anamnese');
+        return $this->hasMany('App\Models\Dashboard\Anamnese', 'id_funcionario');
     }
 
     public function getTrabalhoAttribute($value)
@@ -65,6 +65,7 @@ class Funcionario extends BaseModel
         'id',
         'id_pessoa',
         'id_empresa',
+        'engajou',
         'genero',
         'trabalho',
     ];
