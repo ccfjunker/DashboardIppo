@@ -15,60 +15,55 @@ export class UtilIppo{
         $("#messageModalError").html(message);
     }
 
+    static setMessageModalInfo(message){
+        $("#messageModalInfo").html(message);
+    }
+
     static showUserMessagesErrorValidation(errors){
         var e = errors['errors'];
-        if(e.nome !== undefined){
-            $("#inputNomeError").html(e.nome);
-            $("#inputNomeError").show();
-        }
 
-        if(e.sobrenome !== undefined){
-            $("#inputSobrenomeError").html(e.sobrenome);
-            $("#inputSobrenomeError").show();
-        }
-
-        if(e.nome_social !== undefined){
-            $("#inputNomeSocialError").html(e.nome_social);
-            $("#inputNomeSocialError").show();
-        }
-
-        if(e.cpf !== undefined){
-            $("#inputCPFError").html(e.cpf);
-            $("#inputCPFError").show();
-        }
-
-        if(e.telefone !== undefined){
-            $("#inputTelefoneError").html(e.telefone);
-            $("#inputTelefoneError").show();
-        }
 
         if(e.email !== undefined){
             $("#inputEmailError").html(e.email);
             $("#inputEmailError").show();
+        }else{
+            $("#inputEmailError").html('');
+            $("#inputEmailError").hide();
         }
 
         if(e.password !== undefined){
             $("#inputPasswordError").html(e.password);
             $("#inputPasswordError").show();
+        }else{
+            $("#inputPasswordError").html('');
+            $("#inputPasswordError").hide();
         }
 
         if(e.password_confirmation !== undefined){
             $("#inputConfirmPasswordError").html(e.password_confirmation);
             $("#inputConfirmPasswordError").show();
+        }else{
+            $("#inputConfirmPasswordError").html('');
+            $("#inputConfirmPasswordError").hide();
         }
 
         if(e.id_empresa !== undefined){
             $("#selectEmpresaError").html(e.id_empresa);
             $("#selectEmpresaError").show();
+        }else{
+            $("#selectEmpresaError").html('');
+            $("#selectEmpresaError").hide();
         }
 
-        if(e.data_nascimento !== undefined){
-            $("#inputDataNascimentoError").html(e.data_nascimento);
-            $("#inputDataNascimentoError").show();
-        }
 
     }
 
+    static showModalInfo(){
+        var mensagem = 'Registro salvo com sucesso!';
+
+        this.setMessageModalInfo(mensagem)
+        this.showModal('#modalInfo');
+    }
 
     static showModalError(errors){
         var mensagem = '';
@@ -79,8 +74,13 @@ export class UtilIppo{
         this.showModal('#modalError');
     }
 
+
+    static hideModalAddUsuario(){
+        this.hideModal('#modalAddUsuario');
+    }
+
     static hideModalError(){
-        this.hideModal('#modalError');
+        this.hideModal('#modalAddUsuario');
     }
 
     static showModalLoading(){

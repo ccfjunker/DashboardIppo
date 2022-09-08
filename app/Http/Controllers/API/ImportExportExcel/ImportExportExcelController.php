@@ -11,8 +11,9 @@ class ImportExportExcelController extends Controller
 {
     public function import(Request $request)
     {
-
         Excel::import(new ImportAnamnese(), request()->file('import_file'));
         return response()->json('Registros importados com sucesso', 200);
+
+
     }
 }

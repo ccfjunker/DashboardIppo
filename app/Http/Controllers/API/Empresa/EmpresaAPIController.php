@@ -1,40 +1,40 @@
 <?php
 
-namespace App\Http\Controllers\API\Pessoa;
+namespace App\Http\Controllers\API\Empresa;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\FuncionarioRequest;
-use App\Models\Pessoa\Funcionario;
-use App\Services\FuncionarioService;
+use App\Http\Requests\EmpresaRequest;
+use App\Models\Empresa\Empresa;
+use App\Services\EmpresaService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class FuncionarioAPIController extends Controller
+class EmpresaAPIController extends Controller
 {
     public function index(){
-        return Funcionario::with(['empresa'])->get();
+        return Empresa::get();
     }
 
     public function show($id)
     {
-        return Funcionario::find($id)->with(['empresa']);
+        return Empresa::find($id);
     }
 
-    public function store(FuncionarioRequest $request)
+    public function store(EmpresaRequest $request)
     {
         $validated = $request->validated();
         if($validated){
             try {
                 DB::beginTransaction();
-                FuncionarioService::salvar($request);
+                EmpresaService::salvar($request);
                 DB::commit();
                 return response()->json([
-                    'message' => 'Successfully created Funcionario!'
+                    'message' => 'Successfully created Empresa!'
                 ], 201);
             }catch (\Exception $exception){
                 DB::rollBack();
                 return response()->json([
-                    'message' => 'Error create Funcionario!',
+                    'message' => 'Error create Empresa!',
                     'error'=> $exception->getMessage()
                 ], 500);
             }
@@ -45,13 +45,6 @@ class FuncionarioAPIController extends Controller
 
     }
 
-    public function update(Request $request, $id)
-    {
-        $Funcionario = Funcionario::findOrFail($id);
-        $Funcionario->update($request->all());
-
-        return $Funcionario;
-    }
 
     public function delete(Request $request, $id)
     {

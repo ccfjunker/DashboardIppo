@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\FiltroDashboardEmpresaRequest;
 use App\Models\Dashboard\Anamnese;
 use App\Util\Parametro;
+use Illuminate\Support\Facades\DB;
 
 class DashboardService
 {
@@ -19,9 +20,9 @@ class DashboardService
 
         $anamneses = $this->getFilteredsAnamneses($request);
 
-        $colaboradores = $this->getListaFuncionarios($request);
-        $colaboradoresAnamnese = $this->getListaFuncionariosAnamnese($request);
-        $colaboradoresEngajados = $this->getListaFuncionariosEngajados($request);
+        $colaboradores = FuncionarioService::buscaLista($request);
+        $colaboradoresAnamnese = FuncionarioService::buscaListaAnamnese($request);
+        $colaboradoresEngajados = FuncionarioService::buscaListaEngajados($request);
 
         $data['saude_cronica'] = $this->generateArrayDataChartSaudeCronica($anamneses);
         $data['saude_mental'] = $this->generateArrayDataChartSaudeMental($anamneses);
@@ -32,44 +33,9 @@ class DashboardService
         return $data;
     }
 
-    public function getListaFuncionarios(FiltroDashboardEmpresaRequest $request){
-        if(!isUserAdmin()){
-            return FuncionarioService::buscaLista(auth()->user()->empresas[0]->id);
-        }else{
-            if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
-                return FuncionarioService::buscaLista($request->input('selectEmpresa'));
-            }else{
-                return FuncionarioService::buscaLista();
-            }
-        }
 
-    }
 
-    public function getListaFuncionariosAnamnese(FiltroDashboardEmpresaRequest $request){
-        if(!isUserAdmin()){
-            return FuncionarioService::buscaListaAnamnese(auth()->user()->empresas[0]->id);
-        }else{
-            if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
-                return FuncionarioService::buscaListaAnamnese($request->input('selectEmpresa'));
-            }else{
-                return FuncionarioService::buscaListaAnamnese();
-            }
-        }
 
-    }
-
-    public function getListaFuncionariosEngajados(FiltroDashboardEmpresaRequest $request){
-        if(!isUserAdmin()){
-            return FuncionarioService::buscaListaEngajados(auth()->user()->empresas[0]->id);
-        }else{
-            if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
-                return FuncionarioService::buscaListaEngajados($request->input('selectEmpresa'));
-            }else{
-                return FuncionarioService::buscaListaEngajados();
-            }
-        }
-
-    }
 
     private function generateArrayDataChartSaudeCronica($anamneses): array
     {
@@ -185,7 +151,7 @@ class DashboardService
         }
 
         if($request->has('inputDataInicial') && !empty($request->input('inputDataInicial')) && $request->has('inputDataFinal') && !empty($request->input('inputDataFinal'))){
-            $anamneses->whereBetween('data_atualizacao', [$request->input('inputDataInicial'), $request->input('inputDataFinal')]);
+            $anamneses->whereBetween(DB::raw('DATE(data_atualizacao)'), [dateDB($request->input('inputDataInicial')), dateDB($request->input('inputDataFinal'))]);
         }
 
         if($request->has('selectTrabalho') && !empty($request->input('selectTrabalho'))){
@@ -194,9 +160,17 @@ class DashboardService
             })->get();
         }
 
+        if($request->has('selectSexo') && !empty($request->input('selectSexo'))){
+            $anamneses->whereHas('funcionario', function ($query) use ($request) {
+                return $query->where('genero', $request->input('selectSexo'));
+            })->get();
+        }
+
         if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
             $anamneses->where('id_empresa', $request->input('selectEmpresa'));
         }
+
+
 
         return $anamneses->get();
     }

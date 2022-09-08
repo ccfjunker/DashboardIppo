@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Models\Empresa\Empresa;
-use App\Models\Pessoa\Pessoa;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,7 +13,6 @@ use Laravel\Passport\HasApiTokens;
  * App\User
  *
  * @property int $id
- * @property int $id_pessoa
  * @property string|null $funcao
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
@@ -36,12 +34,12 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereFuncao($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereIdPessoa($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read Pessoa $pessoa
+ * @property-read \Illuminate\Database\Eloquent\Collection|Empresa[] $empresas
+ * @property-read int|null $empresas_count
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -53,53 +51,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'id_pessoa', 'password', 'email', 'funcao',
+        'password', 'email', 'funcao',
     ];
 
-    protected $appends = [
-        'cpf',
-        'nome',
-        'sobrenome',
-        'nome_social',
-        'telefone',
-        'email_contato',
-        'data_nascimento',
-    ];
-
-    protected function getCpfAttribute()
-    {
-        return $this->pessoa->cpf;
-    }
-
-    protected function getNomeAttribute()
-    {
-        return $this->pessoa->nome;
-    }
-
-    protected function getSobrenomeAttribute()
-    {
-        return $this->pessoa->sobrenome;
-    }
-
-    protected function getNomeSocialAttribute()
-    {
-        return $this->pessoa->nome_social;
-    }
-
-    protected function getTelefoneAttribute()
-    {
-        return $this->pessoa->telefone;
-    }
-
-    protected function getEmailContatoAttribute()
-    {
-        return $this->pessoa->email;
-    }
-
-    protected function getDataNascimentoAttribute()
-    {
-        return $this->pessoa->data_nascimento;
-    }
 
 
     /**
@@ -120,10 +74,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function pessoa(){
-        return $this->belongsTo('App\Models\Pessoa\Pessoa', 'id_pessoa');
-    }
-
     public function empresas(){
         return $this->belongsToMany(Empresa::class, 'tb_user_empresa', 'id_usuario', 'id_empresa');
     }
@@ -132,8 +82,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public static function inserirArray(array $data){
         return self::create([
-            'id_pessoa'=>$data['id_pessoa'],
-            'name'=>$data['nome'],
             'email'=>$data['email'],
             'funcao'=>$data['funcao'],
             'password' => Hash::make($data['password'])

@@ -13,7 +13,7 @@ class EmpresaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,11 @@ class EmpresaRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->request->get('id') ? ',' . $this->request->get('id') : '';
         return [
-            //
+            "id"=>"nullable|sometimes|numeric",
+            "nome" => "required|max:100|unique:tb_empresa,nome".$id,
+            "cupom" => "required|max:30|unique:tb_empresa,cupom".$id,
         ];
     }
 }

@@ -29,8 +29,13 @@ Route::group([
             Route::get('funcionarios', 'API\Pessoa\FuncionarioAPIController@index');
             Route::get('funcionario/{id}', 'API\Pessoa\FuncionarioAPIController@show');
             Route::post('funcionario', 'API\Pessoa\FuncionarioAPIController@store');
-            Route::put('funcionario/{id}', 'API\Pessoa\FuncionarioAPIController@update');
             Route::delete('funcionario/{id}', 'API\Pessoa\FuncionarioAPIController@delete');
+
+            Route::get('empresas', 'API\Empresa\EmpresaAPIController@index');
+            Route::get('empresa/{id}', 'API\Empresa\EmpresaAPIController@show');
+            Route::post('empresa', 'API\Empresa\EmpresaAPIController@store');
+            Route::put('empresa/{id}', 'API\Empresa\EmpresaAPIController@update');
+            Route::delete('empresa/{id}', 'API\Empresa\EmpresaAPIController@delete');
 
             Route::get('anamneses', 'API\Dashboard\AnamneseAPIController@index');
             Route::get('import-export-excel', 'API\ImportExportExcel\ImportExportExcelController@index');

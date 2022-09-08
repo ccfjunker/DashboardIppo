@@ -45,6 +45,7 @@ export class Dashboard{
 
     updateDataDashboard(data){
         this.updateDataCharts(data);
+        this.setDataTabelaFuncionario(data.colaboradores.lista_cadastro);
     }
 
     setDataDashboard(data){
@@ -78,9 +79,9 @@ export class Dashboard{
         Object.keys(responseData).forEach(function (key) {
             const colaborador = responseData[key];
             html += '<tr>';
-            html += '<td>' + UtilIppo.dataFormatada(colaborador.pessoa.data_nascimento) + '</td>';
-            html += '<td className="ps-0">' + colaborador.pessoa.nome + ' ' + colaborador.pessoa.sobrenome + '</td>';
-            html += '<td className="text-center">' + UtilIppo.maskCPF(colaborador.pessoa.cpf) + '</td>';
+            html += '<td>' + UtilIppo.dataFormatada(colaborador.data_nascimento) + '</td>';
+            html += '<td className="ps-0">' + colaborador.nome + ' ' + colaborador.sobrenome + '</td>';
+            html += '<td className="text-center">' + UtilIppo.maskCPF(colaborador.cpf) + '</td>';
             html += '</tr>';
         });
 

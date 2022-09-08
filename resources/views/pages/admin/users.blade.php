@@ -19,29 +19,14 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nome</th>
-                                <th>Nome Social</th>
                                 <th>E-mail</th>
-                                <th>Telefone</th>
-                                <th>CPF</th>
                                 <th>Função</th>
                             </tr>
                             </thead>
                             <tbody>
 
                             </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Nome Social</th>
-                                <th>E-mail</th>
-                                <th>Telefone</th>
-                                <th>CPF</th>
-                                <th>Função</th>
 
-                            </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -68,11 +53,7 @@
             ajax: "{{route('admin.usersList')}}",
             columns: [
                 { data: 'id' },
-                { data: 'nome' },
-                { data: 'nome_social' },
                 { data: 'email' },
-                { data: 'telefone' },
-                { data: 'cpf' },
                 { data: 'funcao' }
             ]
 

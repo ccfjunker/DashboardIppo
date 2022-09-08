@@ -24,31 +24,11 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            "email" => "required|string|email|unique:users|unique:tb_pessoa",
+            "email" => "required|string|email|unique:users",
             "password" => "required|string|confirmed|min:8",
             "funcao"=>"required|in:A,E",
             "id"=>"nullable|sometimes|numeric",
-            "id_pessoa"=>"nullable|sometimes|numeric",
-            "genero" => "nullable|sometimes|required|max:2",
-            "nome" => "required|max:40",
-            "sobrenome" => "required|max:100",
-            "nome_social" => "nullable|sometimes|max:40",
-            "telefone" => "required|digits:11|unique:tb_pessoa",
-            "cpf" => "required|digits:11|unique:tb_pessoa",
-            "data_nascimento" => "required",
             "id_empresa"=>"required_if:funcao,E|numeric"
-        ];
-    }
-
-    public function retornaPessoaArrayRequest(){
-        return [
-            'cpf'=>self::input('cpf'),
-            'nome'=>self::input('nome'),
-            'email'=>self::input('email'),
-            'telefone'=>self::input('telefone'),
-            'data_nascimento'=>dateDB(self::input('data_nascimento'),),
-            'sobrenome'=>self::input('sobrenome'),
-            'nome_social'=>self::input('nome_social'),
         ];
     }
 }

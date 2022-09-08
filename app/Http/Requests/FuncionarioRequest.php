@@ -23,30 +23,21 @@ class FuncionarioRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->request->get('id') ? ',' . $this->request->get('id') : '';
         return [
-            'id'=>'numeric',
+            "id"=>"nullable|sometimes|numeric",
             'id_empresa'=>'required|numeric|exists:tb_empresa,id',
             "trabalho"=>"required|in:HO,HI,PS",
             "genero" => "required|in:H,M",
             "nome" => "required|max:40",
             "sobrenome" => "required|max:100",
             "nome_social" => "max:40",
-            "telefone" => "required|digits:11|unique:tb_pessoa",
-            "cpf" => "required|digits:11|unique:tb_pessoa",
-            "email" => "required|string|email|unique:tb_pessoa",
+            "telefone" => "required|digits:11|unique:tb_funcionario,telefone".$id,
+            "cpf" => "required|digits:11|unique:tb_funcionario,cpf".$id,
+            "email" => "required|string|email|unique:tb_funcionario,email".$id,
             "data_nascimento" => "required|date_format:Y-m-d"
         ];
     }
 
-    public function retornaPessoaArrayRequest(){
-        return [
-            'cpf'=>self::input('cpf'),
-            'nome'=>self::input('nome'),
-            'email'=>self::input('email'),
-            'telefone'=>self::input('telefone'),
-            'data_nascimento'=>dateDB(self::input('data_nascimento'),),
-            'sobrenome'=>self::input('sobrenome'),
-            'nome_social'=>self::input('nome_social'),
-        ];
-    }
+
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use App\Services\PessoaService;
 use App\Services\UserService;
 use App\User;
 use Carbon\Carbon;
@@ -30,7 +29,7 @@ class AuthAPIController extends Controller
         $validate = $request->validated();
         if($validate){
             try {
-                UserService::insereRequest($request);
+                UserService::salvar($request);
                 DB::commit();
                 return response()->json([
                     'message' => 'Successfully created user!'

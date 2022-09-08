@@ -9,6 +9,7 @@ use App\Services\AnamneseService;
 use App\Services\FuncionarioService;
 use App\Util\Parametro;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class DashboardService
 {
@@ -23,13 +24,15 @@ class DashboardService
 
         $anamneses = $this->getFilteredsAnamneses($request);
 
-        $colaboradores = FuncionarioService::buscaLista($request->input('selectEmpresa'));
+        $colaboradores = FuncionarioService::buscaLista($request);
+        $colaboradoresAnamnese = FuncionarioService::buscaListaAnamnese($request);
+        $colaboradoresEngajados = FuncionarioService::buscaListaEngajados($request);
 
         $data['saude_cronica'] = $this->generateArrayDataChartSaudeCronica($anamneses);
         $data['saude_mental'] = $this->generateArrayDataChartSaudeMental($anamneses);
         $data['saude_alimentar'] = $this->generateArrayDataChartSaudeAlimentar($anamneses);
         $data['atividade_fisica'] = $this->generateArrayDataChartAtividadeFisica($anamneses);
-        $data['colaboradores'] = $this->generateArrayDataChartColaboradores($colaboradores);
+        $data['colaboradores'] = $this->generateArrayDataChartColaboradores($colaboradores, $colaboradoresAnamnese, $colaboradoresEngajados);
 
         return $data;
     }
@@ -148,14 +151,22 @@ class DashboardService
             $anamneses->where('id_empresa', $request->input('selectEmpresa'));
         }
 
+
+
         if($request->has('inputDataInicial') && !empty($request->input('inputDataInicial')) && $request->has('inputDataFinal') && !empty($request->input('inputDataFinal'))){
-            $anamneses->whereBetween('data_atualizacao', [$request->input('inputDataInicial'), $request->input('inputDataFinal')]);
+            $anamneses->whereBetween(DB::raw('DATE(data_atualizacao)'), [dateDB($request->input('inputDataInicial')), dateDB($request->input('inputDataFinal'))]);
         }
 
         if($request->has('selectTrabalho') && !empty($request->input('selectTrabalho'))){
             $anamneses->whereHas('funcionario', function ($query) use ($request) {
                 return $query->where('trabalho', $request->input('selectTrabalho'));
-            })->get();
+            });
+        }
+
+        if($request->has('selectSexo') && !empty($request->input('selectSexo'))){
+            $anamneses->whereHas('funcionario', function ($query) use ($request) {
+                return $query->where('genero', $request->input('selectSexo'));
+            });
         }
 
         if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
@@ -165,12 +176,16 @@ class DashboardService
         return $anamneses->get();
     }
 
-    private function generateArrayDataChartColaboradores($colaboradores){
+    private function generateArrayDataChartColaboradores($colaboradores, $colaboradoresAnamnese, $colaboradoresEngajados){
+        $colaboradoresTotal = count($colaboradores);
+        $colaboradoresTotalAnamnese = count($colaboradoresAnamnese);
+        $colaboradoresTotalEngajados = count($colaboradoresEngajados);
+
         $data = array();
-        $data['cadastrados_total']['s'] = count($colaboradores);
-        $data['cadastrados_total']['n'] = 0;
-        $data['cadastrados_engajamento']['s'] = count($colaboradores);
-        $data['cadastrados_engajamento']['n'] = 0;
+        $data['cadastrados_total']['s'] = $colaboradoresTotalAnamnese;
+        $data['cadastrados_total']['n'] = $colaboradoresTotal;
+        $data['cadastrados_engajamento']['s'] = $colaboradoresTotalEngajados;
+        $data['cadastrados_engajamento']['n'] = $colaboradoresTotalAnamnese;
         $data['lista_cadastro'] = $colaboradores;
 
         return $data;

@@ -38,11 +38,11 @@ class Empresa extends BaseModel
     }
 
     public function funcionarios(){
-        return $this->hasMany('App\Models\Pessoa\Funcionario');
+        return $this->hasMany('App\Models\Pessoa\Funcionario', 'id_empresa');
     }
 
     public function anamneses(){
-        return $this->hasMany('App\Models\Dashboard\Anamnese');
+        return $this->hasMany('App\Models\Dashboard\Anamnese', 'id_empresa');
     }
 
     public static function getArrayOptions(): ?\Illuminate\Support\Collection

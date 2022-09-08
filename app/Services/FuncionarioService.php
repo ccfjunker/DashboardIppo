@@ -2,44 +2,128 @@
 
 namespace App\Services;
 
+use App\Http\Requests\FiltroDashboardEmpresaRequest;
 use App\Http\Requests\FuncionarioRequest;
 use App\Models\Pessoa\Funcionario;
+use Illuminate\Support\Facades\DB;
 
 class FuncionarioService
 {
-    public static function insereArray(array $pessoaArray){
-        return Funcionario::inserirArray($pessoaArray);
+    public static function insereArray(array $funcionarioArray){
+        return Funcionario::create($funcionarioArray);
     }
 
-    public static function insereRequest(FuncionarioRequest $request){
-        $funcionarioArray = $request->all();
-        if(!$request->has('id_pessoa')){
-            $funcionarioArray['id_pessoa'] = PessoaService::inserePessoaArray($request->retornaPessoaArrayRequest())->id;
-        }
-        return self::insereArray($funcionarioArray);
+    public static function atualizaArray(array $funcionarioArray){
+        return Funcionario::find($funcionarioArray['id'])->update($funcionarioArray);
     }
 
-    public static function buscaLista($id_empresa = null){
-        if($id_empresa != null){
-            return Funcionario::whereIdEmpresa($id_empresa)->with('pessoa')->get();
+    public static function salvar(FuncionarioRequest $request){
+        if($request->has('id')){
+            self::atualizaArray($request->all());
         }else{
-            return Funcionario::with('pessoa')->get();
+            self::insereArray($request->all());
         }
     }
 
-    public static function buscaListaAnamnese($id_empresa = null){
-        if($id_empresa != null){
-            return Funcionario::whereIdEmpresa($id_empresa)->with('anamneses')->with('pessoa')->get();
-        }else{
-            return Funcionario::with('anamneses')->with('pessoa')->get();
-        }
+
+
+    public static function findByCPF($cpf){
+        return Funcionario::where('cpf', '=', $cpf)->first();
     }
 
-    public static function buscaListaEngajados($id_empresa = null){
-        if($id_empresa != null){
-            return Funcionario::whereIdEmpresa($id_empresa)->where('engajou', '=', 'S')->with('anamneses')->with('pessoa')->get();
+    public static function buscaLista(FiltroDashboardEmpresaRequest $request){
+        $anamneses = Funcionario::where('id', '>', '0');
+
+        if(isUserAdmin()){
+            if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
+                $anamneses->where('id_empresa', $request->input('selectEmpresa'));
+            }
         }else{
-            return Funcionario::with('anamneses')->where('engajou', '=', 'S')->with('pessoa')->get();
+            $anamneses->where('id_empresa', \Auth::user()->empresas[0]->id);
         }
+
+
+        if($request->has('inputDataInicial') && !empty($request->input('inputDataInicial')) && $request->has('inputDataFinal') && !empty($request->input('inputDataFinal'))){
+            $anamneses->whereHas('anamneses', function ($query) use ($request) {
+                return   $query->whereBetween(DB::raw('DATE(data_atualizacao)'), [dateDB($request->input('inputDataInicial')), dateDB($request->input('inputDataFinal'))]);
+            })->get();
+        }
+
+        if($request->has('selectTrabalho') && !empty($request->input('selectTrabalho'))){
+            $anamneses->where('trabalho', $request->input('selectTrabalho'));
+        }
+
+        if($request->has('selectSexo') && !empty($request->input('selectSexo'))){
+                $anamneses->where('genero', $request->input('selectSexo'));
+        }
+
+        if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
+            $anamneses->where('id_empresa', $request->input('selectEmpresa'));
+        }
+        return $anamneses->get();
+    }
+
+    public static function buscaListaAnamnese(FiltroDashboardEmpresaRequest $request){
+        $anamneses = Funcionario::where('id', '>', '0');
+
+        if(isUserAdmin()){
+            if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
+                $anamneses->where('id_empresa', $request->input('selectEmpresa'));
+            }
+        }else{
+            $anamneses->where('id_empresa', \Auth::user()->empresas[0]->id);
+        }
+
+
+
+        if($request->has('inputDataInicial') && !empty($request->input('inputDataInicial')) && $request->has('inputDataFinal') && !empty($request->input('inputDataFinal'))){
+            $anamneses->whereHas('anamneses', function ($query) use ($request) {
+                return   $query->whereBetween(DB::raw('DATE(data_atualizacao)'), [dateDB($request->input('inputDataInicial')), dateDB($request->input('inputDataFinal'))]);
+            })->get();
+        }
+
+        if($request->has('selectTrabalho') && !empty($request->input('selectTrabalho'))){
+            $anamneses->where('trabalho', $request->input('selectTrabalho'));
+        }
+
+        if($request->has('selectSexo') && !empty($request->input('selectSexo'))){
+            $anamneses->where('genero', $request->input('selectSexo'));
+        }
+
+        if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
+            $anamneses->where('id_empresa', $request->input('selectEmpresa'));
+        }
+        return $anamneses->with('anamneses')->get();
+    }
+
+    public static function buscaListaEngajados(FiltroDashboardEmpresaRequest $request){
+        $anamneses = Funcionario::where('id', '>', '0');
+
+        if(isUserAdmin()){
+            if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
+                $anamneses->where('id_empresa', $request->input('selectEmpresa'));
+            }
+        }else{
+            $anamneses->where('id_empresa', \Auth::user()->empresas[0]->id);
+        }
+
+        if($request->has('inputDataInicial') && !empty($request->input('inputDataInicial')) && $request->has('inputDataFinal') && !empty($request->input('inputDataFinal'))){
+            $anamneses->whereHas('anamneses', function ($query) use ($request) {
+                return   $query->whereBetween(DB::raw('DATE(data_atualizacao)'), [dateDB($request->input('inputDataInicial')), dateDB($request->input('inputDataFinal'))]);
+            })->get();
+        }
+
+        if($request->has('selectTrabalho') && !empty($request->input('selectTrabalho'))){
+            $anamneses->where('trabalho', $request->input('selectTrabalho'));
+        }
+
+        if($request->has('selectSexo') && !empty($request->input('selectSexo'))){
+            $anamneses->where('genero', $request->input('selectSexo'));
+        }
+
+        if($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))){
+            $anamneses->where('id_empresa', $request->input('selectEmpresa'));
+        }
+        return $anamneses->with('anamneses')->where('engajou', '=', 'S')->get();
     }
 }

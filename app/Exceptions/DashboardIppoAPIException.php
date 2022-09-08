@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use Exception;
+
 class DashboardIppoAPIException extends Exception
 {
     /**

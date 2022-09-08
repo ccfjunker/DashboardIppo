@@ -25,6 +25,7 @@
     <div id="load_screen"> <div class="loader"> <div class="loader-content">
          <div class="spinner-grow align-self-center"></div>
     </div></div></div>
+    @include('inc.navbar')
     <!--  END LOADER -->
     @include('inc.modal_loading')
     @include('inc.modal_error')
@@ -39,7 +40,7 @@
         @include('inc.sidebar')
 
         <!--  BEGIN CONTENT PART  -->
-        <div id="content" class="main-content" style="margin-top: 0">
+        <div id="content" class="main-content">
 
             @yield('content')
 

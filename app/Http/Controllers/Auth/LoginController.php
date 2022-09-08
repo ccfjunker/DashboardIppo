@@ -57,8 +57,9 @@ class LoginController extends Controller
                 return redirect()->route('home');
             }
         }else{
-            return redirect()->route('login')
-                ->with('error','E-mail e/ou Senha estão incorretos.');
+            return back()->withErrors([
+                'incorrect' => 'Usuário e/ou senha incorreto(s).',
+            ]);
         }
 
     }

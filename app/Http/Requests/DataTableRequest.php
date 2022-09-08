@@ -33,15 +33,5 @@ class DataTableRequest extends FormRequest
         ];
     }
 
-    public function retornaPessoaArrayRequest(){
-        return [
-            'cpf'=>self::input('cpf'),
-            'nome'=>self::input('nome'),
-            'email'=>self::input('email'),
-            'telefone'=>self::input('telefone'),
-            'data_nascimento'=>dateDB(self::input('data_nascimento'),),
-            'sobrenome'=>self::input('sobrenome'),
-            'nome_social'=>self::input('nome_social'),
-        ];
-    }
+
 }

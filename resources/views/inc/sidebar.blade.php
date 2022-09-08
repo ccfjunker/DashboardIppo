@@ -9,12 +9,12 @@
                 <div class="nav-logo">
                     <div class="nav-item theme-logo">
                         <a href="./index.html">
-                            <img src="../src/assets/img/logo.svg" class="navbar-logo" alt="logo">
+                            <img src="../src/assets/img/logo.svg" class="navbar-logo" alt="logo" style="width: 40px; height: auto;">
                         </a>
                     </div>
-                    <div class="nav-item theme-text">
-                        <a href="./index.html" class="nav-link"> IPPO </a>
-                    </div>
+{{--                    <div class="nav-item theme-text">--}}
+{{--                        <a href="./index.html" class="nav-link"> IPPO </a>--}}
+{{--                    </div>--}}
                 </div>
                 <div class="nav-item sidebar-toggle">
                     <div class="btn-toggle sidebarCollapse">
@@ -28,7 +28,7 @@
                     <div class="dropdown-toggle" >
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                            <span>Olá, {{ auth()->user()->pessoa->nome }}!</span>
+                            <span>Olá, {{ getUsernameFromEmailAuthenticated() }}!</span>
 
                         </div>
 
@@ -37,7 +37,7 @@
                 </li>
                 <hr style="margin-left: 16px; margin-right: 16px;"/>
                 <li class="menu {{ $page_name == 'analytics' ? 'active' : '' }}">
-                    <a href="{{ isUserAdmin() ? route('home') : route('admin.home') }}" aria-expanded="false" class="dropdown-toggle">
+                    <a href="{{ isUserAdmin() ? route('admin.home') : route('home') }}" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span>Dashboard</span>

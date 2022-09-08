@@ -11,6 +11,33 @@
         position: relative;
         float: right;
     }
+    @media (min-width: 992px){
+        #navBarIppo{
+            display: none;
+        }
+        .navbar .toggle-sidebar, .navbar .sidebarCollapse {
+            display: none;
+        }
+        #content{
+            margin-top: 0 !important;
+            min-height: auto !important;
+        }
+        #formFiltroAnamnese .row{
+            margin-top: 15px;
+        }
+    }
+
+    @media (max-width: 992px){
+
+        #content{
+            margin-top: 55px !important;
+        }
+
+        #formFiltroAnamnese .col-md-6, #formFiltroAnamnese .col-md-4{
+            margin-top: 15px;
+        }
+    }
+
 </style>
  <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/css/table/datatable/dt-global_style.css') }}">
 @if ($page_name != 'coming_soon' && $page_name != 'contact_us' && $page_name != 'error404' && $page_name != 'error500' && $page_name != 'error503' && $page_name != 'faq' && $page_name != 'helpdesk' && $page_name != 'maintenence' && $page_name != 'privacy' && $page_name != 'auth_boxed' && $page_name != 'auth_default')

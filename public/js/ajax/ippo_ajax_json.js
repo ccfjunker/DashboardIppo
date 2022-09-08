@@ -20,6 +20,7 @@ export class IppoAjaxJSON{
         }).fail(function (jqXHR, textStatus, errorThrown) {
             UtilIppo.hideModalLoading();
             var data = jqXHR.responseJSON;
+            console.log(data);
             if(self.context === "admin.user.create"){
                 UtilIppo.showUserMessagesErrorValidation(data);
             }else{

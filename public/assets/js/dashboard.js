@@ -15,9 +15,9 @@ var dashboard = {
         Object.keys(responseData).forEach(function(key){
             var colaborador = responseData[key];
             html += '<tr>';
-            html += '<td>'+UtilIppo.dataFormatada(colaborador.pessoa.data_nascimento)+'</td>';
-            html += '<td className="ps-0">'+colaborador.pessoa.nome+' '+colaborador.pessoa.sobrenome+'</td>';
-            html += '<td className="text-center">'+UTIL.maskCPF(colaborador.pessoa.cpf)+'</td>';
+            html += '<td>'+UtilIppo.dataFormatada(colaborador.data_nascimento)+'</td>';
+            html += '<td className="ps-0">'+colaborador.nome+' '+colaborador.sobrenome+'</td>';
+            html += '<td className="text-center">'+UTIL.maskCPF(colaborador.cpf)+'</td>';
             html += '</tr>';
         });
 

@@ -43,6 +43,7 @@ var App = function() {
                     getSidebar = document.querySelector('.sidebar-wrapper');
 
                     if ($recentSubmenu === true) {
+
                         if (document.querySelector('.collapse.submenu').classList.contains('show')) {
                             document.querySelector('.submenu.show').classList.add('mini-recent-submenu');
                             getSidebar.querySelector('.collapse.submenu').classList.remove('show');
@@ -64,7 +65,7 @@ var App = function() {
                         }
                     }
                     Dom.class.mainContainer.classList.toggle("sidebar-closed");
-                   // Dom.class.mainHeader.classList.toggle('expand-header');
+                    Dom.class.mainHeader.classList.toggle('expand-header');
                     Dom.class.mainContainer.classList.toggle("sbar-open");
                     Dom.class.overlay.classList.toggle('show');
                     Dom.main.classList.toggle('sidebar-noneoverflow');

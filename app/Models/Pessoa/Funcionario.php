@@ -11,7 +11,6 @@ use Illuminate\Foundation\Http\FormRequest;
  * App\Models\Pessoa\Funcionario
  *
  * @property int $id
- * @property int $id_pessoa
  * @property int $id_empresa
  * @property string $genero
  * @property string $trabalho
@@ -20,7 +19,6 @@ use Illuminate\Foundation\Http\FormRequest;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Dashboard\Anamnese[] $anamneses
  * @property-read int|null $anamneses_count
  * @property-read \App\Models\Empresa\Empresa $empresa
- * @property-read \App\Models\Pessoa\Pessoa $pessoa
  * @method static \Illuminate\Database\Eloquent\Builder|Funcionario newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Funcionario newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Funcionario query()
@@ -28,18 +26,29 @@ use Illuminate\Foundation\Http\FormRequest;
  * @method static \Illuminate\Database\Eloquent\Builder|Funcionario whereGenero($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Funcionario whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Funcionario whereIdEmpresa($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Funcionario whereIdPessoa($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Funcionario whereTrabalho($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Funcionario whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $nome
+ * @property string $sobrenome
+ * @property string|null $nome_social
+ * @property string $telefone
+ * @property string $cpf
+ * @property string $email
+ * @property string $data_nascimento
+ * @property string $engajou
+ * @method static \Illuminate\Database\Eloquent\Builder|Funcionario whereCpf($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Funcionario whereDataNascimento($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Funcionario whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Funcionario whereEngajou($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Funcionario whereNome($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Funcionario whereNomeSocial($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Funcionario whereSobrenome($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Funcionario whereTelefone($value)
  */
 class Funcionario extends BaseModel
 {
     protected $table = 'tb_funcionario';
-
-    public function pessoa(){
-        return $this->belongsTo('App\Models\Pessoa\Pessoa', 'id_pessoa');
-    }
 
     public function empresa(){
         return $this->belongsTo('App\Models\Empresa\Empresa', 'id_empresa');
@@ -63,8 +72,14 @@ class Funcionario extends BaseModel
 
     protected $fillable = [
         'id',
-        'id_pessoa',
         'id_empresa',
+        'cpf',
+        'nome',
+        'sobrenome',
+        'nome_social',
+        'telefone',
+        'email',
+        'data_nascimento',
         'engajou',
         'genero',
         'trabalho',
@@ -75,9 +90,6 @@ class Funcionario extends BaseModel
       'updated_at'
     ];
 
-    public static function findByIdPessoa($valor){
-        return self::where('id_pessoa', $valor)->first();
-    }
 
     protected function validarRequest(FormRequest $request)
     {

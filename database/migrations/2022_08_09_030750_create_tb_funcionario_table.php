@@ -15,10 +15,15 @@ class CreateTbFuncionarioTable extends Migration
     {
         Schema::create('tb_funcionario', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_pessoa');
-            $table->foreign('id_pessoa')->references('id')->on('tb_pessoa')->onDelete('cascade');
             $table->unsignedBigInteger('id_empresa');
             $table->foreign('id_empresa')->references('id')->on('tb_empresa')->onDelete('cascade');
+            $table->string('nome');
+            $table->string('sobrenome');
+            $table->string('nome_social')->nullable();
+            $table->string('telefone', 11)->unique();
+            $table->string('cpf', 11)->unique();
+            $table->string('email')->unique();
+            $table->date('data_nascimento');
             $table->char('engajou')->default('N');
             $table->char('genero');
             $table->char('trabalho', 2);

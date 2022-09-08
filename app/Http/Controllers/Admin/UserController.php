@@ -50,11 +50,8 @@ class UserController extends Controller
     }
 
     public function store(UserRequest $request){
-        if($request->has("id")){
-            UserService::updateRequest($request);
-        }else{
-            UserService::insereRequest($request);
-        }
+        UserService::salvar($request);
+        return response()->json('Usuário cadastrado com sucesso!', 200);
     }
 
     public function getUsersList(DataTableRequest $request){
@@ -75,15 +72,10 @@ class UserController extends Controller
 
         // Total records
         $totalRecords = User::select('count(*) as allcount')->count();
-        $totalRecordswithFilter = User::select('count(*) as allcount')->whereHas('pessoa', function($q) use ($searchValue){
-            $q->where('nome', 'like', '%' .$searchValue . '%');
-        })->count();
+        $totalRecordswithFilter = User::select('count(*) as allcount')->count();
 
         // Fetch records
         $records = User::orderBy($columnName,$columnSortOrder)
-            ->whereHas('pessoa', function($q) use ($searchValue){
-                $q->where('nome', 'like', '%' .$searchValue . '%');
-            })
             ->skip($start)
             ->take($rowperpage)
             ->get();
@@ -94,12 +86,8 @@ class UserController extends Controller
 
             $data_arr[] = array(
                 "id" => $record->id,
-                "nome" => $record->nome." ".$record->sobrenome,
-                "nome_social" => $record->nome_social,
-                "funcao"=>helperDescricaoFuncao($record->funcao),
                 "email" => $record->email,
-                "telefone" => maskTelefone($record->telefone),
-                "cpf" => maskCPF($record->cpf),
+                "funcao" => helperDescricaoFuncao($record->funcao)
             );
         }
 

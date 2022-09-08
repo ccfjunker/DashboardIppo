@@ -44,7 +44,6 @@
                                             <input name="inputDataFinal" id="inputDataFinal" value="" class="form-control flatpickr flatpickr-input active" type="date" placeholder="Data final..."/>
                                         </div>
                                     </div>
-                                    <br/>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="inputIdade">Idade: </label>
@@ -70,7 +69,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <br/>
                                     @if(isUserAdmin())
                                     <div class="row">
                                         <div class="col-md-4">
