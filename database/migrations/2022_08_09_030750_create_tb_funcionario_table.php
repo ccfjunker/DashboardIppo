@@ -21,12 +21,12 @@ class CreateTbFuncionarioTable extends Migration
             $table->string('sobrenome');
             $table->string('nome_social')->nullable();
             $table->string('telefone', 11)->unique();
-            $table->string('cpf', 11)->unique();
+            $table->string('cpf', 14)->unique();
             $table->string('email')->unique();
-            $table->date('data_nascimento');
+            $table->date('data_nascimento')->nullable();
             $table->char('engajou')->default('N');
-            $table->char('genero');
-            $table->char('trabalho', 2);
+            $table->char('genero')->nullable();
+            $table->char('trabalho', 2)->nullable();
             $table->timestamps();
         });
     }
