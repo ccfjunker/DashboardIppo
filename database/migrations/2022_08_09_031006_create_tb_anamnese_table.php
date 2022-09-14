@@ -21,7 +21,6 @@ class CreateTbAnamneseTable extends Migration
             $table->foreign('id_empresa')->references('id')->on('tb_empresa')->onDelete('cascade');
             $table->dateTime('data_criacao');
             $table->dateTime('data_atualizacao');
-            $table->string('proprietario');
             $table->string('cronicos')->nullable();
             $table->string('mental')->nullable();
             $table->string('alimentacao')->nullable();
