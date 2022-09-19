@@ -17,6 +17,7 @@ class CreateTbEmpresaTable extends Migration
             $table->id();
             $table->string('nome')->unique();
             $table->string('cupom')->unique();
+            $table->integer('total_funcionario');
             $table->timestamps();
         });
     }

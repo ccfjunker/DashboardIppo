@@ -38,6 +38,9 @@ Route::group([
             Route::delete('empresa/{id}', 'API\Empresa\EmpresaAPIController@delete');
 
             Route::get('anamneses', 'API\Dashboard\AnamneseAPIController@index');
+            Route::post('anamnese', 'API\Dashboard\AnamneseAPIController@store');
+            Route::delete('anamnese/{id}', 'API\Dashboard\AnamneseAPIController@delete');
+
             Route::get('import-export-excel', 'API\ImportExportExcel\ImportExportExcelController@index');
             Route::post('import-export-excel', 'API\ImportExportExcel\ImportExportExcelController@import');
             Route::get('export-excel', 'API\ImportExportExcel\ImportExportExcelController@export');
