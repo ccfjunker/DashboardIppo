@@ -19,8 +19,10 @@ class CreateTbAnamneseTable extends Migration
             $table->foreign('id_funcionario')->references('id')->on('tb_funcionario')->onDelete('cascade');
             $table->unsignedBigInteger('id_empresa');
             $table->foreign('id_empresa')->references('id')->on('tb_empresa')->onDelete('cascade');
-            $table->dateTime('data_criacao');
-            $table->dateTime('data_atualizacao');
+            $table->dateTime('data_criacao')->nullable();;
+            $table->dateTime('data_atualizacao')->nullable();;
+            $table->string('proprietario')->nullable();;
+
             $table->string('cronicos')->nullable();
             $table->string('mental')->nullable();
             $table->string('alimentacao')->nullable();

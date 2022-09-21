@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
  * @property int $id
  * @property string $nome
  * @property string $cupom
+ * @property string $total_funcionario
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Empresa newModelQuery()
@@ -52,7 +53,7 @@ class Empresa extends BaseModel
         return null;
     }
 
-    protected $fillable = ['nome', 'cupom'];
+    protected $fillable = ['nome', 'cupom', 'total_funcionario'];
     protected $hidden = [
         'created_at',
         'updated_at'

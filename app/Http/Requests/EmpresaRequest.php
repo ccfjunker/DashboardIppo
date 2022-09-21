@@ -28,6 +28,7 @@ class EmpresaRequest extends FormRequest
             "id"=>"nullable|sometimes|numeric",
             "nome" => "required|max:100|unique:tb_empresa,nome".$id,
             "cupom" => "required|max:30|unique:tb_empresa,cupom".$id,
+            "total_funcionario"=>"nullable|sometimes|numeric",
         ];
     }
 }

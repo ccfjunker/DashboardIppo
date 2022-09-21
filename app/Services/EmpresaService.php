@@ -27,6 +27,9 @@ class EmpresaService
         $empresa = Empresa::find($empresaArray['id']);
         $empresa->nome = $empresaArray['nome'];
         $empresa->cupom = $empresaArray['cupom'];
+        if(!empty($empresaArray['total_funcionario'])){
+            $empresa->total_funcionario = $empresaArray['total_funcionario'];
+        }
         $empresa->save();
         return $empresa;
     }
