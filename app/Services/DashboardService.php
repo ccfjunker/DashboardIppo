@@ -51,6 +51,11 @@ class DashboardService
             if($arrayOpcao && !empty($arrayOpcao)){
                 foreach ($arrayOpcao as $opcao){
                     $data['opcoes'][$opcao] ++;
+		    // FIXME: write in a better way
+		    if ($opcao == "Não possuo doenças crônicas"){
+                        $data['totais']['indicaram'] --;
+                        $data['totais']['nao_indicaram'] ++;
+		    }
                 }
                 $data['totais']['indicaram'] ++;
             }else{
@@ -77,6 +82,11 @@ class DashboardService
             if($arrayOpcao && !empty($arrayOpcao)){
                 foreach ($arrayOpcao as $opcao){
                     $data['opcoes'][$opcao] ++;
+		    // FIXME: write in a better way
+		    if ($opcao == "Não tive ou não tenho essa necessidade"){
+                        $data['totais']['indicaram'] --;
+                        $data['totais']['nao_indicaram'] ++;
+		    }
                 }
                 $data['totais']['indicaram'] ++;
             }else{
@@ -103,6 +113,11 @@ class DashboardService
             if($arrayOpcao && !empty($arrayOpcao)){
                 foreach ($arrayOpcao as $opcao){
                     $data['opcoes'][$opcao] ++;
+		    // FIXME: write in a better way
+		    if ($opcao == "Balanceada"){
+                        $data['totais']['indicaram'] --;
+                        $data['totais']['nao_indicaram'] ++;
+		    }
                 }
                 $data['totais']['indicaram'] ++;
             }else{
@@ -128,6 +143,11 @@ class DashboardService
             if($arrayOpcao && !empty($arrayOpcao)){
                 foreach ($arrayOpcao as $opcao){
                     $data['opcoes'][$opcao] ++;
+		    // FIXME: write in a better way
+		    if ($opcao == "Não faço exercícios"){
+                        $data['totais']['indicaram'] --;
+                        $data['totais']['nao_indicaram'] ++;
+		    }
                 }
                 $data['totais']['indicaram'] ++;
             }else{

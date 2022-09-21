@@ -22,6 +22,7 @@ class CreateTbAnamneseTable extends Migration
             $table->dateTime('data_criacao')->nullable();;
             $table->dateTime('data_atualizacao')->nullable();;
             $table->string('proprietario')->nullable();;
+
             $table->string('cronicos')->nullable();
             $table->string('mental')->nullable();
             $table->string('alimentacao')->nullable();

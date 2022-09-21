@@ -45,7 +45,7 @@
                                         <table class="table table-striped" id="table_funcionario_dashboard">
                                             <thead>
                                             <tr>
-                                                <th scope="col">Dada de cadastro</th>
+                                                <th scope="col">Data de cadastro</th>
                                                 <th class="ps-0" scope="col">Nome</th>
                                                 <th class="text-center" scope="col">CPF</th>
                                             </tr>
