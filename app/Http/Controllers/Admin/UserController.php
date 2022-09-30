@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ListDataTableController;
 use App\Http\Requests\DataTableRequest;
 use App\Http\Requests\UserRequest;
 use App\Services\EmpresaService;
@@ -10,7 +11,7 @@ use App\Services\UserService;
 use App\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserController extends ListDataTableController
 {
     /**
      * Create a new controller instance.
@@ -55,31 +56,7 @@ class UserController extends Controller
     }
 
     public function getUsersList(DataTableRequest $request){
-        ## Read value
-        $draw = $request->get('draw');
-        $start = $request->get("start");
-        $rowperpage = $request->get("length"); // Rows display per page
-
-        $columnIndex_arr = $request->get('order');
-        $columnName_arr = $request->get('columns');
-        $order_arr = $request->get('order');
-        $search_arr = $request->get('search');
-
-        $columnIndex = $columnIndex_arr[0]['column']; // Column index
-        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
-        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
-        $searchValue = $search_arr['value']; // Search value
-
-        // Total records
-        $totalRecords = User::select('count(*) as allcount')->count();
-        $totalRecordswithFilter = User::select('count(*) as allcount')->count();
-
-        // Fetch records
-        $records = User::orderBy($columnName,$columnSortOrder)
-            ->skip($start)
-            ->take($rowperpage)
-            ->get();
-
+        $records = $this->getList($request, User::class)->get();
         $data_arr = array();
 
         foreach($records as $record){
@@ -92,9 +69,9 @@ class UserController extends Controller
         }
 
         return array(
-            "draw" => intval($draw),
-            "iTotalRecords" => $totalRecords,
-            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "draw" => intval($this->draw),
+            "iTotalRecords" => $this->totalRecords,
+            "iTotalDisplayRecords" => $this->totalRecordswithFilter,
             "aaData" => $data_arr
         );
     }

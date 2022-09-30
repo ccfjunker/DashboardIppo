@@ -23,9 +23,8 @@
 @switch($page_name)
     @case('analytics')
       {{-- Dashboard --}}
-      <script src="{{asset('plugins/apex/apexcharts.min.js')}}"></script>
+      <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
       <script src="{{asset('plugins/table/datatable/datatables.js')}}"></script>
-      <script src="{{asset('src/assets/js/dashboard/dash_1.js')}}"></script>
       <script src="{{asset('src/assets/js/scrollspyNav.js')}}"></script>
       <script src="{{asset('src/plugins/src/flatpickr/flatpickr.js')}}"></script>
 

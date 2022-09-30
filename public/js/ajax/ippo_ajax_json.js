@@ -23,6 +23,8 @@ export class IppoAjaxJSON{
             console.log(data);
             if(self.context === "admin.user.create"){
                 UtilIppo.showUserMessagesErrorValidation(data);
+            }else if(self.context === "funcionario.store"){
+                UtilIppo.showFuncionarioMessagesErrorValidation(data);
             }else{
                 UtilIppo.showModalError(data);
             }

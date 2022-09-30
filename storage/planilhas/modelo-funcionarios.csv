@@ -1,0 +1,5 @@
+Nome,Sobrenome,Nome Social,Telefone,CPF,E-mail,Data de nascimento,Engajou,Gênero,Trabalho,,LEGENDA,
+,,,,,,,,,,,Coluna,Valores
+,,,,,,,,,,,Engajou,S ou N (Sim ou Não)
+,,,,,,,,,,,Gênero,M ou H (Mulher ou Homem)
+,,,,,,,,,,,Trabalho,"HI, HO, PS (Híbrido, Home Office ou Presencial"

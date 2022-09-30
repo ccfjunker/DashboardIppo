@@ -34,8 +34,13 @@ Route::group(['middleware' => 'auth'] , function() {
     Route::get('/dataFilteredForTheCharts', 'DashboardController@dataFilteredForTheCharts')->name('dataFilteredForTheCharts');
     Route::get('/', 'DashboardController@index');
     Route::get('/home', 'DashboardController@index')->name('home');
+    Route::get('/funcionarios', 'Empresa\FuncionarioController@index')->name('funcionario.index');
+    Route::get('/listarFuncionarios', 'Empresa\FuncionarioController@list')->name('funcionario.list');
+    Route::get('/funcionario/{id}', 'Empresa\FuncionarioController@show')->name('funcionario.show');
+    Route::post('/salvarFuncionario', 'Empresa\FuncionarioController@store')->name('funcionario.store');
+    Route::get('/file', 'FileController@downloadModeloFuncionario')->name('file.downloadModeloFuncionario');
 
-
+/*
     Route::get('/analytics', function() {
         // $category_name = '';
         $data = [
@@ -1421,7 +1426,7 @@ Route::group(['middleware' => 'auth'] , function() {
         return view('pages.widgets.widgets')->with($data);
     });
 
-
+*/
 });
 
 Auth::routes();

@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="modalAddUsuario" tabindex="-1" role="dialog" aria-labelledby="modalAddUsuarioLabel" aria-hidden="true">
+<div class="modal fade" id="modalEditFuncionario" tabindex="-1" role="dialog" aria-labelledby="modalAddFuncionarioLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,8 +9,9 @@
                 </button>
             </div>
             <div class="modal-body">
-               <form id="formModalAddUsuario" class="row g-3 ">
+               <form id="formModalAddFuncionario" class="row g-3 ">
                    @csrf
+
                    <label for="funcao">Função</label>
                    <div class="col-md-12">
                        <div class="form-check form-check-primary form-check-inline">
@@ -30,9 +31,7 @@
                         <label for="selectEmpresa" class="form-label">Empresa</label>
                         <select name="id_empresa" class="form-select" id="selectEmpresa">
                             <option selected disabled>Selecione uma empresa</option>
-                            @foreach($empresas as $empresa)
-                                <option value="{{ $empresa->id }}">{{$empresa->nome}}</option>
-                            @endforeach
+
                         </select>
                         <div class="invalid-feedback" id="selectEmpresaError"></div>
                     </div>
@@ -60,30 +59,30 @@
             </div>
             <div class="modal-footer">
                 <button class="btn" data-bs-dismiss="modal"><i class="flaticon-cancel-12"></i> Cancelar</button>
-                <button class="btn btn-primary" id="btnSalvarNovoUsuario">Salvar</button>
+                <button class="btn btn-primary" id="btnSalvarNovoFuncionario">Salvar</button>
             </div>
         </div>
     </div>
     <script type="module">
 
-        import {User} from "../../../js/user/user.js";
-        var user = new User();
-        $('#formModalAddUsuario').submit(function() {
-            user.add($('#formModalAddUsuario').serialize());
-            return false;
-        });
-
-        $("#btnSalvarNovoUsuario").click(function(){
-            $('#formModalAddUsuario').submit();
-        });
-
-        $('input[type=radio][name=funcao]').change(function() {
-            if (this.value === 'A') {
-                $("#divSelectEmpresa").hide();
-            }
-            else if (this.value === 'E') {
-                $("#divSelectEmpresa").show();
-            }
-        });
+        // import {User} from "../../../js/user/user.js";
+        // var user = new User();
+        // $('#formModalAddFuncionario').submit(function() {
+        //     user.add($('#formModalAddFuncionario').serialize());
+        //     return false;
+        // });
+        //
+        // $("#btnSalvarNovoFuncionario").click(function(){
+        //     $('#formModalAddFuncionario').submit();
+        // });
+        //
+        // $('input[type=radio][name=funcao]').change(function() {
+        //     if (this.value === 'A') {
+        //         $("#divSelectEmpresa").hide();
+        //     }
+        //     else if (this.value === 'E') {
+        //         $("#divSelectEmpresa").show();
+        //     }
+        // });
     </script>
 </div>

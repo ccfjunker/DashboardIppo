@@ -2,10 +2,18 @@
 
 use App\Util\Parametro;
 
+
 function getUsernameFromEmailAuthenticated(){
     $email = Auth::user()->email;
     return explode('@', $email)[0];
 }
+function getEmpresaFromLoggedUser(){
+    if(!isUserAdmin() && !empty(Auth::user()->empresas)){
+        return Auth::user()->empresas[0];
+    }
+    return null;
+}
+
 function isUserAdmin(): bool{
     return Auth::user()->funcao == Parametro::FUNCAO_ADMIN;
 }
@@ -19,6 +27,10 @@ function helperDescricaoGenero($value): string
     return retornaArrayGenero()[$value];
 }
 
+function helperDescricaoEngajou($value): string
+{
+    return retornaArrayEngajou()[$value];
+}
 function helperIndexTabalho($value){
     return array_search(ucfirst($value), retornaArrayTrabalho());
 }
@@ -52,6 +64,15 @@ function retornaArrayGenero(): array
     );
 }
 
+function retornaArrayEngajou(): array
+{
+    return array(
+        'S'=>'Sim',
+        'N'=>'Não',
+        null =>'Sem informacao'
+    );
+}
+
 function retornaArrayFuncao(): array
 {
     return array(
@@ -66,6 +87,14 @@ function dateDB($valor){
 
 function dateTimeDB($valor){
     return date("Y-m-d H:i:s", strtotime($valor));
+}
+
+function dateFormatted($valor){
+    $dateExplode = explode('-', $valor);
+    if($dateExplode){
+        return $dateExplode[2].'/'.$dateExplode[1].'/'.$dateExplode[0];
+    }
+    return $valor;
 }
 
 function cast($instance, $className)

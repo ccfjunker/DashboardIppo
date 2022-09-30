@@ -21,6 +21,7 @@
                                 <th>ID</th>
                                 <th>E-mail</th>
                                 <th>Função</th>
+                                <th>Ação</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,15 +47,20 @@
                 sLengthMenu: "Resultados :  _MENU_",
             },
             stripeClasses: [],
-            lengthMenu: [7, 10, 20, 50],
-            pageLength: 10,
+            lengthMenu: [12, 24],
+            pageLength: 12,
             processing: true,
             serverSide: true,
             ajax: "{{route('admin.usersList')}}",
             columns: [
                 { data: 'id' },
                 { data: 'email' },
-                { data: 'funcao' }
+                { data: 'funcao' },
+                {
+                    data: null,
+                    sortable: false,
+                    render: function (data, type, full) { return "<a href=''>" + 'Edit' + '</a>'; }
+                }
             ]
 
         });

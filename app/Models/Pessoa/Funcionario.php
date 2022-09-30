@@ -68,6 +68,21 @@ class Funcionario extends BaseModel
         return helperDescricaoGenero($value);
     }
 
+    public function getEngajouAttribute($value)
+    {
+        return helperDescricaoEngajou($value);
+    }
+
+    public function getCpfAttribute($value)
+    {
+        return maskCPF($value);
+    }
+
+    public function getTelefoneAttribute($value)
+    {
+        return maskTelefone($value);
+    }
+
 
 
     protected $fillable = [
