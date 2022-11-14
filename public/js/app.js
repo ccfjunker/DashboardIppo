@@ -2464,13 +2464,1314 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./public/js/ajax/ippo_ajax_json.js":
+/*!******************************************!*\
+  !*** ./public/js/ajax/ippo_ajax_json.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IppoAjaxJSON": () => (/* binding */ IppoAjaxJSON)
+/* harmony export */ });
+/* harmony import */ var _util_util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/util.js */ "./public/js/util/util.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+
+var IppoAjaxJSON = /*#__PURE__*/function () {
+  function IppoAjaxJSON(url, method, context) {
+    _classCallCheck(this, IppoAjaxJSON);
+
+    this.url = window.location.origin + url;
+    this.method = method;
+    this.context = context;
+  }
+
+  _createClass(IppoAjaxJSON, [{
+    key: "createRequest",
+    value: function createRequest(data) {
+      var self = this;
+      return $.ajax({
+        data: data,
+        dataType: 'json',
+        url: this.url,
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        method: this.method
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        _util_util_js__WEBPACK_IMPORTED_MODULE_0__.UtilIppo.hideModalLoading();
+        var data = jqXHR.responseJSON;
+        console.log(data);
+
+        if (self.context === "admin.user.create") {
+          _util_util_js__WEBPACK_IMPORTED_MODULE_0__.UtilIppo.showUserMessagesErrorValidation(data);
+        } else if (self.context === "funcionario.store") {
+          _util_util_js__WEBPACK_IMPORTED_MODULE_0__.UtilIppo.showFuncionarioMessagesErrorValidation(data);
+        } else {
+          _util_util_js__WEBPACK_IMPORTED_MODULE_0__.UtilIppo.showModalError(data);
+        }
+      });
+    }
+  }]);
+
+  return IppoAjaxJSON;
+}();
+
+/***/ }),
+
+/***/ "./public/js/components/chart.js":
+/*!***************************************!*\
+  !*** ./public/js/components/chart.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChartIppo": () => (/* binding */ ChartIppo)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var emptyChart = {
+  text: 'Carregando...',
+  align: 'center',
+  verticalAlign: 'middle',
+  offsetX: 0,
+  offsetY: 0
+}; //utils
+
+function returnFellingSeries(data) {
+  var qualidade_da_alimentacao = data[0];
+  var nivel_de_estresse = data[1];
+  var qualidade_de_sono = data[2];
+  var nivel_de_ansiedade = data[3];
+  var nivel_de_humor = data[4];
+  var VALOR_MEDIA_MOVEL_DIAS = 3; // Media de Dias de alimentacao
+
+  qualidade_da_alimentacao.map(function (value) {
+    return value.nivel = parseInt(value.nivel);
+  });
+  nivel_de_estresse.map(function (value) {
+    return value.nivel = parseInt(value.nivel);
+  });
+  qualidade_de_sono.map(function (value) {
+    return value.nivel = parseInt(value.nivel);
+  });
+  nivel_de_ansiedade.map(function (value) {
+    return value.nivel = parseInt(value.nivel);
+  });
+  nivel_de_humor.map(function (value) {
+    return value.nivel = parseInt(value.nivel);
+  }); // Media diaria
+
+  for (var i = 0; i < qualidade_da_alimentacao.length; i++) {
+    if (i === qualidade_da_alimentacao.length - 1 || qualidade_da_alimentacao[i].data_criacao.substring(0, 10) != qualidade_da_alimentacao[i + 1].data_criacao.substring(0, 10)) {
+      //volta verificando os iguais
+      if (i > 0 && qualidade_da_alimentacao[i].data_criacao.substring(0, 10) === qualidade_da_alimentacao[i - 1].data_criacao.substring(0, 10)) {
+        // tem iguais
+        var index = i;
+        var contagem_de_index_voltados = 0;
+        var soma_de_nivel = 0;
+
+        while (index >= 0 && qualidade_da_alimentacao[i].data_criacao.substring(0, 10) === qualidade_da_alimentacao[index].data_criacao.substring(0, 10)) {
+          soma_de_nivel += qualidade_da_alimentacao[index].nivel;
+          index--;
+          contagem_de_index_voltados++;
+        }
+
+        qualidade_da_alimentacao[index + 1].nivel = soma_de_nivel / contagem_de_index_voltados;
+        qualidade_da_alimentacao.splice(index + 2, contagem_de_index_voltados - 1);
+        i = index + 2;
+      }
+    }
+  }
+
+  for (var _i = 0; _i < nivel_de_estresse.length; _i++) {
+    if (_i === nivel_de_estresse.length - 1 || nivel_de_estresse[_i].data_criacao.substring(0, 10) != nivel_de_estresse[_i + 1].data_criacao.substring(0, 10)) {
+      //volta verificando os iguais
+      if (_i > 0 && nivel_de_estresse[_i].data_criacao.substring(0, 10) === nivel_de_estresse[_i - 1].data_criacao.substring(0, 10)) {
+        // tem iguais
+        var _index = _i;
+        var _contagem_de_index_voltados = 0;
+        var _soma_de_nivel = 0;
+
+        while (_index >= 0 && nivel_de_estresse[_i].data_criacao.substring(0, 10) === nivel_de_estresse[_index].data_criacao.substring(0, 10)) {
+          _soma_de_nivel += nivel_de_estresse[_index].nivel;
+          _index--;
+          _contagem_de_index_voltados++;
+        }
+
+        nivel_de_estresse[_index + 1].nivel = _soma_de_nivel / _contagem_de_index_voltados;
+        nivel_de_estresse.splice(_index + 2, _contagem_de_index_voltados - 1);
+        _i = _index + 2;
+      }
+    }
+  }
+
+  for (var _i2 = 0; _i2 < qualidade_de_sono.length; _i2++) {
+    if (_i2 === qualidade_de_sono.length - 1 || qualidade_de_sono[_i2].data_criacao.substring(0, 10) != qualidade_de_sono[_i2 + 1].data_criacao.substring(0, 10)) {
+      //volta verificando os iguais
+      if (_i2 > 0 && qualidade_de_sono[_i2].data_criacao.substring(0, 10) === qualidade_de_sono[_i2 - 1].data_criacao.substring(0, 10)) {
+        // tem iguais
+        var _index2 = _i2;
+        var _contagem_de_index_voltados2 = 0;
+        var _soma_de_nivel2 = 0;
+
+        while (_index2 >= 0 && qualidade_de_sono[_i2].data_criacao.substring(0, 10) === qualidade_de_sono[_index2].data_criacao.substring(0, 10)) {
+          _soma_de_nivel2 += qualidade_de_sono[_index2].nivel;
+          _index2--;
+          _contagem_de_index_voltados2++;
+        }
+
+        qualidade_de_sono[_index2 + 1].nivel = _soma_de_nivel2 / _contagem_de_index_voltados2;
+        qualidade_de_sono.splice(_index2 + 2, _contagem_de_index_voltados2 - 1);
+        _i2 = _index2 + 2;
+      }
+    }
+  }
+
+  for (var _i3 = 0; _i3 < nivel_de_ansiedade.length; _i3++) {
+    if (_i3 === nivel_de_ansiedade.length - 1 || nivel_de_ansiedade[_i3].data_criacao.substring(0, 10) != nivel_de_ansiedade[_i3 + 1].data_criacao.substring(0, 10)) {
+      //volta verificando os iguais
+      if (_i3 > 0 && nivel_de_ansiedade[_i3].data_criacao.substring(0, 10) === nivel_de_ansiedade[_i3 - 1].data_criacao.substring(0, 10)) {
+        // tem iguais
+        var _index3 = _i3;
+        var _contagem_de_index_voltados3 = 0;
+        var _soma_de_nivel3 = 0;
+
+        while (_index3 >= 0 && nivel_de_ansiedade[_i3].data_criacao.substring(0, 10) === nivel_de_ansiedade[_index3].data_criacao.substring(0, 10)) {
+          _soma_de_nivel3 += nivel_de_ansiedade[_index3].nivel;
+          _index3--;
+          _contagem_de_index_voltados3++;
+        }
+
+        nivel_de_ansiedade[_index3 + 1].nivel = _soma_de_nivel3 / _contagem_de_index_voltados3;
+        nivel_de_ansiedade.splice(_index3 + 2, _contagem_de_index_voltados3 - 1);
+        _i3 = _index3 + 2;
+      }
+    }
+  }
+
+  for (var _i4 = 0; _i4 < nivel_de_humor.length; _i4++) {
+    if (_i4 === nivel_de_humor.length - 1 || nivel_de_humor[_i4].data_criacao.substring(0, 10) != nivel_de_humor[_i4 + 1].data_criacao.substring(0, 10)) {
+      //volta verificando os iguais
+      if (_i4 > 0 && nivel_de_humor[_i4].data_criacao.substring(0, 10) === nivel_de_humor[_i4 - 1].data_criacao.substring(0, 10)) {
+        // tem iguais
+        var _index4 = _i4;
+        var _contagem_de_index_voltados4 = 0;
+        var _soma_de_nivel4 = 0;
+
+        while (_index4 >= 0 && nivel_de_humor[_i4].data_criacao.substring(0, 10) === nivel_de_humor[_index4].data_criacao.substring(0, 10)) {
+          _soma_de_nivel4 += nivel_de_humor[_index4].nivel;
+          _index4--;
+          _contagem_de_index_voltados4++;
+        }
+
+        nivel_de_humor[_index4 + 1].nivel = _soma_de_nivel4 / _contagem_de_index_voltados4;
+        nivel_de_humor.splice(_index4 + 2, _contagem_de_index_voltados4 - 1);
+        _i4 = _index4 + 2;
+      }
+    }
+  } // Media Movel
+
+
+  for (var _i5 = 0; _i5 < qualidade_da_alimentacao.length; _i5++) {
+    var valor_media_movel = _i5 > VALOR_MEDIA_MOVEL_DIAS ? VALOR_MEDIA_MOVEL_DIAS + 1 : _i5 + 1;
+    var sum = 0;
+
+    for (var j = 0; j < valor_media_movel; j++) {
+      sum += qualidade_da_alimentacao[_i5 - j].nivel;
+    }
+
+    sum = sum / valor_media_movel;
+    qualidade_da_alimentacao[_i5].avarage = sum;
+  }
+
+  for (var _i6 = 0; _i6 < qualidade_de_sono.length; _i6++) {
+    var _valor_media_movel = _i6 > VALOR_MEDIA_MOVEL_DIAS ? VALOR_MEDIA_MOVEL_DIAS + 1 : _i6 + 1;
+
+    var _sum = 0;
+
+    for (var _j = 0; _j < _valor_media_movel; _j++) {
+      _sum += qualidade_de_sono[_i6 - _j].nivel;
+    }
+
+    _sum = _sum / _valor_media_movel;
+    qualidade_de_sono[_i6].avarage = _sum;
+  }
+
+  for (var _i7 = 0; _i7 < nivel_de_estresse.length; _i7++) {
+    var _valor_media_movel2 = _i7 > VALOR_MEDIA_MOVEL_DIAS ? VALOR_MEDIA_MOVEL_DIAS + 1 : _i7 + 1;
+
+    var _sum2 = 0;
+
+    for (var _j2 = 0; _j2 < _valor_media_movel2; _j2++) {
+      _sum2 += nivel_de_estresse[_i7 - _j2].nivel;
+    }
+
+    _sum2 = _sum2 / _valor_media_movel2;
+    nivel_de_estresse[_i7].avarage = _sum2;
+  }
+
+  for (var _i8 = 0; _i8 < nivel_de_ansiedade.length; _i8++) {
+    var _valor_media_movel3 = _i8 > VALOR_MEDIA_MOVEL_DIAS ? VALOR_MEDIA_MOVEL_DIAS + 1 : _i8 + 1;
+
+    var _sum3 = 0;
+
+    for (var _j3 = 0; _j3 < _valor_media_movel3; _j3++) {
+      _sum3 += nivel_de_ansiedade[_i8 - _j3].nivel;
+    }
+
+    _sum3 = _sum3 / _valor_media_movel3;
+    nivel_de_ansiedade[_i8].avarage = _sum3;
+  }
+
+  for (var _i9 = 0; _i9 < nivel_de_humor.length; _i9++) {
+    var _valor_media_movel4 = _i9 > VALOR_MEDIA_MOVEL_DIAS ? VALOR_MEDIA_MOVEL_DIAS + 1 : _i9 + 1;
+
+    var _sum4 = 0;
+
+    for (var _j4 = 0; _j4 < _valor_media_movel4; _j4++) {
+      _sum4 += nivel_de_humor[_i9 - _j4].nivel;
+    }
+
+    _sum4 = _sum4 / _valor_media_movel4;
+    nivel_de_humor[_i9].avarage = _sum4;
+  }
+
+  var qualidade_da_alimentacao_Array = qualidade_da_alimentacao.map(function (value) {
+    return [new Date(value.data_criacao).getTime(), value.avarage];
+  });
+  var nivel_de_estresse_Array = nivel_de_estresse.map(function (value) {
+    return [new Date(value.data_criacao).getTime(), value.avarage];
+  });
+  var qualidade_de_sono_Array = qualidade_de_sono.map(function (value) {
+    return [new Date(value.data_criacao).getTime(), value.avarage];
+  });
+  var nivel_de_ansiedade_Array = nivel_de_ansiedade.map(function (value) {
+    return [new Date(value.data_criacao).getTime(), value.avarage];
+  });
+  var nivel_de_humor_Array = nivel_de_humor.map(function (value) {
+    return [new Date(value.data_criacao).getTime(), value.avarage];
+  });
+  var series = [];
+  series.push(qualidade_de_sono_Array);
+  series.push(nivel_de_estresse_Array);
+  series.push(qualidade_da_alimentacao_Array);
+  series.push(nivel_de_ansiedade_Array);
+  series.push(nivel_de_humor_Array);
+  return series;
+}
+
+var ChartIppo = /*#__PURE__*/function () {
+  function ChartIppo() {
+    _classCallCheck(this, ChartIppo);
+
+    this.barSaudeCronica = null;
+    this.donutSaudeCronica = null;
+    this.barSaudeMental = null;
+    this.donutSaudeMental = null;
+    this.barAlimentacao = null;
+    this.donutAlimentacao = null;
+    this.donutColaboradoresCadastradosTotal = null;
+    this.donutColaboradoresCadastradosEngajamento = null; //
+
+    this.barFelling = null;
+  }
+
+  _createClass(ChartIppo, [{
+    key: "renderAtividadeFisica",
+    value: function renderAtividadeFisica(data) {
+      var arrayLabels = [];
+      var arrayDataLabels = Object.keys(data.opcoes);
+
+      for (var i = 0; i < arrayDataLabels.length; i++) {
+        arrayLabels[i] = arrayDataLabels[i].split(" ");
+      }
+
+      var barOptionAtividadeFisica = {
+        chart: {
+          height: 300,
+          type: 'bar',
+          toolbar: {
+            show: false
+          }
+        },
+        noData: emptyChart,
+        colors: ['#7d30cb'],
+        series: [{
+          data: Object.values(data.opcoes)
+        }],
+        xaxis: {
+          categories: arrayLabels,
+          labels: {
+            style: {
+              fontSize: '10px',
+              fontWeight: 900
+            }
+          }
+        }
+      };
+      this.barAtividadeFisica = new ApexCharts(document.querySelector("#barAtividadeFisica"), barOptionAtividadeFisica);
+      this.barAtividadeFisica.render();
+      var donutOptionAtividadeFisica = {
+        chart: {
+          height: 300,
+          type: 'donut',
+          toolbar: {
+            show: false
+          }
+        },
+        noData: emptyChart,
+        legend: {
+          show: true,
+          position: 'bottom',
+          verticalAlign: 'bottom',
+          align: 'center'
+        },
+        colors: ['#7d30cb', '#bfc9d4'],
+        series: [data.totais.indicaram, data.totais.nao_indicaram],
+        labels: ["Indicaram prática de atividade física.", "Não prática de atividade física."],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              show: true,
+              position: 'bottom',
+              verticalAlign: 'bottom',
+              align: 'center'
+            }
+          }
+        }]
+      };
+      this.donutAtividadeFisica = new ApexCharts(document.querySelector("#donutAtividadeFisica"), donutOptionAtividadeFisica);
+      this.donutAtividadeFisica.render();
+    }
+  }, {
+    key: "updateAtividadeFisica",
+    value: function updateAtividadeFisica(data) {
+      this.barAtividadeFisica.updateSeries([{
+        data: Object.values(data.opcoes)
+      }]);
+      this.donutAtividadeFisica.updateSeries([data.totais.indicaram, data.totais.nao_indicaram]);
+    }
+  }, {
+    key: "renderSaudeAlimentar",
+    value: function renderSaudeAlimentar(data) {
+      var arrayLabels = [];
+      var arrayDataLabels = Object.keys(data.opcoes);
+
+      for (var i = 0; i < arrayDataLabels.length; i++) {
+        arrayLabels[i] = arrayDataLabels[i].split(" ");
+      }
+
+      var barOptionAlimentacao = {
+        chart: {
+          height: 300,
+          type: 'bar',
+          toolbar: {
+            show: false
+          }
+        },
+        noData: emptyChart,
+        colors: ['#f8538d'],
+        series: [{
+          data: Object.values(data.opcoes)
+        }],
+        xaxis: {
+          categories: arrayLabels,
+          labels: {
+            style: {
+              fontSize: '10px',
+              fontWeight: 900
+            }
+          }
+        }
+      };
+      this.barAlimentacao = new ApexCharts(document.querySelector("#barAlimentacao"), barOptionAlimentacao);
+      this.barAlimentacao.render();
+      var donutOptionAlimentacao = {
+        chart: {
+          height: 300,
+          type: 'donut',
+          toolbar: {
+            show: false
+          }
+        },
+        noData: emptyChart,
+        legend: {
+          show: true,
+          position: 'bottom',
+          verticalAlign: 'bottom',
+          align: 'center'
+        },
+        colors: ['#f8538d', '#bfc9d4'],
+        series: [data.totais.indicaram, data.totais.nao_indicaram],
+        labels: ["Indicaram como veem sua alimentação.", "Não como veem sua alimentação."],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              show: true,
+              position: 'bottom',
+              verticalAlign: 'bottom',
+              align: 'center'
+            }
+          }
+        }]
+      };
+      this.donutAlimentacao = new ApexCharts(document.querySelector("#donutAlimentacao"), donutOptionAlimentacao);
+      this.donutAlimentacao.render();
+    }
+  }, {
+    key: "updateSaudeAlimentar",
+    value: function updateSaudeAlimentar(data) {
+      this.barAlimentacao.updateSeries([{
+        data: Object.values(data.opcoes)
+      }]);
+      this.donutAlimentacao.updateSeries([data.totais.indicaram, data.totais.nao_indicaram]);
+    }
+  }, {
+    key: "renderSaudeCronica",
+    value: function renderSaudeCronica(data) {
+      var arrayLabels = [];
+      var arrayDataLabels = Object.keys(data.opcoes);
+
+      for (var i = 0; i < arrayDataLabels.length; i++) {
+        arrayLabels[i] = arrayDataLabels[i].split(" ");
+      }
+
+      var barOptionSaudeCronica = {
+        chart: {
+          height: 300,
+          type: 'bar',
+          toolbar: {
+            show: false
+          }
+        },
+        noData: emptyChart,
+        colors: ['#008eff'],
+        series: [{
+          data: Object.values(data.opcoes)
+        }],
+        xaxis: {
+          categories: arrayLabels,
+          labels: {
+            style: {
+              fontSize: '10px',
+              fontWeight: 900
+            }
+          }
+        }
+      };
+      this.barSaudeCronica = new ApexCharts(document.querySelector("#barSaudeCronica"), barOptionSaudeCronica);
+      this.barSaudeCronica.render();
+      var donutOptionSaudeCronica = {
+        chart: {
+          height: 300,
+          type: 'donut',
+          toolbar: {
+            show: false
+          }
+        },
+        legend: {
+          show: true,
+          position: 'bottom',
+          verticalAlign: 'bottom',
+          align: 'center'
+        },
+        noData: emptyChart,
+        colors: ['#008eff', '#bfc9d4'],
+        series: [data.totais.indicaram, data.totais.nao_indicaram],
+        labels: ["Indicaram alguma doença crônica.", "Não indicaram doença crônica."],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              show: true,
+              position: 'bottom',
+              verticalAlign: 'bottom',
+              align: 'center'
+            }
+          }
+        }]
+      };
+      this.donutSaudeCronica = new ApexCharts(document.querySelector("#donutSaudeCronica"), donutOptionSaudeCronica);
+      this.donutSaudeCronica.render();
+    }
+  }, {
+    key: "updateSaudeCronica",
+    value: function updateSaudeCronica(data) {
+      this.barSaudeCronica.updateSeries([{
+        data: Object.values(data.opcoes)
+      }]);
+      this.donutSaudeCronica.updateSeries([data.totais.indicaram, data.totais.nao_indicaram]);
+    }
+  }, {
+    key: "renderSaudeMental",
+    value: function renderSaudeMental(data) {
+      var arrayLabels = [];
+      var arrayDataLabels = Object.keys(data.opcoes);
+
+      for (var i = 0; i < arrayDataLabels.length; i++) {
+        arrayLabels[i] = arrayDataLabels[i].split(" ");
+      }
+
+      var barOptionSaudeMental = {
+        chart: {
+          height: 300,
+          type: 'bar',
+          toolbar: {
+            show: false
+          }
+        },
+        noData: emptyChart,
+        colors: ['#e95f2b'],
+        series: [{
+          data: Object.values(data.opcoes)
+        }],
+        xaxis: {
+          categories: arrayLabels,
+          labels: {
+            style: {
+              fontSize: '10px',
+              fontWeight: 900
+            }
+          }
+        }
+      };
+      this.barSaudeMental = new ApexCharts(document.querySelector("#barSaudeMental"), barOptionSaudeMental);
+      this.barSaudeMental.render();
+      var donutOptionSaudeMental = {
+        chart: {
+          height: 300,
+          type: 'donut',
+          toolbar: {
+            show: false
+          }
+        },
+        legend: {
+          show: true,
+          position: 'bottom',
+          verticalAlign: 'bottom',
+          align: 'center'
+        },
+        noData: emptyChart,
+        colors: ['#e95f2b', '#bfc9d4'],
+        series: [data.totais.indicaram, data.totais.nao_indicaram],
+        labels: ["Indicaram algum problema de ordem mental.", "Não indicaram algum problema de ordem mental."],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              show: true,
+              position: 'bottom',
+              verticalAlign: 'bottom',
+              align: 'center'
+            }
+          }
+        }]
+      };
+      this.donutSaudeMental = new ApexCharts(document.querySelector("#donutSaudeMental"), donutOptionSaudeMental);
+      this.donutSaudeMental.render();
+    }
+  }, {
+    key: "updateSaudeMental",
+    value: function updateSaudeMental(data) {
+      this.barSaudeMental.updateSeries([{
+        data: Object.values(data.opcoes)
+      }]);
+      this.donutSaudeMental.updateSeries([data.totais.indicaram, data.totais.nao_indicaram]);
+    }
+  }, {
+    key: "renderColaboradoresCadastradosTotal",
+    value: function renderColaboradoresCadastradosTotal(data) {
+      var cadastrados = data.cadastrados_total.s;
+      var baseTotal = data.cadastrados_total.n;
+      var donutOptionColaboradoresCadastradosTotal = {
+        chart: {
+          height: 300,
+          type: 'donut',
+          toolbar: {
+            show: false
+          }
+        },
+        title: {
+          text: 'Cadastrados X Base Total',
+          align: 'center',
+          margin: 10,
+          offsetX: 0,
+          offsetY: 0,
+          floating: false,
+          style: {
+            fontSize: '14px',
+            fontWeight: 'bold',
+            fontFamily: undefined,
+            color: '#263238'
+          }
+        },
+        legend: {
+          show: true,
+          position: 'bottom',
+          verticalAlign: 'bottom',
+          align: 'center'
+        },
+        colors: ['#009688', '#bfc9d4'],
+        series: [cadastrados, baseTotal],
+        labels: ["Cadastrados", "Base Total"],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              show: true,
+              position: 'bottom',
+              verticalAlign: 'bottom',
+              align: 'center'
+            }
+          }
+        }]
+      };
+      this.donutColaboradoresCadastradosTotal = new ApexCharts(document.querySelector("#donutColaboradoresCadastradosTotal"), donutOptionColaboradoresCadastradosTotal);
+      this.donutColaboradoresCadastradosTotal.render();
+    }
+  }, {
+    key: "updateColaboradoresCadastradosTotal",
+    value: function updateColaboradoresCadastradosTotal(data) {
+      var cadastrados = data.cadastrados_total.s;
+      var baseTotaal = data.cadastrados_total.n;
+      this.donutColaboradoresCadastradosTotal.updateSeries([cadastrados, baseTotaal]);
+    }
+  }, {
+    key: "renderColaboradoresCadastradosEngajamento",
+    value: function renderColaboradoresCadastradosEngajamento(data) {
+      var engajados = data.cadastrados_engajamento.s;
+      var cadastrados = data.cadastrados_engajamento.n;
+      var donutOptionColaboradoresCadastradosEngajamento = {
+        chart: {
+          height: 300,
+          type: 'donut',
+          toolbar: {
+            show: false
+          }
+        },
+        title: {
+          text: 'Engajamento X Cadastrados',
+          align: 'center',
+          margin: 10,
+          offsetX: 0,
+          offsetY: 0,
+          floating: false,
+          style: {
+            fontSize: '14px',
+            fontWeight: 'bold',
+            fontFamily: undefined,
+            color: '#263238'
+          }
+        },
+        legend: {
+          show: true,
+          position: 'bottom',
+          verticalAlign: 'bottom',
+          align: 'center'
+        },
+        colors: ['#009688', '#bfc9d4'],
+        series: [engajados, cadastrados],
+        labels: ["Engajamento", "Cadastrados"],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              show: true,
+              position: 'bottom',
+              verticalAlign: 'bottom',
+              align: 'center'
+            }
+          }
+        }]
+      };
+      this.donutColaboradoresCadastradosEngajamento = new ApexCharts(document.querySelector("#donutColaboradoresCadastradosEngajamento"), donutOptionColaboradoresCadastradosEngajamento);
+      this.donutColaboradoresCadastradosEngajamento.render();
+    }
+  }, {
+    key: "updateColaboradoresCadastradosEngajamento",
+    value: function updateColaboradoresCadastradosEngajamento(data) {
+      var engajamento = data.cadastrados_engajamento.s;
+      var cadastrados = data.cadastrados_engajamento.n;
+      this.donutColaboradoresCadastradosEngajamento.updateSeries([engajamento, cadastrados]);
+    }
+  }, {
+    key: "renderFelling",
+    value: function renderFelling(data) {
+      var series = returnFellingSeries(data);
+      var barFelling = {
+        series: [{
+          name: "Qualidade de Sono",
+          data: series[0]
+        }, {
+          name: "Nível de estresse",
+          data: series[1]
+        }, {
+          name: "Qualidade de alimentação",
+          data: series[2]
+        }, {
+          name: "Nível de ansiedade",
+          data: series[3]
+        }, {
+          name: "Nível de humor",
+          data: series[4]
+        }],
+        stroke: {
+          width: 4,
+          curve: 'smooth',
+          dashArray: 0
+        },
+        chart: {
+          id: 'line-datetime',
+          type: 'line',
+          height: 350,
+          zoom: {
+            autoScaleYaxis: true
+          }
+        },
+        grid: {
+          show: true,
+          borderColor: '#f1f1f1'
+        },
+        xaxis: {
+          type: 'datetime'
+        },
+        yaxis: [{
+          min: 1,
+          max: 5,
+          labels: {
+            formatter: function formatter(val) {
+              return val.toFixed(2);
+            }
+          }
+        }],
+        markers: {
+          size: 7
+        },
+        tooltip: {
+          enabled: false
+        },
+        colors: ['#8c84fa', '#4dd1a0', '#bc8308', '#bc2308', '#af07f8']
+      };
+      this.barFelling = new ApexCharts(document.querySelector("#barFelling"), barFelling);
+      this.barFelling.render();
+    }
+  }, {
+    key: "updateFelling",
+    value: function updateFelling(data) {
+      var series = returnFellingSeries(data);
+      this.barFelling.updateSeries([{
+        name: "Qualidade de Sono",
+        data: series[0]
+      }, {
+        name: "Nível de estresse",
+        data: series[1]
+      }, {
+        name: "Qualidade de alimentação",
+        data: series[2]
+      }, {
+        name: "Nível de ansiedade",
+        data: series[3]
+      }, {
+        name: "Nível de humor",
+        data: series[4]
+      }]);
+    }
+  }]);
+
+  return ChartIppo;
+}();
+
+/***/ }),
+
+/***/ "./public/js/dashboard/dashboard.js":
+/*!******************************************!*\
+  !*** ./public/js/dashboard/dashboard.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Dashboard": () => (/* binding */ Dashboard)
+/* harmony export */ });
+/* harmony import */ var _ajax_ippo_ajax_json_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ajax/ippo_ajax_json.js */ "./public/js/ajax/ippo_ajax_json.js");
+/* harmony import */ var _components_chart_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/chart.js */ "./public/js/components/chart.js");
+/* harmony import */ var _util_util_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/util.js */ "./public/js/util/util.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+
+
+
+var Dashboard = /*#__PURE__*/function () {
+  function Dashboard() {
+    _classCallCheck(this, Dashboard);
+
+    this.chartIppo = new _components_chart_js__WEBPACK_IMPORTED_MODULE_1__.ChartIppo();
+  }
+
+  _createClass(Dashboard, [{
+    key: "loadDashboardAdmin",
+    value: function loadDashboardAdmin(request) {
+      var ippoAjax = new _ajax_ippo_ajax_json_js__WEBPACK_IMPORTED_MODULE_0__.IppoAjaxJSON("/admin/dataFilteredForTheCharts", "GET", "admin.dashboard").createRequest(request);
+      var escopo = this;
+      ippoAjax.done(function (data) {
+        escopo.setDataDashboard(data);
+      });
+    }
+  }, {
+    key: "refreshDashboardAdmin",
+    value: function refreshDashboardAdmin(request) {
+      _util_util_js__WEBPACK_IMPORTED_MODULE_2__.UtilIppo.showModalLoading();
+      var ippoAjax = new _ajax_ippo_ajax_json_js__WEBPACK_IMPORTED_MODULE_0__.IppoAjaxJSON("/admin/dataFilteredForTheCharts", "GET", "admin.dashboard").createRequest(request);
+      var escopo = this;
+      ippoAjax.done(function (data) {
+        _util_util_js__WEBPACK_IMPORTED_MODULE_2__.UtilIppo.hideModalLoading();
+        escopo.updateDataDashboard(data);
+      });
+    }
+  }, {
+    key: "loadDashboard",
+    value: function loadDashboard(request) {
+      var ippoAjax = new _ajax_ippo_ajax_json_js__WEBPACK_IMPORTED_MODULE_0__.IppoAjaxJSON("/dataFilteredForTheCharts", "GET", "dashboard").createRequest(request);
+      var escopo = this;
+      ippoAjax.done(function (data) {
+        escopo.setDataDashboard(data);
+      });
+    }
+  }, {
+    key: "refreshDashboard",
+    value: function refreshDashboard(request) {
+      _util_util_js__WEBPACK_IMPORTED_MODULE_2__.UtilIppo.showModalLoading();
+      var ippoAjax = new _ajax_ippo_ajax_json_js__WEBPACK_IMPORTED_MODULE_0__.IppoAjaxJSON("/dataFilteredForTheCharts", "GET", "dashboard").createRequest(request);
+      var escopo = this;
+      ippoAjax.done(function (data) {
+        _util_util_js__WEBPACK_IMPORTED_MODULE_2__.UtilIppo.hideModalLoading();
+        escopo.updateDataDashboard(data);
+      });
+    }
+  }, {
+    key: "updateDataDashboard",
+    value: function updateDataDashboard(data) {
+      this.updateDataCharts(data);
+      this.setDataTabelaFuncionario(data.colaboradores.lista_cadastro);
+    }
+  }, {
+    key: "setDataDashboard",
+    value: function setDataDashboard(data) {
+      this.setDataCharts(data);
+      this.setDataTabelaFuncionario(data.colaboradores.lista_cadastro);
+    }
+  }, {
+    key: "setDataCharts",
+    value: function setDataCharts(data) {
+      this.chartIppo.renderColaboradoresCadastradosTotal(data.colaboradores);
+      this.chartIppo.renderColaboradoresCadastradosEngajamento(data.colaboradores);
+      this.chartIppo.renderSaudeCronica(data.saude_cronica);
+      this.chartIppo.renderSaudeMental(data.saude_mental);
+      this.chartIppo.renderSaudeAlimentar(data.saude_alimentar);
+      this.chartIppo.renderAtividadeFisica(data.atividade_fisica);
+      this.chartIppo.renderFelling(data.fellings);
+    }
+  }, {
+    key: "updateDataCharts",
+    value: function updateDataCharts(data) {
+      this.chartIppo.updateColaboradoresCadastradosTotal(data.colaboradores);
+      this.chartIppo.updateColaboradoresCadastradosEngajamento(data.colaboradores);
+      this.chartIppo.updateSaudeCronica(data.saude_cronica);
+      this.chartIppo.updateSaudeMental(data.saude_mental);
+      this.chartIppo.updateSaudeAlimentar(data.saude_alimentar);
+      this.chartIppo.updateAtividadeFisica(data.atividade_fisica);
+      this.chartIppo.updateFelling(data.fellings);
+    }
+  }, {
+    key: "setDataTabelaFuncionario",
+    value: function setDataTabelaFuncionario(responseData) {
+      var $table = $('#table_funcionario_dashboard tbody');
+      var html = '';
+      Object.keys(responseData).forEach(function (key) {
+        var colaborador = responseData[key];
+        html += '<tr>';
+        html += '<td>' + _util_util_js__WEBPACK_IMPORTED_MODULE_2__.UtilIppo.dataFormatada(colaborador.data_nascimento) + '</td>';
+        html += '<td className="ps-0">' + colaborador.nome + ' ' + colaborador.sobrenome + '</td>';
+        html += '<td className="text-center">' + _util_util_js__WEBPACK_IMPORTED_MODULE_2__.UtilIppo.maskCPF(colaborador.cpf) + '</td>';
+        html += '</tr>';
+      });
+      $table.html(html);
+    }
+  }]);
+
+  return Dashboard;
+}();
+
+/***/ }),
+
+/***/ "./public/js/util/util.js":
+/*!********************************!*\
+  !*** ./public/js/util/util.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "UtilIppo": () => (/* binding */ UtilIppo)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var UtilIppo = /*#__PURE__*/function () {
+  function UtilIppo() {
+    _classCallCheck(this, UtilIppo);
+  }
+
+  _createClass(UtilIppo, null, [{
+    key: "showModal",
+    value: function showModal(id) {
+      $(id).modal('show');
+    }
+  }, {
+    key: "hideModal",
+    value: function hideModal(id) {
+      $(id).modal('hide');
+    }
+  }, {
+    key: "setMessageModalError",
+    value: function setMessageModalError(message) {
+      $("#messageModalError").html(message);
+    }
+  }, {
+    key: "setMessageModalInfo",
+    value: function setMessageModalInfo(message) {
+      $("#messageModalInfo").html(message);
+    }
+  }, {
+    key: "showUserMessagesErrorValidation",
+    value: function showUserMessagesErrorValidation(errors) {
+      var e = errors['errors'];
+
+      if (e.email !== undefined) {
+        $("#inputEmailError").html(e.email);
+        $("#inputEmailError").show();
+      } else {
+        $("#inputEmailError").html('');
+        $("#inputEmailError").hide();
+      }
+
+      if (e.password !== undefined) {
+        $("#inputPasswordError").html(e.password);
+        $("#inputPasswordError").show();
+      } else {
+        $("#inputPasswordError").html('');
+        $("#inputPasswordError").hide();
+      }
+
+      if (e.password_confirmation !== undefined) {
+        $("#inputConfirmPasswordError").html(e.password_confirmation);
+        $("#inputConfirmPasswordError").show();
+      } else {
+        $("#inputConfirmPasswordError").html('');
+        $("#inputConfirmPasswordError").hide();
+      }
+
+      if (e.id_empresa !== undefined) {
+        $("#selectEmpresaError").html(e.id_empresa);
+        $("#selectEmpresaError").show();
+      } else {
+        $("#selectEmpresaError").html('');
+        $("#selectEmpresaError").hide();
+      }
+    }
+  }, {
+    key: "showFuncionarioMessagesErrorValidation",
+    value: function showFuncionarioMessagesErrorValidation(errors) {
+      var e = errors['errors'];
+
+      if (e.nome !== undefined) {
+        $("#inputNomeError").html(e.nome);
+        $("#inputNomeError").show();
+      } else {
+        $("#inputNomeError").html('');
+        $("#inputNomeError").hide();
+      }
+
+      if (e.sobrenome !== undefined) {
+        $("#inputSobrenomeError").html(e.sobrenome);
+        $("#inputSobrenomeError").show();
+      } else {
+        $("#inputSobrenomeError").html('');
+        $("#inputSobrenomeError").hide();
+      }
+
+      if (e.nome_social !== undefined) {
+        $("#inputNomeSocialError").html(e.nome_social);
+        $("#inputNomeSocialError").show();
+      } else {
+        $("#inputNomeSocialError").html('');
+        $("#inputNomeSocialError").hide();
+      }
+
+      if (e.telefone !== undefined) {
+        $("#inputTelefoneError").html(e.telefone);
+        $("#inputTelefoneError").show();
+      } else {
+        $("#inputTelefoneError").html('');
+        $("#inputTelefoneError").hide();
+      }
+
+      if (e.cpf !== undefined) {
+        $("#inputCPFError").html(e.cpf);
+        $("#inputCPFError").show();
+      } else {
+        $("#inputCPFError").html('');
+        $("#inputCPFError").hide();
+      }
+
+      if (e.email !== undefined) {
+        $("#inputEmailError").html(e.email);
+        $("#inputEmailError").show();
+      } else {
+        $("#inputEmailError").html('');
+        $("#inputEmailError").hide();
+      }
+
+      if (e.data_nascimento !== undefined) {
+        $("#inputDataNascimentoError").html(e.data_nascimento);
+        $("#inputDataNascimentoError").show();
+      } else {
+        $("#inputDataNascimentoError").html('');
+        $("#inputDataNascimentoError").hide();
+      }
+
+      if (e.trabalho !== undefined) {
+        $("#selectTrabalhoError").html(e.trabalho);
+        $("#selectTrabalhoError").show();
+      } else {
+        $("#selectTrabalhoError").html('');
+        $("#selectTrabalhoError").hide();
+      }
+
+      if (e.genero !== undefined) {
+        $("#selectGeneroError").html(e.genero);
+        $("#selectGeneroError").show();
+      } else {
+        $("#selectGeneroError").html('');
+        $("#selectGeneroError").hide();
+      }
+    }
+  }, {
+    key: "showModalInfo",
+    value: function showModalInfo() {
+      var mensagem = 'Registro salvo com sucesso!';
+      this.setMessageModalInfo(mensagem);
+      this.showModal('#modalInfo');
+    }
+  }, {
+    key: "showModalError",
+    value: function showModalError(errors) {
+      var mensagem = '';
+      mensagem = 'Ops! Houve um erro ao processar os dados. Tente novamente.';
+      this.setMessageModalError(mensagem);
+      this.showModal('#modalError');
+    }
+  }, {
+    key: "showModalAddFuncionario",
+    value: function showModalAddFuncionario(data) {
+      if (data) {
+        UtilIppo.preencheCamposModalFuncionario(data);
+      } else {
+        UtilIppo.limpaCamposModalFuncionario(data);
+      }
+
+      UtilIppo.showModal('#modalAddFuncionario');
+    }
+  }, {
+    key: "preencheCamposModalFuncionario",
+    value: function preencheCamposModalFuncionario(data) {
+      $('#modalAddFuncionario input[name=id]').val(data.id);
+      $('#modalAddFuncionario input[name=nome]').val(data.nome);
+      $('#modalAddFuncionario input[name=sobrenome]').val(data.sobrenome);
+      $('#modalAddFuncionario input[name=nome_social]').val(data.nome_social);
+      $('#modalAddFuncionario input[name=cpf]').val(data.cpf);
+      $('#modalAddFuncionario input[name=telefone]').val(data.telefone);
+      $('#modalAddFuncionario input[name=email]').val(data.email);
+      $('#modalAddFuncionario input[name=data_nascimento]').val(data.data_nascimento);
+      $('#modalAddFuncionario select[name=genero] option').filter(function (i, e) {
+        return $(e).text() === data.genero;
+      }).prop('selected', true);
+      $('#modalAddFuncionario select[name=trabalho] option').filter(function (i, e) {
+        return $(e).text() === data.trabalho;
+      }).prop('selected', true);
+      $('#modalAddFuncionario select[name=engajou] option').filter(function (i, e) {
+        return $(e).text() === data.engajou;
+      }).prop('selected', true);
+    }
+  }, {
+    key: "limpaCamposModalFuncionario",
+    value: function limpaCamposModalFuncionario() {
+      $('#modalAddFuncionario input[name=id]').val('');
+      $('#modalAddFuncionario input[name=nome]').val('');
+      $('#modalAddFuncionario input[name=sobrenome]').val('');
+      $('#modalAddFuncionario input[name=nome_social]').val('');
+      $('#modalAddFuncionario input[name=cpf]').val('');
+      $('#modalAddFuncionario input[name=telefone]').val('');
+      $('#modalAddFuncionario input[name=email]').val('');
+      $('#modalAddFuncionario input[name=data_nascimento]').val('');
+      $("#modalAddFuncionario select[name=genero]").val($("#modalAddFuncionario select[name=genero] option:first").val());
+      $("#modalAddFuncionario select[name=trabalho]").val($("#modalAddFuncionario select[name=trabalho] option:first").val());
+      $("#modalAddFuncionario select[name=engajou]").val($("#modalAddFuncionario select[name=engajou] option:first").val());
+    }
+  }, {
+    key: "hideModalAddUsuario",
+    value: function hideModalAddUsuario() {
+      this.hideModal('#modalAddUsuario');
+    }
+  }, {
+    key: "hideModalAddFuncionario",
+    value: function hideModalAddFuncionario() {
+      this.hideModal('#modalAddFuncionario');
+    }
+  }, {
+    key: "hideModalError",
+    value: function hideModalError() {
+      this.hideModal('#modalError');
+    }
+  }, {
+    key: "showModalLoading",
+    value: function showModalLoading() {
+      this.showModal('#modalLoading');
+    }
+  }, {
+    key: "hideModalLoading",
+    value: function hideModalLoading() {
+      this.hideModal('#modalLoading');
+    }
+  }, {
+    key: "dataFormatada",
+    value: function dataFormatada(data) {
+      if (!data) return "";
+      var dia = data.split("-")[2];
+      var mes = data.split("-")[1];
+      var ano = data.split("-")[0];
+      return ("0" + dia).slice(-2) + '/' + ("0" + mes).slice(-2) + '/' + ano;
+    }
+  }, {
+    key: "mask",
+    value: function mask(value, pattern) {
+      var i = 0;
+      var v = value.toString();
+      return pattern.replace(/#/g, function (_) {
+        return v[i++];
+      });
+    }
+  }, {
+    key: "maskCPF",
+    value: function maskCPF(value) {
+      return this.mask(value, '###.###.###-##');
+    }
+  }, {
+    key: "maskTelefone",
+    value: function maskTelefone(value) {
+      return this.mask(value, '(##) ####-####');
+    }
+  }, {
+    key: "maskCelular",
+    value: function maskCelular(value) {
+      return this.mask(value, '(##) #####-####');
+    }
+  }, {
+    key: "getLabelsChartFromLongTexts",
+    value: function getLabelsChartFromLongTexts(text) {
+      var textSplited = text.split(" ");
+
+      if (textSplited.length <= 1) {
+        return text;
+      }
+
+      return this.getArrayLabelsFromTextSplited(textSplited);
+    }
+  }, {
+    key: "getArrayLabelsFromTextSplited",
+    value: function getArrayLabelsFromTextSplited(textSplited) {
+      var ultimoAdicionado = textSplited[0];
+      var textLabel = [ultimoAdicionado];
+      var lastPositionSplited = textSplited.length - 1;
+      var lastPositionLabel = textLabel.length - 1;
+
+      for (var i = 1; i <= lastPositionSplited; i++) {
+        var atual = textSplited[i];
+        var concatenado = ultimoAdicionado + " " + atual;
+
+        if (concatenado.length <= 9) {
+          textLabel[lastPositionLabel] = concatenado;
+          ultimoAdicionado = concatenado;
+        } else {
+          textLabel.push(atual);
+        }
+      }
+
+      return textLabel;
+    }
+  }]);
+
+  return UtilIppo;
+}();
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _public_js_util_util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../public/js/util/util.js */ "./public/js/util/util.js");
+/* harmony import */ var _public_js_dashboard_dashboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../public/js/dashboard/dashboard */ "./public/js/dashboard/dashboard.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+
+
 
 /***/ }),
 
