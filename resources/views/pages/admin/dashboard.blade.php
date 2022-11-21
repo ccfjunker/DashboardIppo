@@ -68,6 +68,25 @@
                         </div>
                     </div>
                 </div>
+                <div id="graficoFelling" class="col-xl-12 layout-spacing">
+                    <div class="statbox widget box box-shadow">
+                        <div class="widget-header">
+                            <div class="row">
+                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                    <h4>Evolução Diária</h4>
+                                </div>
+                            </div>
+                            <hr/>
+                        </div>
+
+                        <div class="widget-content widget-content-area">
+                            <div class="row">
+                                <div id="barFelling" class="col-xl-12" style="display: inline-block"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
                 <div id="graficoSaudeCronica" class="col-xl-6 layout-spacing">
                     <div class="statbox widget box box-shadow">
                         <div class="widget-header">

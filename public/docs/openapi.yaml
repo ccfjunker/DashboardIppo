@@ -1,0 +1,751 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/auth/login:
+    post:
+      summary: 'Login user and create token'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'O campo value deve ser um endereço de e-mail válido.'
+                  example: sbergstrom@example.net
+                password:
+                  type: string
+                  description: ''
+                  example: sed
+                remember_me:
+                  type: boolean
+                  description: ''
+                  example: false
+              required:
+                - email
+                - password
+      security: []
+  /api/auth/register:
+    post:
+      summary: 'Create user'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'O campo value deve ser um endereço de e-mail válido.'
+                  example: zdenesik@example.org
+                password:
+                  type: string
+                  description: 'O campo value deve ter pelo menos 8 caracteres.'
+                  example: hlvuzpn
+                funcao:
+                  type: string
+                  description: 'Must be one of <code>A</code> or <code>E</code>.'
+                  example: E
+                id:
+                  type: number
+                  description: ''
+                  example: 27991421.991724
+                id_empresa:
+                  type: number
+                  description: 'O campo value é obrigatório quando <code>funcao</code> for <code>E</code>.'
+                  example: 29.62867
+              required:
+                - email
+                - password
+                - funcao
+      security: []
+  /api/auth/logout:
+    get:
+      summary: 'Logout user (Revoke the token)'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Server Error'
+                properties:
+                  message:
+                    type: string
+                    example: 'Server Error'
+      tags:
+        - Endpoints
+      security: []
+  /api/auth/user:
+    get:
+      summary: 'Get the authenticated User'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Server Error'
+                properties:
+                  message:
+                    type: string
+                    example: 'Server Error'
+      tags:
+        - Endpoints
+      security: []
+  /api/auth/funcionarios:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Server Error'
+                properties:
+                  message:
+                    type: string
+                    example: 'Server Error'
+      tags:
+        - Endpoints
+      security: []
+  '/api/auth/funcionario/{id}':
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Server Error'
+                properties:
+                  message:
+                    type: string
+                    example: 'Server Error'
+      tags:
+        - Endpoints
+      security: []
+    delete:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the funcionario.'
+        example: consequatur
+        required: true
+        schema:
+          type: string
+  /api/auth/funcionario:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  description: ''
+                  example: 10.205771704
+                id_empresa:
+                  type: number
+                  description: ''
+                  example: 273986.19884151
+                trabalho:
+                  type: string
+                  description: 'Must be one of <code>HO</code>, <code>HI</code>, or <code>PS</code>.'
+                  example: PS
+                genero:
+                  type: string
+                  description: 'Must be one of <code>H</code> or <code>M</code>.'
+                  example: H
+                nome:
+                  type: string
+                  description: 'O campo value não pode ser superior a 40 caracteres.'
+                  example: ndooroliaejotbdkn
+                sobrenome:
+                  type: string
+                  description: 'O campo value não pode ser superior a 100 caracteres.'
+                  example: dwesnsusisljzgxracrjbiczddmnzaweotsuejslgwgkoitbyezleyutponuvlpyztomssyvnwwazvvhapbjggq
+                nome_social:
+                  type: string
+                  description: 'O campo value não pode ser superior a 40 caracteres.'
+                  example: snq
+                telefone:
+                  type: string
+                  description: 'O campo value deve ter 11 dígitos.'
+                  example: '92498526058'
+                cpf:
+                  type: string
+                  description: 'O campo value deve ter 11 dígitos.'
+                  example: '90849106239'
+                email:
+                  type: string
+                  description: 'O campo value deve ser um endereço de e-mail válido.'
+                  example: kole97@example.net
+                data_nascimento:
+                  type: string
+                  description: 'Must be a valid date in the format <code>Y-m-d</code>.'
+                  example: '2022-11-14'
+              required:
+                - id_empresa
+                - trabalho
+                - genero
+                - nome
+                - sobrenome
+                - telefone
+                - cpf
+                - email
+                - data_nascimento
+      security: []
+  /api/auth/empresas:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Server Error'
+                properties:
+                  message:
+                    type: string
+                    example: 'Server Error'
+      tags:
+        - Endpoints
+      security: []
+  '/api/auth/empresa/{id}':
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Server Error'
+                properties:
+                  message:
+                    type: string
+                    example: 'Server Error'
+      tags:
+        - Endpoints
+      security: []
+    delete:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the empresa.'
+        example: quis
+        required: true
+        schema:
+          type: string
+  /api/auth/empresa:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  description: ''
+                  example: 8739569.9199836
+                nome:
+                  type: string
+                  description: 'O campo value não pode ser superior a 100 caracteres.'
+                  example: hdwdzooqmxcaexbyeactbvipyut
+                cupom:
+                  type: string
+                  description: 'O campo value não pode ser superior a 30 caracteres.'
+                  example: wntkuwoeqtanfsdkctqtunghglfiz
+                total_funcionario:
+                  type: number
+                  description: ''
+                  example: 56.2266195
+              required:
+                - nome
+                - cupom
+      security: []
+  /api/auth/anamneses:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Server Error'
+                properties:
+                  message:
+                    type: string
+                    example: 'Server Error'
+      tags:
+        - Endpoints
+      security: []
+  /api/auth/anamnese:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  description: ''
+                  example: 344875500.45
+                id_empresa:
+                  type: number
+                  description: ''
+                  example: 135115.24680397
+                id_funcionario:
+                  type: number
+                  description: ''
+                  example: 224057490.66594
+                data_atualizacao:
+                  type: string
+                  description: 'Must be a valid date in the format <code>Y-m-d</code>.'
+                  example: '2022-11-14'
+                data_criacao:
+                  type: string
+                  description: 'Must be a valid date in the format <code>Y-m-d</code>.'
+                  example: '2022-11-14'
+                proprietario:
+                  type: string
+                  description: ''
+                  example: aut
+                cronicos:
+                  type: string
+                  description: ''
+                  example: qui
+                mental:
+                  type: string
+                  description: ''
+                  example: iusto
+                alimentacao:
+                  type: string
+                  description: ''
+                  example: veniam
+                fisico:
+                  type: string
+                  description: ''
+                  example: et
+              required:
+                - id_empresa
+                - id_funcionario
+      security: []
+  /api/auth/import-export-excel:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/user:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Server Error'
+                properties:
+                  message:
+                    type: string
+                    example: 'Server Error'
+      tags:
+        - Endpoints
+      security: []
+  /api/felling:
+    post:
+      summary: Store
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  description: 'O campo value não pode ser superior a 50 caracteres.'
+                  example: uawxvqubypjjez
+                sobrenome:
+                  type: string
+                  description: 'O campo value não pode ser superior a 50 caracteres.'
+                  example: plolkhmxhujijfxjvgqkcenwobkzibggv
+                telefone:
+                  type: string
+                  description: 'O campo value deve ter 11 dígitos.'
+                  example: '54838045888'
+                cpf:
+                  type: string
+                  description: 'O campo value deve ter 11 dígitos.'
+                  example: '51466544892'
+                qualidade_de_alimentacao:
+                  type: number
+                  description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
+                  example: '1'
+                nivel_de_estresse:
+                  type: number
+                  description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
+                  example: '2'
+                qualidade_de_sono:
+                  type: number
+                  description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
+                  example: '4'
+                nivel_de_ansiedade:
+                  type: number
+                  description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
+                  example: '3'
+                nivel_de_humor:
+                  type: number
+                  description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
+                  example: '2'
+              required:
+                - cpf
+      security: []
+tags:
+  -
+    name: Endpoints
+    description: ''

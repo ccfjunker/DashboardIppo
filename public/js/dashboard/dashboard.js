@@ -60,6 +60,7 @@ export class Dashboard{
         this.chartIppo.renderSaudeMental(data.saude_mental);
         this.chartIppo.renderSaudeAlimentar(data.saude_alimentar);
         this.chartIppo.renderAtividadeFisica(data.atividade_fisica);
+        this.chartIppo.renderFelling(data.fellings);
     }
 
     updateDataCharts(data){
@@ -70,6 +71,7 @@ export class Dashboard{
         this.chartIppo.updateSaudeMental(data.saude_mental);
         this.chartIppo.updateSaudeAlimentar(data.saude_alimentar);
         this.chartIppo.updateAtividadeFisica(data.atividade_fisica);
+        this.chartIppo.updateFelling(data.fellings);
     }
 
     setDataTabelaFuncionario(responseData) {

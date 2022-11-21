@@ -7,8 +7,190 @@ var emptyChart = {
 };
 
 
+//utils
+function returnFellingSeries(data) {
+    const qualidade_da_alimentacao = data[0]
+    const nivel_de_estresse = data[1]
+    const qualidade_de_sono = data[2]
+    const nivel_de_ansiedade = data[3]
+    const nivel_de_humor = data[4]
+    const VALOR_MEDIA_MOVEL_DIAS = 3;
 
-export class ChartIppo{
+    // Media de Dias de alimentacao
+    qualidade_da_alimentacao.map((value) => value.nivel = parseInt(value.nivel))
+    nivel_de_estresse.map((value) => value.nivel = parseInt(value.nivel))
+    qualidade_de_sono.map((value) => value.nivel = parseInt(value.nivel))
+    nivel_de_ansiedade.map((value) => value.nivel = parseInt(value.nivel))
+    nivel_de_humor.map((value) => value.nivel = parseInt(value.nivel))
+
+    // Media diaria
+    for (let i = 0; i < qualidade_da_alimentacao.length; i++) {
+        if (i === qualidade_da_alimentacao.length - 1 || qualidade_da_alimentacao[i].data_criacao.substring(0, 10) != qualidade_da_alimentacao[i + 1].data_criacao.substring(0, 10)) {
+            //volta verificando os iguais
+            if (i > 0 && qualidade_da_alimentacao[i].data_criacao.substring(0, 10) === qualidade_da_alimentacao[i - 1].data_criacao.substring(0, 10)) {
+                // tem iguais
+                let index = i;
+                let contagem_de_index_voltados = 0;
+                let soma_de_nivel = 0;
+                while (index >= 0 && qualidade_da_alimentacao[i].data_criacao.substring(0, 10) === qualidade_da_alimentacao[index].data_criacao.substring(0, 10)) {
+                    soma_de_nivel += qualidade_da_alimentacao[index].nivel
+                    index--
+                    contagem_de_index_voltados++
+                }
+                qualidade_da_alimentacao[index + 1].nivel = soma_de_nivel / contagem_de_index_voltados
+                qualidade_da_alimentacao.splice(index + 2, contagem_de_index_voltados - 1);
+                i = index + 2
+            }
+        }
+    }
+    for (let i = 0; i < nivel_de_estresse.length; i++) {
+        if (i === nivel_de_estresse.length - 1 || nivel_de_estresse[i].data_criacao.substring(0, 10) != nivel_de_estresse[i + 1].data_criacao.substring(0, 10)) {
+            //volta verificando os iguais
+            if (i > 0 && nivel_de_estresse[i].data_criacao.substring(0, 10) === nivel_de_estresse[i - 1].data_criacao.substring(0, 10)) {
+                // tem iguais
+                let index = i;
+                let contagem_de_index_voltados = 0;
+                let soma_de_nivel = 0;
+                while (index >= 0 && nivel_de_estresse[i].data_criacao.substring(0, 10) === nivel_de_estresse[index].data_criacao.substring(0, 10)) {
+                    soma_de_nivel += nivel_de_estresse[index].nivel
+                    index--
+                    contagem_de_index_voltados++
+                }
+                nivel_de_estresse[index + 1].nivel = soma_de_nivel / contagem_de_index_voltados
+                nivel_de_estresse.splice(index + 2, contagem_de_index_voltados - 1);
+                i = index + 2
+            }
+        }
+    }
+    for (let i = 0; i < qualidade_de_sono.length; i++) {
+        if (i === qualidade_de_sono.length - 1 || qualidade_de_sono[i].data_criacao.substring(0, 10) != qualidade_de_sono[i + 1].data_criacao.substring(0, 10)) {
+            //volta verificando os iguais
+            if (i > 0 && qualidade_de_sono[i].data_criacao.substring(0, 10) === qualidade_de_sono[i - 1].data_criacao.substring(0, 10)) {
+                // tem iguais
+                let index = i;
+                let contagem_de_index_voltados = 0;
+                let soma_de_nivel = 0;
+                while (index >= 0 && qualidade_de_sono[i].data_criacao.substring(0, 10) === qualidade_de_sono[index].data_criacao.substring(0, 10)) {
+                    soma_de_nivel += qualidade_de_sono[index].nivel
+                    index--
+                    contagem_de_index_voltados++
+                }
+                qualidade_de_sono[index + 1].nivel = soma_de_nivel / contagem_de_index_voltados
+                qualidade_de_sono.splice(index + 2, contagem_de_index_voltados - 1);
+                i = index + 2
+            }
+        }
+    }
+    for (let i = 0; i < nivel_de_ansiedade.length; i++) {
+        if (i === nivel_de_ansiedade.length - 1 || nivel_de_ansiedade[i].data_criacao.substring(0, 10) != nivel_de_ansiedade[i + 1].data_criacao.substring(0, 10)) {
+            //volta verificando os iguais
+            if (i > 0 && nivel_de_ansiedade[i].data_criacao.substring(0, 10) === nivel_de_ansiedade[i - 1].data_criacao.substring(0, 10)) {
+                // tem iguais
+                let index = i;
+                let contagem_de_index_voltados = 0;
+                let soma_de_nivel = 0;
+                while (index >= 0 && nivel_de_ansiedade[i].data_criacao.substring(0, 10) === nivel_de_ansiedade[index].data_criacao.substring(0, 10)) {
+                    soma_de_nivel += nivel_de_ansiedade[index].nivel
+                    index--
+                    contagem_de_index_voltados++
+                }
+                nivel_de_ansiedade[index + 1].nivel = soma_de_nivel / contagem_de_index_voltados
+                nivel_de_ansiedade.splice(index + 2, contagem_de_index_voltados - 1);
+                i = index + 2
+            }
+        }
+    }
+    for (let i = 0; i < nivel_de_humor.length; i++) {
+        if (i === nivel_de_humor.length - 1 || nivel_de_humor[i].data_criacao.substring(0, 10) != nivel_de_humor[i + 1].data_criacao.substring(0, 10)) {
+            //volta verificando os iguais
+            if (i > 0 && nivel_de_humor[i].data_criacao.substring(0, 10) === nivel_de_humor[i - 1].data_criacao.substring(0, 10)) {
+                // tem iguais
+                let index = i;
+                let contagem_de_index_voltados = 0;
+                let soma_de_nivel = 0;
+                while (index >= 0 && nivel_de_humor[i].data_criacao.substring(0, 10) === nivel_de_humor[index].data_criacao.substring(0, 10)) {
+                    soma_de_nivel += nivel_de_humor[index].nivel
+                    index--
+                    contagem_de_index_voltados++
+                }
+                nivel_de_humor[index + 1].nivel = soma_de_nivel / contagem_de_index_voltados
+                nivel_de_humor.splice(index + 2, contagem_de_index_voltados - 1);
+                i = index + 2
+            }
+        }
+    }
+
+
+    // Media Movel
+    for (let i = 0; i < qualidade_da_alimentacao.length; i++) {
+        const valor_media_movel = (i > VALOR_MEDIA_MOVEL_DIAS ? (VALOR_MEDIA_MOVEL_DIAS + 1) : (i + 1))
+        let sum = 0;
+        for (let j = 0; j < valor_media_movel; j++) {
+            sum += qualidade_da_alimentacao[i - j].nivel
+        }
+        sum = sum / valor_media_movel
+        qualidade_da_alimentacao[i].avarage = sum
+    }
+    for (let i = 0; i < qualidade_de_sono.length; i++) {
+        const valor_media_movel = (i > VALOR_MEDIA_MOVEL_DIAS ? (VALOR_MEDIA_MOVEL_DIAS + 1) : (i + 1))
+        let sum = 0;
+        for (let j = 0; j < valor_media_movel; j++) {
+            sum += qualidade_de_sono[i - j].nivel
+        }
+        sum = sum / valor_media_movel
+        qualidade_de_sono[i].avarage = sum
+    }
+    for (let i = 0; i < nivel_de_estresse.length; i++) {
+        const valor_media_movel = (i > VALOR_MEDIA_MOVEL_DIAS ? (VALOR_MEDIA_MOVEL_DIAS + 1) : (i + 1))
+        let sum = 0;
+        for (let j = 0; j < valor_media_movel; j++) {
+            sum += nivel_de_estresse[i - j].nivel
+        }
+        sum = sum / valor_media_movel
+        nivel_de_estresse[i].avarage = sum
+    }
+    for (let i = 0; i < nivel_de_ansiedade.length; i++) {
+        const valor_media_movel = (i > VALOR_MEDIA_MOVEL_DIAS ? (VALOR_MEDIA_MOVEL_DIAS + 1) : (i + 1))
+        let sum = 0;
+        for (let j = 0; j < valor_media_movel; j++) {
+            sum += nivel_de_ansiedade[i - j].nivel
+        }
+        sum = sum / valor_media_movel
+        nivel_de_ansiedade[i].avarage = sum
+    }
+    for (let i = 0; i < nivel_de_humor.length; i++) {
+        const valor_media_movel = (i > VALOR_MEDIA_MOVEL_DIAS ? (VALOR_MEDIA_MOVEL_DIAS + 1) : (i + 1))
+        let sum = 0;
+        for (let j = 0; j < valor_media_movel; j++) {
+            sum += nivel_de_humor[i - j].nivel
+        }
+        sum = sum / valor_media_movel
+        nivel_de_humor[i].avarage = sum
+    }
+
+    const qualidade_da_alimentacao_Array = qualidade_da_alimentacao.map((value) =>
+        [(new Date(value.data_criacao)).getTime(), value.avarage])
+    const nivel_de_estresse_Array = nivel_de_estresse.map((value) =>
+        [(new Date(value.data_criacao)).getTime(), value.avarage])
+    const qualidade_de_sono_Array = qualidade_de_sono.map((value) =>
+        [(new Date(value.data_criacao)).getTime(), value.avarage])
+    const nivel_de_ansiedade_Array = nivel_de_ansiedade.map((value) =>
+        [(new Date(value.data_criacao)).getTime(), value.avarage])
+    const nivel_de_humor_Array = nivel_de_humor.map((value) =>
+        [(new Date(value.data_criacao)).getTime(), value.avarage])
+
+
+    const series = []
+    series.push(qualidade_de_sono_Array)
+    series.push(nivel_de_estresse_Array)
+    series.push(qualidade_da_alimentacao_Array)
+    series.push(nivel_de_ansiedade_Array)
+    series.push(nivel_de_humor_Array)
+    return series;
+}
+
+export class ChartIppo {
+
     constructor() {
         this.barSaudeCronica = null;
         this.donutSaudeCronica = null;
@@ -18,11 +200,13 @@ export class ChartIppo{
         this.donutAlimentacao = null;
         this.donutColaboradoresCadastradosTotal = null;
         this.donutColaboradoresCadastradosEngajamento = null;
+        //
+        this.barFelling = null;
     }
     renderAtividadeFisica(data) {
         var arrayLabels = [];
         var arrayDataLabels = Object.keys(data.opcoes);
-        for(var i=0; i<arrayDataLabels.length; i++){
+        for (var i = 0; i < arrayDataLabels.length; i++) {
             arrayLabels[i] = arrayDataLabels[i].split(" ");
         }
 
@@ -36,9 +220,9 @@ export class ChartIppo{
             },
             noData: emptyChart,
             colors: ['#7d30cb'],
-            series: [{ data: Object.values(data.opcoes)}],
+            series: [{ data: Object.values(data.opcoes) }],
             xaxis: {
-                categories : arrayLabels,
+                categories: arrayLabels,
                 labels: {
                     style: {
                         fontSize: '10px',
@@ -61,14 +245,14 @@ export class ChartIppo{
             },
             noData: emptyChart,
             legend: {
-                show:true,
+                show: true,
                 position: 'bottom',
                 verticalAlign: 'bottom',
-                align:'center'
+                align: 'center'
             },
             colors: ['#7d30cb', '#bfc9d4'],
             series: [data.totais.indicaram, data.totais.nao_indicaram],
-            labels: ["Indicaram prática de atividade física.","Não prática de atividade física."],
+            labels: ["Indicaram prática de atividade física.", "Não prática de atividade física."],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -76,10 +260,10 @@ export class ChartIppo{
                         width: 200
                     },
                     legend: {
-                        show:true,
+                        show: true,
                         position: 'bottom',
                         verticalAlign: 'bottom',
-                        align:'center'
+                        align: 'center'
                     }
                 }
             }]
@@ -91,8 +275,7 @@ export class ChartIppo{
         );
         this.donutAtividadeFisica.render();
     }
-    updateAtividadeFisica (data) {
-        console.log(Object.values(data.opcoes));
+    updateAtividadeFisica(data) {
         this.barAtividadeFisica.updateSeries([{
             data: Object.values(data.opcoes)
         }]);
@@ -103,7 +286,7 @@ export class ChartIppo{
     renderSaudeAlimentar(data) {
         var arrayLabels = [];
         var arrayDataLabels = Object.keys(data.opcoes);
-        for(var i=0; i<arrayDataLabels.length; i++){
+        for (var i = 0; i < arrayDataLabels.length; i++) {
             arrayLabels[i] = arrayDataLabels[i].split(" ");
         }
 
@@ -117,9 +300,9 @@ export class ChartIppo{
             },
             noData: emptyChart,
             colors: ['#f8538d'],
-            series: [{ data: Object.values(data.opcoes)}],
+            series: [{ data: Object.values(data.opcoes) }],
             xaxis: {
-                categories : arrayLabels,
+                categories: arrayLabels,
                 labels: {
                     style: {
                         fontSize: '10px',
@@ -142,14 +325,14 @@ export class ChartIppo{
             },
             noData: emptyChart,
             legend: {
-                show:true,
+                show: true,
                 position: 'bottom',
                 verticalAlign: 'bottom',
-                align:'center'
+                align: 'center'
             },
             colors: ['#f8538d', '#bfc9d4'],
             series: [data.totais.indicaram, data.totais.nao_indicaram],
-            labels: ["Indicaram como veem sua alimentação.","Não como veem sua alimentação."],
+            labels: ["Indicaram como veem sua alimentação.", "Não como veem sua alimentação."],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -157,10 +340,10 @@ export class ChartIppo{
                         width: 200
                     },
                     legend: {
-                        show:true,
+                        show: true,
                         position: 'bottom',
                         verticalAlign: 'bottom',
-                        align:'center'
+                        align: 'center'
                     }
                 }
             }]
@@ -172,7 +355,7 @@ export class ChartIppo{
         );
         this.donutAlimentacao.render();
     }
-    updateSaudeAlimentar (data) {
+    updateSaudeAlimentar(data) {
         this.barAlimentacao.updateSeries([{
             data: Object.values(data.opcoes)
         }]);
@@ -181,7 +364,7 @@ export class ChartIppo{
     renderSaudeCronica(data) {
         var arrayLabels = [];
         var arrayDataLabels = Object.keys(data.opcoes);
-        for(var i=0; i<arrayDataLabels.length; i++){
+        for (var i = 0; i < arrayDataLabels.length; i++) {
             arrayLabels[i] = arrayDataLabels[i].split(" ");
         }
 
@@ -195,9 +378,9 @@ export class ChartIppo{
             },
             noData: emptyChart,
             colors: ['#008eff'],
-            series: [{ data: Object.values(data.opcoes)}],
+            series: [{ data: Object.values(data.opcoes) }],
             xaxis: {
-                categories : arrayLabels,
+                categories: arrayLabels,
                 labels: {
                     style: {
                         fontSize: '10px',
@@ -219,15 +402,15 @@ export class ChartIppo{
                 }
             },
             legend: {
-                show:true,
+                show: true,
                 position: 'bottom',
                 verticalAlign: 'bottom',
-                align:'center'
+                align: 'center'
             },
             noData: emptyChart,
             colors: ['#008eff', '#bfc9d4'],
             series: [data.totais.indicaram, data.totais.nao_indicaram],
-            labels: ["Indicaram alguma doença crônica.","Não indicaram doença crônica."],
+            labels: ["Indicaram alguma doença crônica.", "Não indicaram doença crônica."],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -235,31 +418,31 @@ export class ChartIppo{
                         width: 200
                     },
                     legend: {
-                        show:true,
+                        show: true,
                         position: 'bottom',
                         verticalAlign: 'bottom',
-                        align:'center'
+                        align: 'center'
                     }
                 }
             }]
         }
 
-         this.donutSaudeCronica = new ApexCharts(
+        this.donutSaudeCronica = new ApexCharts(
             document.querySelector("#donutSaudeCronica"),
             donutOptionSaudeCronica
         );
-         this.donutSaudeCronica.render();
-}
-    updateSaudeCronica (data) {
+        this.donutSaudeCronica.render();
+    }
+    updateSaudeCronica(data) {
         this.barSaudeCronica.updateSeries([{
             data: Object.values(data.opcoes)
         }]);
-         this.donutSaudeCronica.updateSeries([data.totais.indicaram, data.totais.nao_indicaram]);
+        this.donutSaudeCronica.updateSeries([data.totais.indicaram, data.totais.nao_indicaram]);
     }
     renderSaudeMental(data) {
         var arrayLabels = [];
         var arrayDataLabels = Object.keys(data.opcoes);
-        for(var i=0; i<arrayDataLabels.length; i++){
+        for (var i = 0; i < arrayDataLabels.length; i++) {
             arrayLabels[i] = arrayDataLabels[i].split(" ");
         }
 
@@ -273,9 +456,9 @@ export class ChartIppo{
             },
             noData: emptyChart,
             colors: ['#e95f2b'],
-            series: [{ data: Object.values(data.opcoes)}],
+            series: [{ data: Object.values(data.opcoes) }],
             xaxis: {
-                categories : arrayLabels,
+                categories: arrayLabels,
                 labels: {
                     style: {
                         fontSize: '10px',
@@ -285,8 +468,8 @@ export class ChartIppo{
             }
         }
 
-         this.barSaudeMental = new ApexCharts(document.querySelector("#barSaudeMental"), barOptionSaudeMental);
-         this.barSaudeMental.render();
+        this.barSaudeMental = new ApexCharts(document.querySelector("#barSaudeMental"), barOptionSaudeMental);
+        this.barSaudeMental.render();
 
         var donutOptionSaudeMental = {
             chart: {
@@ -297,15 +480,15 @@ export class ChartIppo{
                 }
             },
             legend: {
-                show:true,
+                show: true,
                 position: 'bottom',
                 verticalAlign: 'bottom',
-                align:'center'
+                align: 'center'
             },
             noData: emptyChart,
             colors: ['#e95f2b', '#bfc9d4'],
             series: [data.totais.indicaram, data.totais.nao_indicaram],
-            labels: ["Indicaram algum problema de ordem mental.","Não indicaram algum problema de ordem mental."],
+            labels: ["Indicaram algum problema de ordem mental.", "Não indicaram algum problema de ordem mental."],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -313,10 +496,10 @@ export class ChartIppo{
                         width: 200
                     },
                     legend: {
-                        show:true,
+                        show: true,
                         position: 'bottom',
                         verticalAlign: 'bottom',
-                        align:'center'
+                        align: 'center'
                     }
                 }
             }]
@@ -328,8 +511,8 @@ export class ChartIppo{
         );
         this.donutSaudeMental.render();
     }
-    updateSaudeMental (data) {
-         this.barSaudeMental.updateSeries([{
+    updateSaudeMental(data) {
+        this.barSaudeMental.updateSeries([{
             data: Object.values(data.opcoes)
         }]);
         this.donutSaudeMental.updateSeries([data.totais.indicaram, data.totais.nao_indicaram]);
@@ -347,7 +530,7 @@ export class ChartIppo{
                     show: false,
                 }
             },
-            title:{
+            title: {
                 text: 'Cadastrados X Base Total',
                 align: 'center',
                 margin: 10,
@@ -355,21 +538,21 @@ export class ChartIppo{
                 offsetY: 0,
                 floating: false,
                 style: {
-                    fontSize:  '14px',
-                    fontWeight:  'bold',
-                    fontFamily:  undefined,
-                    color:  '#263238'
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    fontFamily: undefined,
+                    color: '#263238'
                 }
             },
             legend: {
-                show:true,
+                show: true,
                 position: 'bottom',
                 verticalAlign: 'bottom',
-                align:'center'
+                align: 'center'
             },
             colors: ['#009688', '#bfc9d4'],
             series: [cadastrados, baseTotal],
-            labels: ["Cadastrados","Base Total"],
+            labels: ["Cadastrados", "Base Total"],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -377,10 +560,10 @@ export class ChartIppo{
                         width: 200
                     },
                     legend: {
-                        show:true,
+                        show: true,
                         position: 'bottom',
                         verticalAlign: 'bottom',
-                        align:'center'
+                        align: 'center'
                     }
                 }
             }]
@@ -392,7 +575,7 @@ export class ChartIppo{
         );
         this.donutColaboradoresCadastradosTotal.render();
     }
-    updateColaboradoresCadastradosTotal (data) {
+    updateColaboradoresCadastradosTotal(data) {
         var cadastrados = data.cadastrados_total.s;
         var baseTotaal = data.cadastrados_total.n;
         this.donutColaboradoresCadastradosTotal.updateSeries([cadastrados, baseTotaal]);
@@ -410,7 +593,7 @@ export class ChartIppo{
                     show: false,
                 }
             },
-            title:{
+            title: {
                 text: 'Engajamento X Cadastrados',
                 align: 'center',
                 margin: 10,
@@ -418,17 +601,17 @@ export class ChartIppo{
                 offsetY: 0,
                 floating: false,
                 style: {
-                    fontSize:  '14px',
-                    fontWeight:  'bold',
-                    fontFamily:  undefined,
-                    color:  '#263238'
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    fontFamily: undefined,
+                    color: '#263238'
                 }
             },
             legend: {
-                show:true,
+                show: true,
                 position: 'bottom',
                 verticalAlign: 'bottom',
-                align:'center'
+                align: 'center'
             },
             colors: ['#009688', '#bfc9d4'],
             series: [engajados, cadastrados],
@@ -440,10 +623,10 @@ export class ChartIppo{
                         width: 200
                     },
                     legend: {
-                        show:true,
+                        show: true,
                         position: 'bottom',
                         verticalAlign: 'bottom',
-                        align:'center'
+                        align: 'center'
                     }
                 }
             }]
@@ -455,9 +638,91 @@ export class ChartIppo{
         );
         this.donutColaboradoresCadastradosEngajamento.render();
     }
-    updateColaboradoresCadastradosEngajamento (data) {
+    updateColaboradoresCadastradosEngajamento(data) {
         var engajamento = data.cadastrados_engajamento.s;
         var cadastrados = data.cadastrados_engajamento.n;
         this.donutColaboradoresCadastradosEngajamento.updateSeries([engajamento, cadastrados]);
     }
+    renderFelling(data) {
+        const series = returnFellingSeries(data)
+        var barFelling = {
+            series: [
+                {
+                    name: "Qualidade de Sono",
+                    data: series[0]
+                }, {
+                    name: "Nível de estresse",
+                    data: series[1]
+                }, {
+                    name: "Qualidade de alimentação",
+                    data: series[2]
+                }, {
+                    name: "Nível de ansiedade",
+                    data: series[3]
+                }, {
+                    name: "Nível de humor",
+                    data: series[4]
+                }],
+            stroke: {
+                width: 4,
+                curve: 'smooth',
+                dashArray: 0,
+            },
+            chart: {
+                id: 'line-datetime',
+                type: 'line',
+                height: 350,
+                zoom: {
+                    autoScaleYaxis: true
+                }
+            },
+            grid: {
+                show: true,
+                borderColor: '#f1f1f1',
+            },
+            xaxis: {
+                type: 'datetime',
+            },
+            yaxis: [{
+                min: 1,
+                max: 5,
+                labels: {
+                    formatter: function (val) {
+                        return val.toFixed(2)
+                    }
+                }
+            }],
+            markers: {
+                size: 7
+            },
+            tooltip: {
+                enabled: false,
+            },
+            colors: ['#8c84fa', '#4dd1a0', '#bc8308', '#bc2308', '#af07f8'],
+        };
+
+        this.barFelling = new ApexCharts(document.querySelector("#barFelling"), barFelling);
+        this.barFelling.render();
+    }
+    updateFelling(data) {
+        const series = returnFellingSeries(data)
+        this.barFelling.updateSeries([
+            {
+                name: "Qualidade de Sono",
+                data: series[0]
+            }, {
+                name: "Nível de estresse",
+                data: series[1]
+            }, {
+                name: "Qualidade de alimentação",
+                data: series[2]
+            }, {
+                name: "Nível de ansiedade",
+                data: series[3]
+            }, {
+                name: "Nível de humor",
+                data: series[4]
+            }]);
+    }
+
 }

@@ -30,4 +30,8 @@ class Parametro
         "3 vezes por semana",
        "5 à 7 vezes por semana"
     ];
+
+    const OPCOES_FELLING = [
+        "Qualidade de Sono", "Nível de estresse", "Qualidade de alimentação", "Nível de ansiedade", "Nível de humor"
+    ];
 }

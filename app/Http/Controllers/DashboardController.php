@@ -35,9 +35,9 @@ class DashboardController extends Controller
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'alt_menu' => 0,
-            'options_genero'=>Funcionario::getArrayGenero(),
-            'options_trabalho'=>Funcionario::getArrayTrabalho(),
-            'options_empresa'=>Empresa::getArrayOptions()
+            'options_genero' => Funcionario::getArrayGenero(),
+            'options_trabalho' => Funcionario::getArrayTrabalho(),
+            'options_empresa' => Empresa::getArrayOptions()
         ];
         return view('dashboard2')->with($data);
     }
@@ -47,11 +47,10 @@ class DashboardController extends Controller
      *
      * @param  FiltroDashboardEmpresaRequest  $request
      */
-    public function dataFilteredForTheCharts(FiltroDashboardEmpresaRequest $request){
+    public function dataFilteredForTheCharts(FiltroDashboardEmpresaRequest $request)
+    {
         $dashboardService =  new DashboardService();
-
-        return response()->json( $dashboardService->getDataFilteredForTheCharts($request) );
+        $data = $dashboardService->getDataFilteredForTheCharts($request);
+        return response()->json($data);
     }
-
-
 }
