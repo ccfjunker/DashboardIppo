@@ -241,7 +241,7 @@ class DashboardService
      */
     public function getFilteredsAnamneses(FiltroDashboardEmpresaRequest $request): Collection
     {
-        $anamneses = Anamnese::whereNotNull('data_criacao');
+        $anamneses = Anamnese::whereNotNull('created_at');
 
         if ($request->has('selectEmpresa') && !empty($request->input('selectEmpresa'))) {
             $anamneses->where('id_empresa', $request->input('selectEmpresa'));
