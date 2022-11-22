@@ -27,6 +27,7 @@ class Parametro
     const OPCOES_ATIVIDADE_FISICA = [
         "Não faço exercícios",
         "1 vez por semana",
+        "2 vezes por semana",
         "3 vezes por semana",
        "5 à 7 vezes por semana"
     ];
