@@ -58,6 +58,31 @@ class DashboardService
             $fellings->whereBetween(DB::raw('DATE(data_atualizacao)'), [dateDB($request->input('inputDataInicial')), dateDB($request->input('inputDataFinal'))]);
         }
 
+        if ($request->has('selectIdade') && !empty($request->input('selectIdade'))) {
+            $fellings->whereHas('funcionario', function ($query) use ($request) {
+                $first_age = explode("-", $request->input('selectIdade'))[0];
+                $second_age = explode("-", $request->input('selectIdade'))[1];
+                if ($first_age) {
+                    $first_date = date('d-m-Y', strtotime('-' . $first_age . ' years'));
+                    $day1 = explode("-", $first_date)[0];
+                    $month1 = explode("-", $first_date)[1];
+                    $year1 = explode("-", $first_date)[2];
+                }
+                if ($second_age) {
+                    $second_date = date('d-m-Y', strtotime('-' . $second_age . ' years'));
+                    $day2 = explode("-", $second_date)[0];
+                    $month2 = explode("-", $second_date)[1];
+                    $year2 = explode("-", $second_date)[2];
+                }
+
+                return $first_age && $second_age
+                    ? ($query->where('data_nascimento', '<', $year1 . '-' . $month1 . '-' . $day1)
+                        ->where('data_nascimento', '>=', $year2 . '-' . $month2 . '-' . $day2))
+                    : ($first_age ? $query->where('data_nascimento', '<', $year1 . '-' . $month1 . '-' . $day1)
+                        : $query->where('data_nascimento', '>=', $year2 . '-' . $month2 . '-' . $day2));
+            })->get();
+        }
+
         if ($request->has('selectTrabalho') && !empty($request->input('selectTrabalho'))) {
             $fellings->whereHas('funcionario', function ($query) use ($request) {
                 return $query->where('trabalho', $request->input('selectTrabalho'));
@@ -226,6 +251,31 @@ class DashboardService
 
         if ($request->has('inputDataInicial') && !empty($request->input('inputDataInicial')) && $request->has('inputDataFinal') && !empty($request->input('inputDataFinal'))) {
             $anamneses->whereBetween(DB::raw('DATE(data_atualizacao)'), [dateDB($request->input('inputDataInicial')), dateDB($request->input('inputDataFinal'))]);
+        }
+
+        if ($request->has('selectIdade') && !empty($request->input('selectIdade'))) {
+            $anamneses->whereHas('funcionario', function ($query) use ($request) {
+                $first_age = explode("-", $request->input('selectIdade'))[0];
+                $second_age = explode("-", $request->input('selectIdade'))[1];
+                if ($first_age) {
+                    $first_date = date('d-m-Y', strtotime('-' . $first_age . ' years'));
+                    $day1 = explode("-", $first_date)[0];
+                    $month1 = explode("-", $first_date)[1];
+                    $year1 = explode("-", $first_date)[2];
+                }
+                if ($second_age) {
+                    $second_date = date('d-m-Y', strtotime('-' . $second_age . ' years'));
+                    $day2 = explode("-", $second_date)[0];
+                    $month2 = explode("-", $second_date)[1];
+                    $year2 = explode("-", $second_date)[2];
+                }
+
+                return $first_age && $second_age
+                    ? ($query->where('data_nascimento', '<', $year1 . '-' . $month1 . '-' . $day1)
+                        ->where('data_nascimento', '>=', $year2 . '-' . $month2 . '-' . $day2))
+                    : ($first_age ? $query->where('data_nascimento', '<', $year1 . '-' . $month1 . '-' . $day1)
+                        : $query->where('data_nascimento', '>=', $year2 . '-' . $month2 . '-' . $day2));
+            })->get();
         }
 
         if ($request->has('selectTrabalho') && !empty($request->input('selectTrabalho'))) {

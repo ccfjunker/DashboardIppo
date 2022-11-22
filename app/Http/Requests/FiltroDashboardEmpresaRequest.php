@@ -26,7 +26,8 @@ class FiltroDashboardEmpresaRequest extends FormRequest{
             'inputDataFinal'=>'nullable|sometimes|date_format:d/m/Y',
             'inputIdade'=>'nullable|sometimes|numeric',
             'selectGenero'=>'nullable|sometimes|in:H,M',
-            'selectTrabalho'=>'nullable|sometimes|in:HO,HI,PS'
+            'selectTrabalho'=>'nullable|sometimes|in:HO,HI,PS',
+            'selectIdade'=>'nullable|sometimes|in:-18,18-24,25-32,33-39,40-47,48-54,55-63,64-'
         ];
     }
 }
