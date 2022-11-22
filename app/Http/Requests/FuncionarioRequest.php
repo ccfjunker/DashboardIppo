@@ -29,6 +29,7 @@ class FuncionarioRequest extends FormRequest
             'id_empresa'=>'required|numeric|exists:tb_empresa,id',
             "trabalho"=>"nullable|in:HO,HI,PS",
             "genero" => "nullable|in:H,M",
+            "engajou" => "in:N,S",
             "nome" => "required|max:40",
             "sobrenome" => "required|max:100",
             "nome_social" => "max:40",
