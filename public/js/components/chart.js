@@ -218,6 +218,9 @@ export class ChartIppo {
                     show: false,
                 }
             },
+            dataLabels: {
+              enabled: false,
+            },
             noData: emptyChart,
             colors: ['#7d30cb'],
             series: [{ data: Object.values(data.opcoes) }],
@@ -298,6 +301,9 @@ export class ChartIppo {
                     show: false,
                 }
             },
+            dataLabels: {
+              enabled: false,
+            },
             noData: emptyChart,
             colors: ['#f8538d'],
             series: [{ data: Object.values(data.opcoes) }],
@@ -376,6 +382,9 @@ export class ChartIppo {
                     show: false,
                 }
             },
+            dataLabels: {
+              enabled: false,
+            },
             noData: emptyChart,
             colors: ['#008eff'],
             series: [{ data: Object.values(data.opcoes) }],
@@ -453,6 +462,9 @@ export class ChartIppo {
                 toolbar: {
                     show: false,
                 }
+            },
+            dataLabels: {
+              enabled: false,
             },
             noData: emptyChart,
             colors: ['#e95f2b'],
