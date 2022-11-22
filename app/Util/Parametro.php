@@ -11,7 +11,7 @@ class Parametro
     ];
 
     const OPCOES_SAUDE_MENTAL = [
-        "Crise de Ansiedade","Depressão","Sindrome do Pânico","Não tive ou não tenho essa necessidade","TDAH","Outro", "Estresse Pós Traumático",
+        "Crise de Ansiedade","Depressão","Sindrome do Pânico","Sindrome da Cabana","Não tive ou não tenho essa necessidade","TDAH","Outro", "Estresse Pós Traumático",
     ];
 
     const MASK_CPF = '###.###.###-##';
