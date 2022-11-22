@@ -7,5 +7,6 @@ export class FiltroDashboardRequest {
         this.inputIdade = inputIdade;
         this.selectGenero = selectGenero;
         this.selectTrabalho = selectTrabalho;
+        this.selectIdade = selectIdade;
     }
 }
