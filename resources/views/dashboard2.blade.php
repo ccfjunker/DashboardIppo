@@ -20,6 +20,47 @@
                        text-align: center;
                     }
                 </style>
+                <div id="thermomter" class="col-xl-12 layout-spacing">
+                    <div class="statbox widget box box-shadow">
+                        <div class="widget-header">
+                            <div class="row">
+                                <div class="col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <h4 class="text-center text-md-start">Termômetro</h4>
+                                    <img src="../src/assets/img/sem-dados.png" class="ther_img d-flex d-md-none img-fluid px-sm-5" alt="Termometro">
+                                    <hr class="mt-3 d-flex d-md-none"/>
+                                </div>
+                                <div class="col-xl-2 col-md-2 col-sm-12 col-12">
+                                    <h4 class="text-center">Média</h4>
+                                    <img src="../src/assets/img/icon-sem-dados.png" style="height: 100px;" class="media_img text-center mx-auto d-block d-md-none" alt="Termometro">
+                                    <hr class="mt-3 d-flex d-md-none"/>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-sm-12 col-12">
+                                    <h4 class="text-center text-md-start">Observações</h4>
+                                    <div class="d-flex d-md-none" style="border: 1px solid #aaaaaa; border-radius: 10px; padding: 5px;">
+                                        <p class="align-self-center text-center text-therm">Sem Dados!</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="d-none d-md-flex"/>
+                        </div>
+
+                        <div class="widget-content widget-content-area">
+                            <div class="row d-none d-md-flex">
+                                <div class="d-flex col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <img src="../src/assets/img/sem-dados.png" class="ther_img1 align-self-center img-fluid" alt="Termometro">
+                                </div>
+                                <div class="col-xl-2 col-md-2 col-sm-12 col-12" >
+                                    <img src="../src/assets/img/icon-sem-dados.png" style="max-height: 150px;" class="media_img1 img-fluid" alt="Termometro">
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-sm-12 col-12">
+                                    <div class="d-flex h-100" style="border: 1px solid #aaaaaa; border-radius: 10px; padding: 5px;">
+                                        <p class="align-self-center text-center text-therm1">Sem Dados!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div id="graficoFelling" class="col-xl-12 layout-spacing">
                     <div class="statbox widget box box-shadow">
                         <div class="widget-header">
