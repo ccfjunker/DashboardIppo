@@ -219,7 +219,7 @@ export class ChartIppo {
                 }
             },
             dataLabels: {
-              enabled: false,
+                enabled: false,
             },
             noData: emptyChart,
             colors: ['#7d30cb'],
@@ -302,7 +302,7 @@ export class ChartIppo {
                 }
             },
             dataLabels: {
-              enabled: false,
+                enabled: false,
             },
             noData: emptyChart,
             colors: ['#f8538d'],
@@ -383,7 +383,7 @@ export class ChartIppo {
                 }
             },
             dataLabels: {
-              enabled: false,
+                enabled: false,
             },
             noData: emptyChart,
             colors: ['#008eff'],
@@ -464,7 +464,7 @@ export class ChartIppo {
                 }
             },
             dataLabels: {
-              enabled: false,
+                enabled: false,
             },
             noData: emptyChart,
             colors: ['#e95f2b'],
@@ -736,5 +736,89 @@ export class ChartIppo {
                 data: series[4]
             }]);
     }
+    renderThermomther(data) {
+        const array_media = []
 
+        if (data[0].length > 0) {
+            const qualidade_da_alimentacao = data[0].map(el => parseInt(el.nivel))
+            const media_alimentacao = qualidade_da_alimentacao.reduce((soma, i) => {
+                return soma + i;
+            }) / qualidade_da_alimentacao.length;
+            array_media.push(media_alimentacao)
+        }
+
+        if (data[1].length > 0) {
+            const nivel_de_estresse = data[1].map(el =>
+                parseInt(el.nivel) === 1 ? 5
+                    : (parseInt(el.nivel) === 2 ? 4
+                        : (parseInt(el.nivel) === 4 ? 2
+                            : (parseInt(el.nivel) === 5 ? 1 : 3))))
+            const media_estresse = nivel_de_estresse.reduce((soma, i) => {
+                return soma + i;
+            }) / nivel_de_estresse.length;
+            array_media.push(media_estresse)
+        }
+
+        if (data[2].length > 0) {
+            const qualidade_de_sono = data[2].map(el => parseInt(el.nivel))
+            const media_sono = qualidade_de_sono.reduce((soma, i) => {
+                return soma + i;
+            }) / qualidade_de_sono.length;
+            array_media.push(media_sono)
+        }
+
+        if (data[3].length > 0) {
+            const nivel_de_ansiedade = data[3].map(el =>
+                parseInt(el.nivel) === 1 ? 5
+                    : (parseInt(el.nivel) === 2 ? 4
+                        : (parseInt(el.nivel) === 4 ? 2
+                            : (parseInt(el.nivel) === 5 ? 1 : 3))))
+            const media_ansiedade = nivel_de_ansiedade.reduce((soma, i) => {
+                return soma + i;
+            }) / nivel_de_ansiedade.length;
+            array_media.push(media_ansiedade)
+        }
+
+        if (data[4].length > 0) {
+            const nivel_de_humor = data[4].map(el => parseInt(el.nivel))
+            const media_humor = nivel_de_humor.reduce((soma, i) => {
+                return soma + i;
+            }) / nivel_de_humor.length;
+            array_media.push(media_humor)
+        }
+        const media_global = array_media.length > 0 ? array_media.reduce((soma, i) => {
+            return soma + i;
+        }) / array_media.length : 0;
+        const thermomter_image = document.querySelector(".ther_img");
+        const thermomter_image1 = document.querySelector(".ther_img1");
+        const media_img = document.querySelector(".media_img");
+        const media_img1 = document.querySelector(".media_img1");
+        const text_therm = document.querySelector(".text-therm");
+        const text_therm1 = document.querySelector(".text-therm1");
+        let status = "sem-dados"
+        if (media_global <= (5 / 3) && media_global > 0) {
+            status = "ruim"
+            const text = "A avaliação da saúde dos colaboradores monitorados está crítico. É necessária uma ação preventiva para evitar impactos na saúde das pessoas e da empresa. Vamos entrar em contato com você com alguma solução rápida ok!? Conte com os profissionais da Ippo."
+            text_therm.textContent = text
+            text_therm1.textContent = text
+        } else if (media_global <= (10 / 3) && media_global > (5 / 3)) {
+            status = "regular"
+            const text = " A condição de saúde dos colaboradores monitorados está em um nível de atenção. Estamos observando a evolução das médias e caso entre em um nível crítico, lhe alertamos e juntos vamos criar a solução ok!?"
+            text_therm.textContent = text
+            text_therm1.textContent = text
+        } else if (media_global >= (10 / 3)) {
+            status = "otimo"
+            const text = "Parabéns! A média da condição geral de saúde dos seus colaboradores está em um nível excelente. Continue assim!"
+            text_therm.textContent = text
+            text_therm1.textContent = text
+        } else {
+            const text = "Sem Dados!"
+            text_therm.textContent = text
+            text_therm1.textContent = text
+        }
+        thermomter_image.src = `../src/assets/img/${status}.png`;
+        thermomter_image1.src = `../src/assets/img/${status}.png`;
+        media_img.src = `../src/assets/img/icon-${status}.png`;
+        media_img1.src = `../src/assets/img/icon-${status}.png`;
+    }
 }

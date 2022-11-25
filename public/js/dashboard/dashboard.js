@@ -1,69 +1,70 @@
-import {IppoAjaxJSON} from "../ajax/ippo_ajax_json.js";
-import {ChartIppo} from "../components/chart.js";
-import {UtilIppo} from "../util/util.js";
+import { IppoAjaxJSON } from "../ajax/ippo_ajax_json.js";
+import { ChartIppo } from "../components/chart.js";
+import { UtilIppo } from "../util/util.js";
 
-export class Dashboard{
+export class Dashboard {
     constructor() {
         this.chartIppo = new ChartIppo();
     }
 
-    loadDashboardAdmin(request){
+    loadDashboardAdmin(request) {
         let ippoAjax = new IppoAjaxJSON("/admin/dataFilteredForTheCharts", "GET", "admin.dashboard").createRequest(request);
         var escopo = this;
-        ippoAjax.done(function (data){
+        ippoAjax.done(function (data) {
             escopo.setDataDashboard(data);
         });
     }
 
-    refreshDashboardAdmin(request){
+    refreshDashboardAdmin(request) {
         UtilIppo.showModalLoading();
         let ippoAjax = new IppoAjaxJSON("/admin/dataFilteredForTheCharts", "GET", "admin.dashboard").createRequest(request);
         var escopo = this;
-        ippoAjax.done(function (data){
+        ippoAjax.done(function (data) {
             UtilIppo.hideModalLoading();
             escopo.updateDataDashboard(data);
         });
     }
 
-    loadDashboard(request){
+    loadDashboard(request) {
         let ippoAjax = new IppoAjaxJSON("/dataFilteredForTheCharts", "GET", "dashboard").createRequest(request);
         var escopo = this;
-        ippoAjax.done(function (data){
+        ippoAjax.done(function (data) {
             escopo.setDataDashboard(data);
         });
     }
 
-    refreshDashboard(request){
+    refreshDashboard(request) {
         UtilIppo.showModalLoading();
         let ippoAjax = new IppoAjaxJSON("/dataFilteredForTheCharts", "GET", "dashboard").createRequest(request);
         var escopo = this;
-        ippoAjax.done(function (data){
+        ippoAjax.done(function (data) {
             UtilIppo.hideModalLoading();
             escopo.updateDataDashboard(data);
         });
     }
 
-    updateDataDashboard(data){
+    updateDataDashboard(data) {
         this.updateDataCharts(data);
         this.setDataTabelaFuncionario(data.colaboradores.lista_cadastro);
     }
 
-    setDataDashboard(data){
+    setDataDashboard(data) {
         this.setDataCharts(data);
         this.setDataTabelaFuncionario(data.colaboradores.lista_cadastro);
     }
 
-    setDataCharts(data){
+    setDataCharts(data) {
         this.chartIppo.renderColaboradoresCadastradosTotal(data.colaboradores);
         this.chartIppo.renderColaboradoresCadastradosEngajamento(data.colaboradores);
         this.chartIppo.renderSaudeCronica(data.saude_cronica);
         this.chartIppo.renderSaudeMental(data.saude_mental);
         this.chartIppo.renderSaudeAlimentar(data.saude_alimentar);
         this.chartIppo.renderAtividadeFisica(data.atividade_fisica);
+        this.chartIppo.renderThermomther(data.fellings);
         this.chartIppo.renderFelling(data.fellings);
     }
 
-    updateDataCharts(data){
+    updateDataCharts(data) {
 
         this.chartIppo.updateColaboradoresCadastradosTotal(data.colaboradores);
         this.chartIppo.updateColaboradoresCadastradosEngajamento(data.colaboradores);
@@ -71,6 +72,7 @@ export class Dashboard{
         this.chartIppo.updateSaudeMental(data.saude_mental);
         this.chartIppo.updateSaudeAlimentar(data.saude_alimentar);
         this.chartIppo.updateAtividadeFisica(data.atividade_fisica);
+        this.chartIppo.renderThermomther(data.fellings);
         this.chartIppo.updateFelling(data.fellings);
     }
 

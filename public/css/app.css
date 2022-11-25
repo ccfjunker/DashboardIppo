@@ -6718,6 +6718,7 @@ button.bg-dark:focus {
     align-self: stretch !important;
   }
 }
+
 @media (min-width: 992px) {
   .flex-lg-row {
     flex-direction: row !important;
