@@ -18,7 +18,7 @@ class FuncionarioService
     }
 
     public static function salvar(FuncionarioRequest $request){
-        if($request->has('id')){
+        if($request['id'] !== NULL && $request->has('id')){
             self::atualizaArray($request->all());
         }else{
             self::insereArray($request->all());
