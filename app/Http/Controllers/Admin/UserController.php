@@ -56,7 +56,7 @@ class UserController extends ListDataTableController
     }
 
     public function getUsersList(DataTableRequest $request){
-        $records = $this->getList($request, User::class)->get();
+        $records = $this->getList($request, User::class);
         $data_arr = array();
 
         foreach($records as $record){
