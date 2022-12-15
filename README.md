@@ -35,6 +35,7 @@ mysql # replace user, passwrd and permissions below to adjust your needs
 
 cp .env.example .env
 vim .env # configure DB connection
+vim .env # configure BOT_CONVERSA_KEY
 php artisan migrate
 ```
 
