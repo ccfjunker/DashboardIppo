@@ -20,21 +20,21 @@ endpoints:
         name: email
         description: 'O campo value deve ser um endereço de e-mail válido.'
         required: true
-        example: sbergstrom@example.net
+        example: altenwerth.ulices@example.net
         type: string
         custom: []
       password:
         name: password
         description: ''
         required: true
-        example: sed
+        example: eius
         type: string
         custom: []
       remember_me:
         name: remember_me
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         custom: []
     responses: []
@@ -58,35 +58,35 @@ endpoints:
         name: email
         description: 'O campo value deve ser um endereço de e-mail válido.'
         required: true
-        example: zdenesik@example.org
+        example: austyn.goldner@example.net
         type: string
         custom: []
       password:
         name: password
         description: 'O campo value deve ter pelo menos 8 caracteres.'
         required: true
-        example: hlvuzpn
+        example: 'y'
         type: string
         custom: []
       funcao:
         name: funcao
         description: 'Must be one of <code>A</code> or <code>E</code>.'
         required: true
-        example: E
+        example: A
         type: string
         custom: []
       id:
         name: id
         description: ''
         required: false
-        example: 27991421.991724
+        example: 815.937531972
         type: number
         custom: []
       id_empresa:
         name: id_empresa
         description: 'O campo value é obrigatório quando <code>funcao</code> for <code>E</code>.'
         required: false
-        example: 29.62867
+        example: 90939.295205278
         type: number
         custom: []
     responses: []
@@ -189,7 +189,7 @@ endpoints:
         name: id
         description: 'The ID of the funcionario.'
         required: true
-        example: consequatur
+        example: dolores
         type: string
         custom: []
     queryParameters: []
@@ -225,77 +225,84 @@ endpoints:
         name: id
         description: ''
         required: false
-        example: 10.205771704
+        example: 281.0
         type: number
         custom: []
       id_empresa:
         name: id_empresa
         description: ''
         required: true
-        example: 273986.19884151
+        example: 562.619956
         type: number
         custom: []
       trabalho:
         name: trabalho
         description: 'Must be one of <code>HO</code>, <code>HI</code>, or <code>PS</code>.'
-        required: true
+        required: false
         example: PS
         type: string
         custom: []
       genero:
         name: genero
         description: 'Must be one of <code>H</code> or <code>M</code>.'
-        required: true
+        required: false
         example: H
+        type: string
+        custom: []
+      engajou:
+        name: engajou
+        description: 'Must be one of <code>N</code> or <code>S</code>.'
+        required: false
+        example: 'N'
         type: string
         custom: []
       nome:
         name: nome
         description: 'O campo value não pode ser superior a 40 caracteres.'
         required: true
-        example: ndooroliaejotbdkn
+        example: vfyhrzobx
         type: string
         custom: []
       sobrenome:
         name: sobrenome
         description: 'O campo value não pode ser superior a 100 caracteres.'
         required: true
-        example: dwesnsusisljzgxracrjbiczddmnzaweotsuejslgwgkoitbyezleyutponuvlpyztomssyvnwwazvvhapbjggq
+        example: eoceozgbrfinjomxdjbvjdvpnxxofioblxurwhqhxkyvqjlhby
         type: string
         custom: []
       nome_social:
         name: nome_social
         description: 'O campo value não pode ser superior a 40 caracteres.'
         required: false
-        example: snq
+        example: qharsnmokmy
         type: string
         custom: []
       telefone:
         name: telefone
         description: 'O campo value deve ter 11 dígitos.'
         required: true
-        example: '92498526058'
+        example: '56883419817'
         type: string
         custom: []
       cpf:
         name: cpf
         description: 'O campo value deve ter 11 dígitos.'
         required: true
-        example: '90849106239'
+        example: '08686359880'
         type: string
         custom: []
       email:
         name: email
         description: 'O campo value deve ser um endereço de e-mail válido.'
         required: true
-        example: kole97@example.net
+        example: brianne.weimann@example.com
         type: string
         custom: []
       data_nascimento:
         name: data_nascimento
         description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-        required: true
-        example: '2022-11-14'
+        required: false
+        example: '2022-12-20'
         type: string
         custom: []
     responses: []
@@ -368,7 +375,7 @@ endpoints:
         name: id
         description: 'The ID of the empresa.'
         required: true
-        example: quis
+        example: sint
         type: string
         custom: []
     queryParameters: []
@@ -404,28 +411,28 @@ endpoints:
         name: id
         description: ''
         required: false
-        example: 8739569.9199836
+        example: 12.226130918
         type: number
         custom: []
       nome:
         name: nome
         description: 'O campo value não pode ser superior a 100 caracteres.'
         required: true
-        example: hdwdzooqmxcaexbyeactbvipyut
+        example: lty
         type: string
         custom: []
       cupom:
         name: cupom
         description: 'O campo value não pode ser superior a 30 caracteres.'
         required: true
-        example: wntkuwoeqtanfsdkctqtunghglfiz
+        example: pqhifg
         type: string
         custom: []
       total_funcionario:
         name: total_funcionario
         description: ''
         required: false
-        example: 56.2266195
+        example: 4666289.223791
         type: number
         custom: []
     responses: []
@@ -447,7 +454,7 @@ endpoints:
         name: id
         description: 'The ID of the empresa.'
         required: true
-        example: velit
+        example: id
         type: string
         custom: []
     queryParameters: []
@@ -500,70 +507,70 @@ endpoints:
         name: id
         description: ''
         required: false
-        example: 344875500.45
+        example: 10473891.2
         type: number
         custom: []
       id_empresa:
         name: id_empresa
         description: ''
         required: true
-        example: 135115.24680397
+        example: 2238.64216516
         type: number
         custom: []
       id_funcionario:
         name: id_funcionario
         description: ''
         required: true
-        example: 224057490.66594
+        example: 236.0954
         type: number
         custom: []
       data_atualizacao:
         name: data_atualizacao
         description: 'Must be a valid date in the format <code>Y-m-d</code>.'
         required: false
-        example: '2022-11-14'
+        example: '2022-12-20'
         type: string
         custom: []
       data_criacao:
         name: data_criacao
         description: 'Must be a valid date in the format <code>Y-m-d</code>.'
         required: false
-        example: '2022-11-14'
+        example: '2022-12-20'
         type: string
         custom: []
       proprietario:
         name: proprietario
         description: ''
         required: false
-        example: aut
+        example: fugit
         type: string
         custom: []
       cronicos:
         name: cronicos
         description: ''
         required: false
-        example: qui
+        example: doloribus
         type: string
         custom: []
       mental:
         name: mental
         description: ''
         required: false
-        example: iusto
+        example: labore
         type: string
         custom: []
       alimentacao:
         name: alimentacao
         description: ''
         required: false
-        example: veniam
+        example: mollitia
         type: string
         custom: []
       fisico:
         name: fisico
         description: ''
         required: false
-        example: et
+        example: commodi
         type: string
         custom: []
     responses: []
@@ -631,35 +638,35 @@ endpoints:
         name: nome
         description: 'O campo value não pode ser superior a 50 caracteres.'
         required: false
-        example: uawxvqubypjjez
+        example: zyhbd
         type: string
         custom: []
       sobrenome:
         name: sobrenome
         description: 'O campo value não pode ser superior a 50 caracteres.'
         required: false
-        example: plolkhmxhujijfxjvgqkcenwobkzibggv
+        example: mvoamqytjqpcadcj
         type: string
         custom: []
       telefone:
         name: telefone
         description: 'O campo value deve ter 11 dígitos.'
         required: false
-        example: '54838045888'
+        example: '86960370750'
         type: string
         custom: []
       cpf:
         name: cpf
         description: 'O campo value deve ter 11 dígitos.'
         required: true
-        example: '51466544892'
+        example: '65186742541'
         type: string
         custom: []
       qualidade_de_alimentacao:
         name: qualidade_de_alimentacao
         description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
         required: false
-        example: '1'
+        example: '4'
         type: number
         custom: []
       nivel_de_estresse:
@@ -673,21 +680,66 @@ endpoints:
         name: qualidade_de_sono
         description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
         required: false
-        example: '4'
+        example: '5'
         type: number
         custom: []
       nivel_de_ansiedade:
         name: nivel_de_ansiedade
         description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
         required: false
-        example: '3'
+        example: '4'
         type: number
         custom: []
       nivel_de_humor:
         name: nivel_de_humor
         description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
         required: false
-        example: '2'
+        example: '4'
+        type: number
+        custom: []
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/send_flow
+    metadata:
+      title: send_flow
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      all_users:
+        name: all_users
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        custom: []
+      id_empresa:
+        name: id_empresa
+        description: ''
+        required: false
+        example: 2854.67767836
+        type: number
+        custom: []
+      nome_flow:
+        name: nome_flow
+        description: 'O campo value não pode ser superior a 50 caracteres.'
+        required: false
+        example: izgdjioeomcsdqhxhgzgnhxagmxwelkcuhpwflexthutjpnx
+        type: string
+        custom: []
+      id_flow:
+        name: id_flow
+        description: ''
+        required: false
+        example: 609516101.9487
         type: number
         custom: []
     responses: []

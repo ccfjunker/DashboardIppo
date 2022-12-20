@@ -39,15 +39,15 @@ paths:
                 email:
                   type: string
                   description: 'O campo value deve ser um endereço de e-mail válido.'
-                  example: sbergstrom@example.net
+                  example: altenwerth.ulices@example.net
                 password:
                   type: string
                   description: ''
-                  example: sed
+                  example: eius
                 remember_me:
                   type: boolean
                   description: ''
-                  example: false
+                  example: true
               required:
                 - email
                 - password
@@ -84,23 +84,23 @@ paths:
                 email:
                   type: string
                   description: 'O campo value deve ser um endereço de e-mail válido.'
-                  example: zdenesik@example.org
+                  example: austyn.goldner@example.net
                 password:
                   type: string
                   description: 'O campo value deve ter pelo menos 8 caracteres.'
-                  example: hlvuzpn
+                  example: 'y'
                 funcao:
                   type: string
                   description: 'Must be one of <code>A</code> or <code>E</code>.'
-                  example: E
+                  example: A
                 id:
                   type: number
                   description: ''
-                  example: 27991421.991724
+                  example: 815.937531972
                 id_empresa:
                   type: number
                   description: 'O campo value é obrigatório quando <code>funcao</code> for <code>E</code>.'
-                  example: 29.62867
+                  example: 90939.295205278
               required:
                 - email
                 - password
@@ -273,7 +273,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the funcionario.'
-        example: consequatur
+        example: dolores
         required: true
         schema:
           type: string
@@ -309,11 +309,11 @@ paths:
                 id:
                   type: number
                   description: ''
-                  example: 10.205771704
+                  example: 281.0
                 id_empresa:
                   type: number
                   description: ''
-                  example: 273986.19884151
+                  example: 562.619956
                 trabalho:
                   type: string
                   description: 'Must be one of <code>HO</code>, <code>HI</code>, or <code>PS</code>.'
@@ -322,44 +322,45 @@ paths:
                   type: string
                   description: 'Must be one of <code>H</code> or <code>M</code>.'
                   example: H
+                engajou:
+                  type: string
+                  description: 'Must be one of <code>N</code> or <code>S</code>.'
+                  example: 'N'
                 nome:
                   type: string
                   description: 'O campo value não pode ser superior a 40 caracteres.'
-                  example: ndooroliaejotbdkn
+                  example: vfyhrzobx
                 sobrenome:
                   type: string
                   description: 'O campo value não pode ser superior a 100 caracteres.'
-                  example: dwesnsusisljzgxracrjbiczddmnzaweotsuejslgwgkoitbyezleyutponuvlpyztomssyvnwwazvvhapbjggq
+                  example: eoceozgbrfinjomxdjbvjdvpnxxofioblxurwhqhxkyvqjlhby
                 nome_social:
                   type: string
                   description: 'O campo value não pode ser superior a 40 caracteres.'
-                  example: snq
+                  example: qharsnmokmy
                 telefone:
                   type: string
                   description: 'O campo value deve ter 11 dígitos.'
-                  example: '92498526058'
+                  example: '56883419817'
                 cpf:
                   type: string
                   description: 'O campo value deve ter 11 dígitos.'
-                  example: '90849106239'
+                  example: '08686359880'
                 email:
                   type: string
                   description: 'O campo value deve ser um endereço de e-mail válido.'
-                  example: kole97@example.net
+                  example: brianne.weimann@example.com
                 data_nascimento:
                   type: string
                   description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-                  example: '2022-11-14'
+                  example: '2022-12-20'
               required:
                 - id_empresa
-                - trabalho
-                - genero
                 - nome
                 - sobrenome
                 - telefone
                 - cpf
                 - email
-                - data_nascimento
       security: []
   /api/auth/empresas:
     get:
@@ -458,7 +459,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the empresa.'
-        example: quis
+        example: sint
         required: true
         schema:
           type: string
@@ -494,19 +495,19 @@ paths:
                 id:
                   type: number
                   description: ''
-                  example: 8739569.9199836
+                  example: 12.226130918
                 nome:
                   type: string
                   description: 'O campo value não pode ser superior a 100 caracteres.'
-                  example: hdwdzooqmxcaexbyeactbvipyut
+                  example: lty
                 cupom:
                   type: string
                   description: 'O campo value não pode ser superior a 30 caracteres.'
-                  example: wntkuwoeqtanfsdkctqtunghglfiz
+                  example: pqhifg
                 total_funcionario:
                   type: number
                   description: ''
-                  example: 56.2266195
+                  example: 4666289.223791
               required:
                 - nome
                 - cupom
@@ -578,43 +579,43 @@ paths:
                 id:
                   type: number
                   description: ''
-                  example: 344875500.45
+                  example: 10473891.2
                 id_empresa:
                   type: number
                   description: ''
-                  example: 135115.24680397
+                  example: 2238.64216516
                 id_funcionario:
                   type: number
                   description: ''
-                  example: 224057490.66594
+                  example: 236.0954
                 data_atualizacao:
                   type: string
                   description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-                  example: '2022-11-14'
+                  example: '2022-12-20'
                 data_criacao:
                   type: string
                   description: 'Must be a valid date in the format <code>Y-m-d</code>.'
-                  example: '2022-11-14'
+                  example: '2022-12-20'
                 proprietario:
                   type: string
                   description: ''
-                  example: aut
+                  example: fugit
                 cronicos:
                   type: string
                   description: ''
-                  example: qui
+                  example: doloribus
                 mental:
                   type: string
                   description: ''
-                  example: iusto
+                  example: labore
                 alimentacao:
                   type: string
                   description: ''
-                  example: veniam
+                  example: mollitia
                 fisico:
                   type: string
                   description: ''
-                  example: et
+                  example: commodi
               required:
                 - id_empresa
                 - id_funcionario
@@ -709,23 +710,23 @@ paths:
                 nome:
                   type: string
                   description: 'O campo value não pode ser superior a 50 caracteres.'
-                  example: uawxvqubypjjez
+                  example: zyhbd
                 sobrenome:
                   type: string
                   description: 'O campo value não pode ser superior a 50 caracteres.'
-                  example: plolkhmxhujijfxjvgqkcenwobkzibggv
+                  example: mvoamqytjqpcadcj
                 telefone:
                   type: string
                   description: 'O campo value deve ter 11 dígitos.'
-                  example: '54838045888'
+                  example: '86960370750'
                 cpf:
                   type: string
                   description: 'O campo value deve ter 11 dígitos.'
-                  example: '51466544892'
+                  example: '65186742541'
                 qualidade_de_alimentacao:
                   type: number
                   description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
-                  example: '1'
+                  example: '4'
                 nivel_de_estresse:
                   type: number
                   description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
@@ -733,17 +734,63 @@ paths:
                 qualidade_de_sono:
                   type: number
                   description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
-                  example: '4'
+                  example: '5'
                 nivel_de_ansiedade:
                   type: number
                   description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
-                  example: '3'
+                  example: '4'
                 nivel_de_humor:
                   type: number
                   description: 'Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.'
-                  example: '2'
+                  example: '4'
               required:
                 - cpf
+      security: []
+  /api/send_flow:
+    post:
+      summary: send_flow
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                all_users:
+                  type: boolean
+                  description: ''
+                  example: false
+                id_empresa:
+                  type: number
+                  description: ''
+                  example: 2854.67767836
+                nome_flow:
+                  type: string
+                  description: 'O campo value não pode ser superior a 50 caracteres.'
+                  example: izgdjioeomcsdqhxhgzgnhxagmxwelkcuhpwflexthutjpnx
+                id_flow:
+                  type: number
+                  description: ''
+                  example: 609516101.9487
       security: []
 tags:
   -
