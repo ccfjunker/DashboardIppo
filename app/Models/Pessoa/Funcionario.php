@@ -75,7 +75,7 @@ class Funcionario extends BaseModel
 
     public function getCpfAttribute($value)
     {
-        return maskCPF($value);
+        return $value;
     }
 
     public function getTelefoneAttribute($value)
