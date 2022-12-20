@@ -220,7 +220,7 @@ export class UtilIppo{
 
     static mask(value, pattern) {
         let i = 0;
-        const v = value.toString();
+        const v = value.toString().replaceAll('.', '').replaceAll('-', '');
         return pattern.replace(/#/g, _ => v[i++]);
     }
 

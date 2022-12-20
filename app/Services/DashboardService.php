@@ -157,7 +157,7 @@ class DashboardService
 
     public function getFilteredsAnamneses(FiltroDashboardEmpresaRequest $request)
     {
-        $anamneses = Anamnese::whereNotNull('data_criacao');
+        $anamneses = Anamnese::whereNotNull('created_at');
         if (!isUserAdmin()) {
             $anamneses->where('id_empresa', auth()->user()->empresas[0]->id);
         } else {

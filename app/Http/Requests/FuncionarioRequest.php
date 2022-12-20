@@ -27,15 +27,16 @@ class FuncionarioRequest extends FormRequest
         return [
             "id"=>"nullable|sometimes|numeric",
             'id_empresa'=>'required|numeric|exists:tb_empresa,id',
-            "trabalho"=>"required|in:HO,HI,PS",
-            "genero" => "required|in:H,M",
+            "trabalho"=>"nullable|in:HO,HI,PS",
+            "genero" => "nullable|in:H,M",
+            "engajou" => "in:N,S",
             "nome" => "required|max:40",
             "sobrenome" => "required|max:100",
             "nome_social" => "max:40",
             "telefone" => "required|digits:11|unique:tb_funcionario,telefone".$id,
             "cpf" => "required|digits:11|unique:tb_funcionario,cpf".$id,
             "email" => "required|string|email|unique:tb_funcionario,email".$id,
-            "data_nascimento" => "required|date_format:Y-m-d"
+            "data_nascimento" => "nullable|date_format:Y-m-d"
         ];
     }
 
