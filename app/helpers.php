@@ -90,6 +90,9 @@ function dateTimeDB($valor){
 }
 
 function dateFormatted($valor){
+    if ($valor == NULL){
+        return $valor;
+    }
     $dateExplode = explode('-', $valor);
     if($dateExplode){
         return $dateExplode[2].'/'.$dateExplode[1].'/'.$dateExplode[0];
