@@ -125,6 +125,9 @@
                                     <li class="tocify-item level-2" data-unique="endpoints-POSTapi-felling">
                         <a href="#endpoints-POSTapi-felling">Store</a>
                     </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-send_flow">
+                        <a href="#endpoints-POSTapi-send_flow">send_flow</a>
+                    </li>
                                                     </ul>
                             </ul>
         
@@ -137,7 +140,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
         <ul class="toc-footer" id="last-updated">
-        <li>Last updated: November 14 2022</li>
+        <li>Last updated: December 20 2022</li>
     </ul>
 </div>
 
@@ -177,9 +180,9 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"sbergstrom@example.net\",
-    \"password\": \"sed\",
-    \"remember_me\": false
+    \"email\": \"altenwerth.ulices@example.net\",
+    \"password\": \"eius\",
+    \"remember_me\": true
 }"
 </code></pre></div>
 
@@ -195,9 +198,9 @@ const headers = {
 };
 
 let body = {
-    "email": "sbergstrom@example.net",
-    "password": "sed",
-    "remember_me": false
+    "email": "altenwerth.ulices@example.net",
+    "password": "eius",
+    "remember_me": true
 };
 
 fetch(url, {
@@ -255,7 +258,7 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTapi-auth-login"
-               value="sbergstrom@example.net"
+               value="altenwerth.ulices@example.net"
                data-component="body" hidden>
     <br>
 <p>O campo value deve ser um endereço de e-mail válido.</p>
@@ -265,7 +268,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="POSTapi-auth-login"
-               value="sed"
+               value="eius"
                data-component="body" hidden>
     <br>
 
@@ -310,11 +313,11 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"zdenesik@example.org\",
-    \"password\": \"hlvuzpn\",
-    \"funcao\": \"E\",
-    \"id\": 27991421.991724156,
-    \"id_empresa\": 29.62867
+    \"email\": \"austyn.goldner@example.net\",
+    \"password\": \"y\",
+    \"funcao\": \"A\",
+    \"id\": 815.937531972,
+    \"id_empresa\": 90939.295205278
 }"
 </code></pre></div>
 
@@ -330,11 +333,11 @@ const headers = {
 };
 
 let body = {
-    "email": "zdenesik@example.org",
-    "password": "hlvuzpn",
-    "funcao": "E",
-    "id": 27991421.991724156,
-    "id_empresa": 29.62867
+    "email": "austyn.goldner@example.net",
+    "password": "y",
+    "funcao": "A",
+    "id": 815.937531972,
+    "id_empresa": 90939.295205278
 };
 
 fetch(url, {
@@ -392,7 +395,7 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTapi-auth-register"
-               value="zdenesik@example.org"
+               value="austyn.goldner@example.net"
                data-component="body" hidden>
     <br>
 <p>O campo value deve ser um endereço de e-mail válido.</p>
@@ -402,7 +405,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="POSTapi-auth-register"
-               value="hlvuzpn"
+               value="y"
                data-component="body" hidden>
     <br>
 <p>O campo value deve ter pelo menos 8 caracteres.</p>
@@ -412,7 +415,7 @@ fetch(url, {
                 <input type="text"
                name="funcao"
                data-endpoint="POSTapi-auth-register"
-               value="E"
+               value="A"
                data-component="body" hidden>
     <br>
 <p>Must be one of <code>A</code> or <code>E</code>.</p>
@@ -422,7 +425,7 @@ fetch(url, {
                 <input type="number"
                name="id"
                data-endpoint="POSTapi-auth-register"
-               value="27991421.991724"
+               value="815.937531972"
                data-component="body" hidden>
     <br>
 
@@ -432,7 +435,7 @@ fetch(url, {
                 <input type="number"
                name="id_empresa"
                data-endpoint="POSTapi-auth-register"
-               value="29.62867"
+               value="90939.295205278"
                data-component="body" hidden>
     <br>
 <p>O campo value é obrigatório quando <code>funcao</code> for <code>E</code>.</p>
@@ -734,14 +737,14 @@ content-type: application/json
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/auth/funcionario/consequatur" \
+    --get "http://localhost/api/auth/funcionario/dolores" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/auth/funcionario/consequatur"
+    "http://localhost/api/auth/funcionario/dolores"
 );
 
 const headers = {
@@ -819,7 +822,7 @@ content-type: application/json
                 <input type="text"
                name="id"
                data-endpoint="GETapi-auth-funcionario--id-"
-               value="consequatur"
+               value="dolores"
                data-component="url" hidden>
     <br>
 <p>The ID of the funcionario.</p>
@@ -843,17 +846,18 @@ content-type: application/json
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id\": 10.205771704,
-    \"id_empresa\": 273986.198841513,
+    \"id\": 281,
+    \"id_empresa\": 562.619956,
     \"trabalho\": \"PS\",
     \"genero\": \"H\",
-    \"nome\": \"ndooroliaejotbdkn\",
-    \"sobrenome\": \"dwesnsusisljzgxracrjbiczddmnzaweotsuejslgwgkoitbyezleyutponuvlpyztomssyvnwwazvvhapbjggq\",
-    \"nome_social\": \"snq\",
-    \"telefone\": \"92498526058\",
-    \"cpf\": \"90849106239\",
-    \"email\": \"kole97@example.net\",
-    \"data_nascimento\": \"2022-11-14\"
+    \"engajou\": \"N\",
+    \"nome\": \"vfyhrzobx\",
+    \"sobrenome\": \"eoceozgbrfinjomxdjbvjdvpnxxofioblxurwhqhxkyvqjlhby\",
+    \"nome_social\": \"qharsnmokmy\",
+    \"telefone\": \"56883419817\",
+    \"cpf\": \"08686359880\",
+    \"email\": \"brianne.weimann@example.com\",
+    \"data_nascimento\": \"2022-12-20\"
 }"
 </code></pre></div>
 
@@ -869,17 +873,18 @@ const headers = {
 };
 
 let body = {
-    "id": 10.205771704,
-    "id_empresa": 273986.198841513,
+    "id": 281,
+    "id_empresa": 562.619956,
     "trabalho": "PS",
     "genero": "H",
-    "nome": "ndooroliaejotbdkn",
-    "sobrenome": "dwesnsusisljzgxracrjbiczddmnzaweotsuejslgwgkoitbyezleyutponuvlpyztomssyvnwwazvvhapbjggq",
-    "nome_social": "snq",
-    "telefone": "92498526058",
-    "cpf": "90849106239",
-    "email": "kole97@example.net",
-    "data_nascimento": "2022-11-14"
+    "engajou": "N",
+    "nome": "vfyhrzobx",
+    "sobrenome": "eoceozgbrfinjomxdjbvjdvpnxxofioblxurwhqhxkyvqjlhby",
+    "nome_social": "qharsnmokmy",
+    "telefone": "56883419817",
+    "cpf": "08686359880",
+    "email": "brianne.weimann@example.com",
+    "data_nascimento": "2022-12-20"
 };
 
 fetch(url, {
@@ -937,7 +942,7 @@ fetch(url, {
                 <input type="number"
                name="id"
                data-endpoint="POSTapi-auth-funcionario"
-               value="10.205771704"
+               value="281"
                data-component="body" hidden>
     <br>
 
@@ -947,13 +952,13 @@ fetch(url, {
                 <input type="number"
                name="id_empresa"
                data-endpoint="POSTapi-auth-funcionario"
-               value="273986.19884151"
+               value="562.619956"
                data-component="body" hidden>
     <br>
 
         </p>
                 <p>
-            <b><code>trabalho</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+            <b><code>trabalho</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="trabalho"
                data-endpoint="POSTapi-auth-funcionario"
@@ -963,7 +968,7 @@ fetch(url, {
 <p>Must be one of <code>HO</code>, <code>HI</code>, or <code>PS</code>.</p>
         </p>
                 <p>
-            <b><code>genero</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+            <b><code>genero</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="genero"
                data-endpoint="POSTapi-auth-funcionario"
@@ -973,11 +978,21 @@ fetch(url, {
 <p>Must be one of <code>H</code> or <code>M</code>.</p>
         </p>
                 <p>
+            <b><code>engajou</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="engajou"
+               data-endpoint="POSTapi-auth-funcionario"
+               value="N"
+               data-component="body" hidden>
+    <br>
+<p>Must be one of <code>N</code> or <code>S</code>.</p>
+        </p>
+                <p>
             <b><code>nome</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
                 <input type="text"
                name="nome"
                data-endpoint="POSTapi-auth-funcionario"
-               value="ndooroliaejotbdkn"
+               value="vfyhrzobx"
                data-component="body" hidden>
     <br>
 <p>O campo value não pode ser superior a 40 caracteres.</p>
@@ -987,7 +1002,7 @@ fetch(url, {
                 <input type="text"
                name="sobrenome"
                data-endpoint="POSTapi-auth-funcionario"
-               value="dwesnsusisljzgxracrjbiczddmnzaweotsuejslgwgkoitbyezleyutponuvlpyztomssyvnwwazvvhapbjggq"
+               value="eoceozgbrfinjomxdjbvjdvpnxxofioblxurwhqhxkyvqjlhby"
                data-component="body" hidden>
     <br>
 <p>O campo value não pode ser superior a 100 caracteres.</p>
@@ -997,7 +1012,7 @@ fetch(url, {
                 <input type="text"
                name="nome_social"
                data-endpoint="POSTapi-auth-funcionario"
-               value="snq"
+               value="qharsnmokmy"
                data-component="body" hidden>
     <br>
 <p>O campo value não pode ser superior a 40 caracteres.</p>
@@ -1007,7 +1022,7 @@ fetch(url, {
                 <input type="text"
                name="telefone"
                data-endpoint="POSTapi-auth-funcionario"
-               value="92498526058"
+               value="56883419817"
                data-component="body" hidden>
     <br>
 <p>O campo value deve ter 11 dígitos.</p>
@@ -1017,7 +1032,7 @@ fetch(url, {
                 <input type="text"
                name="cpf"
                data-endpoint="POSTapi-auth-funcionario"
-               value="90849106239"
+               value="08686359880"
                data-component="body" hidden>
     <br>
 <p>O campo value deve ter 11 dígitos.</p>
@@ -1027,17 +1042,17 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTapi-auth-funcionario"
-               value="kole97@example.net"
+               value="brianne.weimann@example.com"
                data-component="body" hidden>
     <br>
 <p>O campo value deve ser um endereço de e-mail válido.</p>
         </p>
                 <p>
-            <b><code>data_nascimento</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+            <b><code>data_nascimento</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
                 <input type="text"
                name="data_nascimento"
                data-endpoint="POSTapi-auth-funcionario"
-               value="2022-11-14"
+               value="2022-12-20"
                data-component="body" hidden>
     <br>
 <p>Must be a valid date in the format <code>Y-m-d</code>.</p>
@@ -1240,14 +1255,14 @@ content-type: application/json
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/auth/empresa/quis" \
+    --get "http://localhost/api/auth/empresa/sint" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/auth/empresa/quis"
+    "http://localhost/api/auth/empresa/sint"
 );
 
 const headers = {
@@ -1325,7 +1340,7 @@ content-type: application/json
                 <input type="text"
                name="id"
                data-endpoint="GETapi-auth-empresa--id-"
-               value="quis"
+               value="sint"
                data-component="url" hidden>
     <br>
 <p>The ID of the empresa.</p>
@@ -1349,10 +1364,10 @@ content-type: application/json
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id\": 8739569.91998362,
-    \"nome\": \"hdwdzooqmxcaexbyeactbvipyut\",
-    \"cupom\": \"wntkuwoeqtanfsdkctqtunghglfiz\",
-    \"total_funcionario\": 56.2266195
+    \"id\": 12.226130918,
+    \"nome\": \"lty\",
+    \"cupom\": \"pqhifg\",
+    \"total_funcionario\": 4666289.223791
 }"
 </code></pre></div>
 
@@ -1368,10 +1383,10 @@ const headers = {
 };
 
 let body = {
-    "id": 8739569.91998362,
-    "nome": "hdwdzooqmxcaexbyeactbvipyut",
-    "cupom": "wntkuwoeqtanfsdkctqtunghglfiz",
-    "total_funcionario": 56.2266195
+    "id": 12.226130918,
+    "nome": "lty",
+    "cupom": "pqhifg",
+    "total_funcionario": 4666289.223791
 };
 
 fetch(url, {
@@ -1429,7 +1444,7 @@ fetch(url, {
                 <input type="number"
                name="id"
                data-endpoint="POSTapi-auth-empresa"
-               value="8739569.9199836"
+               value="12.226130918"
                data-component="body" hidden>
     <br>
 
@@ -1439,7 +1454,7 @@ fetch(url, {
                 <input type="text"
                name="nome"
                data-endpoint="POSTapi-auth-empresa"
-               value="hdwdzooqmxcaexbyeactbvipyut"
+               value="lty"
                data-component="body" hidden>
     <br>
 <p>O campo value não pode ser superior a 100 caracteres.</p>
@@ -1449,7 +1464,7 @@ fetch(url, {
                 <input type="text"
                name="cupom"
                data-endpoint="POSTapi-auth-empresa"
-               value="wntkuwoeqtanfsdkctqtunghglfiz"
+               value="pqhifg"
                data-component="body" hidden>
     <br>
 <p>O campo value não pode ser superior a 30 caracteres.</p>
@@ -1459,7 +1474,7 @@ fetch(url, {
                 <input type="number"
                name="total_funcionario"
                data-endpoint="POSTapi-auth-empresa"
-               value="56.2266195"
+               value="4666289.223791"
                data-component="body" hidden>
     <br>
 
@@ -1479,14 +1494,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/auth/empresa/velit" \
+    "http://localhost/api/auth/empresa/id" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/auth/empresa/velit"
+    "http://localhost/api/auth/empresa/id"
 );
 
 const headers = {
@@ -1548,7 +1563,7 @@ fetch(url, {
                 <input type="text"
                name="id"
                data-endpoint="DELETEapi-auth-empresa--id-"
-               value="velit"
+               value="id"
                data-component="url" hidden>
     <br>
 <p>The ID of the empresa.</p>
@@ -1666,16 +1681,16 @@ content-type: application/json
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id\": 344875500.45,
-    \"id_empresa\": 135115.24680397,
-    \"id_funcionario\": 224057490.66593927,
-    \"data_atualizacao\": \"2022-11-14\",
-    \"data_criacao\": \"2022-11-14\",
-    \"proprietario\": \"aut\",
-    \"cronicos\": \"qui\",
-    \"mental\": \"iusto\",
-    \"alimentacao\": \"veniam\",
-    \"fisico\": \"et\"
+    \"id\": 10473891.2,
+    \"id_empresa\": 2238.64216516,
+    \"id_funcionario\": 236.0954,
+    \"data_atualizacao\": \"2022-12-20\",
+    \"data_criacao\": \"2022-12-20\",
+    \"proprietario\": \"fugit\",
+    \"cronicos\": \"doloribus\",
+    \"mental\": \"labore\",
+    \"alimentacao\": \"mollitia\",
+    \"fisico\": \"commodi\"
 }"
 </code></pre></div>
 
@@ -1691,16 +1706,16 @@ const headers = {
 };
 
 let body = {
-    "id": 344875500.45,
-    "id_empresa": 135115.24680397,
-    "id_funcionario": 224057490.66593927,
-    "data_atualizacao": "2022-11-14",
-    "data_criacao": "2022-11-14",
-    "proprietario": "aut",
-    "cronicos": "qui",
-    "mental": "iusto",
-    "alimentacao": "veniam",
-    "fisico": "et"
+    "id": 10473891.2,
+    "id_empresa": 2238.64216516,
+    "id_funcionario": 236.0954,
+    "data_atualizacao": "2022-12-20",
+    "data_criacao": "2022-12-20",
+    "proprietario": "fugit",
+    "cronicos": "doloribus",
+    "mental": "labore",
+    "alimentacao": "mollitia",
+    "fisico": "commodi"
 };
 
 fetch(url, {
@@ -1758,7 +1773,7 @@ fetch(url, {
                 <input type="number"
                name="id"
                data-endpoint="POSTapi-auth-anamnese"
-               value="344875500.45"
+               value="10473891.2"
                data-component="body" hidden>
     <br>
 
@@ -1768,7 +1783,7 @@ fetch(url, {
                 <input type="number"
                name="id_empresa"
                data-endpoint="POSTapi-auth-anamnese"
-               value="135115.24680397"
+               value="2238.64216516"
                data-component="body" hidden>
     <br>
 
@@ -1778,7 +1793,7 @@ fetch(url, {
                 <input type="number"
                name="id_funcionario"
                data-endpoint="POSTapi-auth-anamnese"
-               value="224057490.66594"
+               value="236.0954"
                data-component="body" hidden>
     <br>
 
@@ -1788,7 +1803,7 @@ fetch(url, {
                 <input type="text"
                name="data_atualizacao"
                data-endpoint="POSTapi-auth-anamnese"
-               value="2022-11-14"
+               value="2022-12-20"
                data-component="body" hidden>
     <br>
 <p>Must be a valid date in the format <code>Y-m-d</code>.</p>
@@ -1798,7 +1813,7 @@ fetch(url, {
                 <input type="text"
                name="data_criacao"
                data-endpoint="POSTapi-auth-anamnese"
-               value="2022-11-14"
+               value="2022-12-20"
                data-component="body" hidden>
     <br>
 <p>Must be a valid date in the format <code>Y-m-d</code>.</p>
@@ -1808,7 +1823,7 @@ fetch(url, {
                 <input type="text"
                name="proprietario"
                data-endpoint="POSTapi-auth-anamnese"
-               value="aut"
+               value="fugit"
                data-component="body" hidden>
     <br>
 
@@ -1818,7 +1833,7 @@ fetch(url, {
                 <input type="text"
                name="cronicos"
                data-endpoint="POSTapi-auth-anamnese"
-               value="qui"
+               value="doloribus"
                data-component="body" hidden>
     <br>
 
@@ -1828,7 +1843,7 @@ fetch(url, {
                 <input type="text"
                name="mental"
                data-endpoint="POSTapi-auth-anamnese"
-               value="iusto"
+               value="labore"
                data-component="body" hidden>
     <br>
 
@@ -1838,7 +1853,7 @@ fetch(url, {
                 <input type="text"
                name="alimentacao"
                data-endpoint="POSTapi-auth-anamnese"
-               value="veniam"
+               value="mollitia"
                data-component="body" hidden>
     <br>
 
@@ -1848,7 +1863,7 @@ fetch(url, {
                 <input type="text"
                name="fisico"
                data-endpoint="POSTapi-auth-anamnese"
-               value="et"
+               value="commodi"
                data-component="body" hidden>
     <br>
 
@@ -2044,15 +2059,15 @@ content-type: application/json
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"nome\": \"uawxvqubypjjez\",
-    \"sobrenome\": \"plolkhmxhujijfxjvgqkcenwobkzibggv\",
-    \"telefone\": \"54838045888\",
-    \"cpf\": \"51466544892\",
-    \"qualidade_de_alimentacao\": \"1\",
+    \"nome\": \"zyhbd\",
+    \"sobrenome\": \"mvoamqytjqpcadcj\",
+    \"telefone\": \"86960370750\",
+    \"cpf\": \"65186742541\",
+    \"qualidade_de_alimentacao\": \"4\",
     \"nivel_de_estresse\": \"2\",
-    \"qualidade_de_sono\": \"4\",
-    \"nivel_de_ansiedade\": \"3\",
-    \"nivel_de_humor\": \"2\"
+    \"qualidade_de_sono\": \"5\",
+    \"nivel_de_ansiedade\": \"4\",
+    \"nivel_de_humor\": \"4\"
 }"
 </code></pre></div>
 
@@ -2068,15 +2083,15 @@ const headers = {
 };
 
 let body = {
-    "nome": "uawxvqubypjjez",
-    "sobrenome": "plolkhmxhujijfxjvgqkcenwobkzibggv",
-    "telefone": "54838045888",
-    "cpf": "51466544892",
-    "qualidade_de_alimentacao": "1",
+    "nome": "zyhbd",
+    "sobrenome": "mvoamqytjqpcadcj",
+    "telefone": "86960370750",
+    "cpf": "65186742541",
+    "qualidade_de_alimentacao": "4",
     "nivel_de_estresse": "2",
-    "qualidade_de_sono": "4",
-    "nivel_de_ansiedade": "3",
-    "nivel_de_humor": "2"
+    "qualidade_de_sono": "5",
+    "nivel_de_ansiedade": "4",
+    "nivel_de_humor": "4"
 };
 
 fetch(url, {
@@ -2134,7 +2149,7 @@ fetch(url, {
                 <input type="text"
                name="nome"
                data-endpoint="POSTapi-felling"
-               value="uawxvqubypjjez"
+               value="zyhbd"
                data-component="body" hidden>
     <br>
 <p>O campo value não pode ser superior a 50 caracteres.</p>
@@ -2144,7 +2159,7 @@ fetch(url, {
                 <input type="text"
                name="sobrenome"
                data-endpoint="POSTapi-felling"
-               value="plolkhmxhujijfxjvgqkcenwobkzibggv"
+               value="mvoamqytjqpcadcj"
                data-component="body" hidden>
     <br>
 <p>O campo value não pode ser superior a 50 caracteres.</p>
@@ -2154,7 +2169,7 @@ fetch(url, {
                 <input type="text"
                name="telefone"
                data-endpoint="POSTapi-felling"
-               value="54838045888"
+               value="86960370750"
                data-component="body" hidden>
     <br>
 <p>O campo value deve ter 11 dígitos.</p>
@@ -2164,7 +2179,7 @@ fetch(url, {
                 <input type="text"
                name="cpf"
                data-endpoint="POSTapi-felling"
-               value="51466544892"
+               value="65186742541"
                data-component="body" hidden>
     <br>
 <p>O campo value deve ter 11 dígitos.</p>
@@ -2174,7 +2189,7 @@ fetch(url, {
                 <input type="number"
                name="qualidade_de_alimentacao"
                data-endpoint="POSTapi-felling"
-               value="1"
+               value="4"
                data-component="body" hidden>
     <br>
 <p>Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.</p>
@@ -2194,7 +2209,7 @@ fetch(url, {
                 <input type="number"
                name="qualidade_de_sono"
                data-endpoint="POSTapi-felling"
-               value="4"
+               value="5"
                data-component="body" hidden>
     <br>
 <p>Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.</p>
@@ -2204,7 +2219,7 @@ fetch(url, {
                 <input type="number"
                name="nivel_de_ansiedade"
                data-endpoint="POSTapi-felling"
-               value="3"
+               value="4"
                data-component="body" hidden>
     <br>
 <p>Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.</p>
@@ -2214,10 +2229,155 @@ fetch(url, {
                 <input type="number"
                name="nivel_de_humor"
                data-endpoint="POSTapi-felling"
-               value="2"
+               value="4"
                data-component="body" hidden>
     <br>
 <p>Must be one of <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code>.</p>
+        </p>
+        </form>
+
+            <h2 id="endpoints-POSTapi-send_flow">send_flow</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-send_flow">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/send_flow" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"all_users\": false,
+    \"id_empresa\": 2854.67767836,
+    \"nome_flow\": \"izgdjioeomcsdqhxhgzgnhxagmxwelkcuhpwflexthutjpnx\",
+    \"id_flow\": 609516101.9487
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/send_flow"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "all_users": false,
+    "id_empresa": 2854.67767836,
+    "nome_flow": "izgdjioeomcsdqhxhgzgnhxagmxwelkcuhpwflexthutjpnx",
+    "id_flow": 609516101.9487
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-send_flow">
+</span>
+<span id="execution-results-POSTapi-send_flow" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-send_flow"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-send_flow"></code></pre>
+</span>
+<span id="execution-error-POSTapi-send_flow" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-send_flow"></code></pre>
+</span>
+<form id="form-POSTapi-send_flow" data-method="POST"
+      data-path="api/send_flow"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-send_flow', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-send_flow"
+                    onclick="tryItOut('POSTapi-send_flow');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-send_flow"
+                    onclick="cancelTryOut('POSTapi-send_flow');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-send_flow" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/send_flow</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>all_users</code></b>&nbsp;&nbsp;<small>boolean</small>     <i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-send_flow" hidden>
+            <input type="radio" name="all_users"
+                   value="true"
+                   data-endpoint="POSTapi-send_flow"
+                   data-component="body"
+            >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-send_flow" hidden>
+            <input type="radio" name="all_users"
+                   value="false"
+                   data-endpoint="POSTapi-send_flow"
+                   data-component="body"
+            >
+            <code>false</code>
+        </label>
+    <br>
+
+        </p>
+                <p>
+            <b><code>id_empresa</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="id_empresa"
+               data-endpoint="POSTapi-send_flow"
+               value="2854.67767836"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>nome_flow</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="nome_flow"
+               data-endpoint="POSTapi-send_flow"
+               value="izgdjioeomcsdqhxhgzgnhxagmxwelkcuhpwflexthutjpnx"
+               data-component="body" hidden>
+    <br>
+<p>O campo value não pode ser superior a 50 caracteres.</p>
+        </p>
+                <p>
+            <b><code>id_flow</code></b>&nbsp;&nbsp;<small>number</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="id_flow"
+               data-endpoint="POSTapi-send_flow"
+               value="609516101.9487"
+               data-component="body" hidden>
+    <br>
+
         </p>
         </form>
 
