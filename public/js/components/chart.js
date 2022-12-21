@@ -212,7 +212,7 @@ export class ChartIppo {
 
         var barOptionAtividadeFisica = {
             chart: {
-                height: 300,
+                height: 400,
                 type: 'bar',
                 toolbar: {
                     show: false,
@@ -220,6 +220,34 @@ export class ChartIppo {
             },
             dataLabels: {
                 enabled: false,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                }
+            },
+            yaxis: {
+                labels: {
+                    formatter: function (value) {
+                        let aux = 0
+                        let array_palavras = [""]
+                        if (Array.isArray(value))
+                            for (let i = 0; i < value.length; i++) {
+                                const element = value[i];
+                                if (element.length + array_palavras[aux].length < 10) {
+                                    array_palavras[aux] =  array_palavras[aux] + " " +element
+                                } else {
+                                    aux++
+                                    array_palavras[aux] = element
+                                }
+                            }
+                        return array_palavras
+                    },
+                    align: 'right',
+                    style: {
+                        fontSize: '10px',
+                    },
+                },
             },
             noData: emptyChart,
             colors: ['#7d30cb'],
@@ -295,7 +323,7 @@ export class ChartIppo {
 
         var barOptionAlimentacao = {
             chart: {
-                height: 300,
+                height: 400,
                 type: 'bar',
                 toolbar: {
                     show: false,
@@ -303,6 +331,34 @@ export class ChartIppo {
             },
             dataLabels: {
                 enabled: false,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                }
+            },
+            yaxis: {
+                labels: {
+                    formatter: function (value) {
+                        let aux = 0
+                        let array_palavras = [""]
+                        if (Array.isArray(value))
+                            for (let i = 0; i < value.length; i++) {
+                                const element = value[i];
+                                if (element.length + array_palavras[aux].length < 14) {
+                                    array_palavras[aux] =  array_palavras[aux] + " " +element
+                                } else {
+                                    aux++
+                                    array_palavras[aux] = element
+                                }
+                            }
+                        return array_palavras
+                    },
+                    align: 'right',
+                    style: {
+                        fontSize: '10px',
+                    },
+                },
             },
             noData: emptyChart,
             colors: ['#f8538d'],
@@ -376,7 +432,7 @@ export class ChartIppo {
 
         var barOptionSaudeCronica = {
             chart: {
-                height: 300,
+                height: 400,
                 type: 'bar',
                 toolbar: {
                     show: false,
@@ -384,6 +440,35 @@ export class ChartIppo {
             },
             dataLabels: {
                 enabled: false,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                }
+            },
+            yaxis: {
+                labels: {
+                    offsetX: 13,
+                    formatter: function (value) {
+                        let aux = 0
+                        let array_palavras = [""]
+                        if (Array.isArray(value))
+                            for (let i = 0; i < value.length; i++) {
+                                const element = value[i];
+                                if (element.length + array_palavras[aux].length < 13) {
+                                    array_palavras[aux] =  array_palavras[aux] + " " +element
+                                } else {
+                                    aux++
+                                    array_palavras[aux] = element
+                                }
+                            }
+                        return array_palavras
+                    },
+                    align: 'right',
+                    style: {
+                        fontSize: '9px',
+                    },
+                },
             },
             noData: emptyChart,
             colors: ['#008eff'],
@@ -457,7 +542,7 @@ export class ChartIppo {
 
         var barOptionSaudeMental = {
             chart: {
-                height: 300,
+                height: 400,
                 type: 'bar',
                 toolbar: {
                     show: false,
@@ -465,6 +550,35 @@ export class ChartIppo {
             },
             dataLabels: {
                 enabled: false,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                }
+            },
+            yaxis: {
+                labels: {
+                    offsetX: 13,
+                    formatter: function (value) {
+                        let aux = 0
+                        let array_palavras = [""]
+                        if (Array.isArray(value))
+                            for (let i = 0; i < value.length; i++) {
+                                const element = value[i];
+                                if (element.length + array_palavras[aux].length < 15) {
+                                    array_palavras[aux] =  array_palavras[aux] + " " +element
+                                } else {
+                                    aux++
+                                    array_palavras[aux] = element
+                                }
+                            }
+                        return array_palavras
+                    },
+                    align: 'right',
+                    style: {
+                        fontSize: '10px',
+                    },
+                },
             },
             noData: emptyChart,
             colors: ['#e95f2b'],
