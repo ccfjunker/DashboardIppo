@@ -255,7 +255,7 @@ export class ChartIppo {
             },
             colors: ['#7d30cb', '#bfc9d4'],
             series: [data.totais.indicaram, data.totais.nao_indicaram],
-            labels: ["Indicaram prática de atividade física.", "Não prática de atividade física."],
+            labels: ["Indicaram alguma prática recorrente.", "Sem nenhuma atividade física e/ou sedentário."],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -338,7 +338,7 @@ export class ChartIppo {
             },
             colors: ['#f8538d', '#bfc9d4'],
             series: [data.totais.indicaram, data.totais.nao_indicaram],
-            labels: ["Indicaram como veem sua alimentação.", "Não como veem sua alimentação."],
+            labels: ["Indicaram alimentação desregrada ou dieta recorrente.", "Indicaram alimentação balanceada e/ou diferenciada."],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -500,7 +500,7 @@ export class ChartIppo {
             noData: emptyChart,
             colors: ['#e95f2b', '#bfc9d4'],
             series: [data.totais.indicaram, data.totais.nao_indicaram],
-            labels: ["Indicaram algum problema de ordem mental.", "Não indicaram algum problema de ordem mental."],
+            labels: ["Indicaram algum problema de ordem mental.", "Não indicaram problemas de ordem mental."],
             responsive: [{
                 breakpoint: 480,
                 options: {
