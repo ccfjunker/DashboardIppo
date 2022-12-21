@@ -22,7 +22,7 @@ export class Funcionario{
             UtilIppo.hideModalLoading();
             UtilIppo.hideModalAddFuncionario();
             UtilIppo.showModalInfo();
-            $('#funcionarioTable').DataTable().ajax.reload();
+            window.location.reload();
         });
     }
 }
