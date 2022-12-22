@@ -394,7 +394,7 @@ export class ChartIppo {
             },
             colors: ['#f8538d', '#bfc9d4'],
             series: [data.totais.indicaram, data.totais.nao_indicaram],
-            labels: ["Indicaram alimentação desregrada ou dieta recorrente.", "Indicaram alimentação balanceada e/ou diferenciada."],
+            labels: ["Indicaram alimentação balanceada e/ou diferenciada.", "Indicaram alimentação desregrada ou dieta recorrente."],
             responsive: [{
                 breakpoint: 480,
                 options: {
