@@ -70,7 +70,7 @@ class FuncionarioService
         $flows_array = json_decode($result_flows, true);
         $id_flow = "";
         foreach ($flows_array as $flow) {
-            if ($flow["name"] === "Fluxo de boas vindas") {
+            if ($flow["name"] === "Fluxo de Cadastro") {
                 $id_flow = $flow["id"];
             }
         }
