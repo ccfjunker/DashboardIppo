@@ -16,13 +16,15 @@ $("#btnAddFuncionario").click(function (){
     UtilIppo.showModalAddFuncionario(null);
 });
 
-$(".btn-edit-list").click(function (){
-    const id = $(this).val();
-    Funcionario.getInfoFuncionario(id, UtilIppo.showModalAddFuncionario)
-});
+$(window).on("load", function(){
+    $(".btn-edit-list").click(function (){
+        const id = $(this).val();
+        Funcionario.getInfoFuncionario(id, UtilIppo.showModalAddFuncionario)
+    });
 
-$(".btn-delete-list").click(function (){
-    const id = $(this).val();
-    const resposta = confirm('Deseja Deletar o Funcionario?')
-    if(resposta) Funcionario.delete(id)
+    $(".btn-delete-list").click(function (){
+        const id = $(this).val();
+        const resposta = confirm('Deseja Deletar o Funcionario?')
+        if(resposta) Funcionario.delete(id)
+    });
 });
