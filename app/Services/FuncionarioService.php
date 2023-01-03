@@ -5,9 +5,9 @@ namespace App\Services;
 use App\Http\Requests\FiltroDashboardEmpresaRequest;
 use App\Http\Requests\FuncionarioRequest;
 use App\Models\Pessoa\Funcionario;
+use App\Models\Empresa\Empresa;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
-use Illuminate\Support\Str;
 
 class FuncionarioService
 {
@@ -99,6 +99,17 @@ class FuncionarioService
         } else {
             self::insereArray($request->all());
             self::saveBotConversa($request->all());
+        }
+    }
+
+    public static function deletar($id)
+    {
+        $teste = Empresa::findByName("Sideout");
+        if ($id !== NULL) {
+            $funcionarioArray = array();
+            $funcionarioArray['id'] = $id;
+            $funcionarioArray['id_empresa'] = $teste['id'];
+            self::atualizaArray($funcionarioArray);
         }
     }
 

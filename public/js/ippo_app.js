@@ -19,5 +19,10 @@ $("#btnAddFuncionario").click(function (){
 $(".btn-edit-list").click(function (){
     const id = $(this).val();
     Funcionario.getInfoFuncionario(id, UtilIppo.showModalAddFuncionario)
+});
 
+$(".btn-delete-list").click(function (){
+    const id = $(this).val();
+    const resposta = confirm('Deseja Deletar o Funcionario?')
+    if(resposta) Funcionario.delete(id)
 });

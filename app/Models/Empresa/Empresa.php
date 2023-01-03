@@ -38,6 +38,10 @@ class Empresa extends BaseModel
         return self::where('cupom', $valor)->first();
     }
 
+    public static function findByName($valor){
+        return self::where('nome', $valor)->first();
+    }
+
     public function funcionarios(){
         return $this->hasMany('App\Models\Pessoa\Funcionario', 'id_empresa');
     }

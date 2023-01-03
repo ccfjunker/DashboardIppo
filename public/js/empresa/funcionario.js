@@ -25,4 +25,12 @@ export class Funcionario{
             window.location.reload();
         });
     }
+
+    static delete(id){
+        let ippoAjax = new IppoAjaxJSON("/deletarFuncionario/"+id, "GET", "funcionario.delete").createRequest(null);
+        ippoAjax.done(function (data){
+            alert(data)
+            window.location.reload();
+        });
+    }
 }
