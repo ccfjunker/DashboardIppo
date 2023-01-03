@@ -39,6 +39,7 @@ class FuncionarioService
         $id_field_cpf = "";
         $id_field_id_empresa = "";
         $id_field_nome_empresa= "";
+        $id_field_cupom_empresa= "";
         foreach ($fields_array as $field) {
             if ($field["key"] === "CPF") {
                 $id_field_cpf = $field["id"];
@@ -48,6 +49,9 @@ class FuncionarioService
             }
             if ($field["key"] === "NOME_EMPRESA") {
                 $id_field_nome_empresa = $field["id"];
+            }
+            if ($field["key"] === "CUPOM_EMPRESA") {
+                $id_field_cupom_empresa = $field["id"];
             }
         }
 
@@ -71,6 +75,13 @@ class FuncionarioService
             'headers' => $headers,
             'json' => [
                 "value" => $empresa["nome"]
+            ]
+        ]);
+        $client->post($url . 'subscriber/' . $id . '/custom_fields' .
+            '/' . $id_field_cupom_empresa . '/', [
+            'headers' => $headers,
+            'json' => [
+                "value" => $empresa["cupom"]
             ]
         ]);
 
