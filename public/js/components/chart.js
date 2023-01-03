@@ -770,6 +770,19 @@ export class ChartIppo {
         this.donutColaboradoresCadastradosEngajamento.updateSeries([engajamento, cadastrados]);
     }
     renderFelling(data) {
+        function getDate(date) {
+            let dia
+            let mes
+            let year
+            if (date.getDate().toString().length == 1)
+                dia = "0" + date.getDate()
+            else dia = date.getDate().toString()
+            if ((date.getMonth() + 1).toString().length == 1)
+                mes = "0" + (date.getMonth() + 1)
+            else mes = (date.getMonth() + 1).toString()
+            year = date.getFullYear().toString()
+            return `${dia}/${mes}/${year}`
+        }
         const series = returnFellingSeries(data)
         var barFelling = {
             series: [
@@ -800,6 +813,17 @@ export class ChartIppo {
                 height: 350,
                 zoom: {
                     autoScaleYaxis: true
+                },
+                events: {
+                    zoomed: function (chartContext, { xaxis, yaxis }) {
+                        if (document.querySelector('#filterCheck').checked) {
+                            var min = new Date(xaxis.min);
+                            var max = new Date(xaxis.max);
+                            document.getElementById("inputDataInicial").value = getDate(min);
+                            document.getElementById("inputDataFinal").value = getDate(max);
+                            document.getElementById("filtro").click();
+                        }
+                    }
                 }
             },
             grid: {
