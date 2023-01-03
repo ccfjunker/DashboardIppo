@@ -43,11 +43,11 @@
                        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="E-mail...">
                        <div class="invalid-feedback" id="inputEmailError"></div>
                    </div>
-                   <div class="col-md-6">
+                   {{-- <div class="col-md-6">
                        <label for="inputDataNascimento">Data de nascimento</label>
                        <input type="date" class="form-control" id="inputDataNascimento" name="data_nascimento" placeholder="E-mail...">
                        <div class="invalid-feedback" id="inputDataNascimentoError"></div>
-                   </div>
+                   </div> --}}
                    <div class="col-md-6">
                        <label for="selectEngajou" class="form-label">Engajou</label>
                        <select name="engajou" class="form-select" id="selectEngajou">
@@ -55,7 +55,7 @@
                            <option value="S">Sim</option>
                        </select>
                    </div>
-                   <div class="col-md-6">
+                   {{-- <div class="col-md-6">
                        <label for="selectTrabalho" class="form-label">Trabalho</label>
                        <select name="trabalho" class="form-select" id="selectTrabalho">
                            <option>Selecione a forma de trabalho</option>
@@ -74,7 +74,7 @@
                            @endforeach
                        </select>
                        <div class="invalid-feedback" id="selectGeneroError"></div>
-                   </div>
+                   </div> --}}
                </form>
             </div>
             <div class="modal-footer">
