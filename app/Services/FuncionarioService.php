@@ -38,6 +38,7 @@ class FuncionarioService
         $fields_array = json_decode($result_fields, true);
         $id_field_cpf = "";
         $id_field_id_empresa = "";
+        $id_field_nome_empresa= "";
         foreach ($fields_array as $field) {
             if ($field["key"] === "CPF") {
                 $id_field_cpf = $field["id"];
@@ -45,8 +46,12 @@ class FuncionarioService
             if ($field["key"] === "ID_EMPRESA") {
                 $id_field_id_empresa = $field["id"];
             }
+            if ($field["key"] === "NOME_EMPRESA") {
+                $id_field_nome_empresa = $field["id"];
+            }
         }
 
+        $empresa = Empresa::find($funcionarioArray["id_empresa"]);
         $client->post($url . 'subscriber/' . $id . '/custom_fields' .
             '/' . $id_field_cpf . '/', [
             'headers' => $headers,
@@ -59,6 +64,13 @@ class FuncionarioService
             'headers' => $headers,
             'json' => [
                 "value" => $funcionarioArray["id_empresa"]
+            ]
+        ]);
+        $client->post($url . 'subscriber/' . $id . '/custom_fields' .
+            '/' . $id_field_nome_empresa . '/', [
+            'headers' => $headers,
+            'json' => [
+                "value" => $empresa["nome"]
             ]
         ]);
 
