@@ -113,7 +113,7 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-12">
-                                            <button class="btn btn-primary">Filtrar</button>
+                                            <button class="btn btn-primary" id="filtro">Filtrar</button>
                                         </div>
                                     </div>
                                 </div>

@@ -65,8 +65,16 @@
                     <div class="statbox widget box box-shadow">
                         <div class="widget-header">
                             <div class="row">
-                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <div class="col-xl-8 col-md-8 col-sm-8 col-8">
                                     <h4>Evolução Diária</h4>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-sm-4 col-4">
+                                    <div class="form-check mt-3">
+                                        <input class="form-check-input" type="checkbox" value="" id="filterCheck">
+                                        <label class="form-check-label" for="filterCheck">
+                                          Aplicar Filtro de Zoom no Termômetro
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <hr/>
@@ -214,6 +222,7 @@
                     var dashboard = new Dashboard();
                     dashboard.loadDashboard($('#formFiltroAnamnese').serialize());
                     $('#formFiltroAnamnese').submit(function() {
+                        console.log("submit")
                         $("#iconAccordionOne").collapse('hide');
                         dashboard.refreshDashboard($('#formFiltroAnamnese').serialize());
                         return false;
