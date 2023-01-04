@@ -43,6 +43,11 @@ class FuncionarioController extends ListDataTableController
         return response()->json('Usuário cadastrado com sucesso!', 200);
     }
 
+    public function delete($id){
+        FuncionarioService::deletar($id);
+        return response()->json('Usuário deletado com sucesso!', 200);
+    }
+
     public function show($id){
         return Funcionario::find($id);
     }

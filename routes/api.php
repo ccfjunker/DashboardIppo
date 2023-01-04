@@ -53,3 +53,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('felling', 'WhatsApp\FellingController@store');
+Route::post('send_flow', 'BotConversa\FlowController@send_flow');
