@@ -112,7 +112,7 @@ class DashboardService
                 foreach ($arrayOpcao as $opcao) {
                     $data['opcoes'][$opcao]++;
                     // FIXME: write in a better way
-                    if ($opcao == "Balanceada") {
+                    if ($opcao == "Desregrada e Aleatória") {
                         $data['totais']['indicaram']--;
                         $data['totais']['nao_indicaram']++;
                     }

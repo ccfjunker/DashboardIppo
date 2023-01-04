@@ -58,7 +58,7 @@
                                                 placeholder="Data final..." />
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    {{-- <div class="row">
                                         <div class="col-md-4">
                                             <label for="selectIdade">Faixa de Idade: </label>
                                             <select class="form-select" id="selectIdade" name="selectIdade">
@@ -94,7 +94,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     @if (isUserAdmin())
                                         <div class="row">
                                             <div class="col-md-4">
@@ -113,7 +113,7 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-12">
-                                            <button class="btn btn-primary">Filtrar</button>
+                                            <button class="btn btn-primary" id="filtro">Filtrar</button>
                                         </div>
                                     </div>
                                 </div>

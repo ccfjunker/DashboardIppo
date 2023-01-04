@@ -5,9 +5,9 @@ namespace App\Services;
 use App\Http\Requests\FiltroDashboardEmpresaRequest;
 use App\Http\Requests\FuncionarioRequest;
 use App\Models\Pessoa\Funcionario;
+use App\Models\Empresa\Empresa;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
-use Illuminate\Support\Str;
 
 class FuncionarioService
 {
@@ -21,7 +21,7 @@ class FuncionarioService
         $response_user = $client->post($url . 'subscriber/', [
             'headers' => $headers,
             'json' => [
-                "phone" => "+" . $funcionarioArray["telefone"],
+                "phone" => "+55" . $funcionarioArray["telefone"],
                 "first_name" => $funcionarioArray["nome"],
                 "last_name" => $funcionarioArray["sobrenome"]
             ]
@@ -38,6 +38,8 @@ class FuncionarioService
         $fields_array = json_decode($result_fields, true);
         $id_field_cpf = "";
         $id_field_id_empresa = "";
+        $id_field_nome_empresa= "";
+        $id_field_cupom_empresa= "";
         foreach ($fields_array as $field) {
             if ($field["key"] === "CPF") {
                 $id_field_cpf = $field["id"];
@@ -45,8 +47,15 @@ class FuncionarioService
             if ($field["key"] === "ID_EMPRESA") {
                 $id_field_id_empresa = $field["id"];
             }
+            if ($field["key"] === "NOME_EMPRESA") {
+                $id_field_nome_empresa = $field["id"];
+            }
+            if ($field["key"] === "CUPOM_EMPRESA") {
+                $id_field_cupom_empresa = $field["id"];
+            }
         }
 
+        $empresa = Empresa::find($funcionarioArray["id_empresa"]);
         $client->post($url . 'subscriber/' . $id . '/custom_fields' .
             '/' . $id_field_cpf . '/', [
             'headers' => $headers,
@@ -61,6 +70,20 @@ class FuncionarioService
                 "value" => $funcionarioArray["id_empresa"]
             ]
         ]);
+        $client->post($url . 'subscriber/' . $id . '/custom_fields' .
+            '/' . $id_field_nome_empresa . '/', [
+            'headers' => $headers,
+            'json' => [
+                "value" => $empresa["nome"]
+            ]
+        ]);
+        $client->post($url . 'subscriber/' . $id . '/custom_fields' .
+            '/' . $id_field_cupom_empresa . '/', [
+            'headers' => $headers,
+            'json' => [
+                "value" => $empresa["cupom"]
+            ]
+        ]);
 
         $request_flows = $client->createRequest('GET', $url . 'flows/', [
             'headers' => $headers
@@ -70,7 +93,7 @@ class FuncionarioService
         $flows_array = json_decode($result_flows, true);
         $id_flow = "";
         foreach ($flows_array as $flow) {
-            if ($flow["name"] === "Fluxo de boas vindas") {
+            if ($flow["name"] === "Fluxo de Cadastro") {
                 $id_flow = $flow["id"];
             }
         }
@@ -99,6 +122,17 @@ class FuncionarioService
         } else {
             self::insereArray($request->all());
             self::saveBotConversa($request->all());
+        }
+    }
+
+    public static function deletar($id)
+    {
+        $teste = Empresa::findByName("Sideout");
+        if ($id !== NULL) {
+            $funcionarioArray = array();
+            $funcionarioArray['id'] = $id;
+            $funcionarioArray['id_empresa'] = $teste['id'];
+            self::atualizaArray($funcionarioArray);
         }
     }
 

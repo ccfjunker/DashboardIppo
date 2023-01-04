@@ -212,7 +212,7 @@ export class ChartIppo {
 
         var barOptionAtividadeFisica = {
             chart: {
-                height: 300,
+                height: 400,
                 type: 'bar',
                 toolbar: {
                     show: false,
@@ -220,6 +220,34 @@ export class ChartIppo {
             },
             dataLabels: {
                 enabled: false,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                }
+            },
+            yaxis: {
+                labels: {
+                    formatter: function (value) {
+                        let aux = 0
+                        let array_palavras = [""]
+                        if (Array.isArray(value))
+                            for (let i = 0; i < value.length; i++) {
+                                const element = value[i];
+                                if (element.length + array_palavras[aux].length < 10) {
+                                    array_palavras[aux] =  array_palavras[aux] + " " +element
+                                } else {
+                                    aux++
+                                    array_palavras[aux] = element
+                                }
+                            }
+                        return array_palavras
+                    },
+                    align: 'right',
+                    style: {
+                        fontSize: '10px',
+                    },
+                },
             },
             noData: emptyChart,
             colors: ['#7d30cb'],
@@ -255,7 +283,7 @@ export class ChartIppo {
             },
             colors: ['#7d30cb', '#bfc9d4'],
             series: [data.totais.indicaram, data.totais.nao_indicaram],
-            labels: ["Indicaram prática de atividade física.", "Não prática de atividade física."],
+            labels: ["Indicaram alguma prática recorrente.", "Sem nenhuma atividade física e/ou sedentário."],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -295,7 +323,7 @@ export class ChartIppo {
 
         var barOptionAlimentacao = {
             chart: {
-                height: 300,
+                height: 400,
                 type: 'bar',
                 toolbar: {
                     show: false,
@@ -303,6 +331,34 @@ export class ChartIppo {
             },
             dataLabels: {
                 enabled: false,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                }
+            },
+            yaxis: {
+                labels: {
+                    formatter: function (value) {
+                        let aux = 0
+                        let array_palavras = [""]
+                        if (Array.isArray(value))
+                            for (let i = 0; i < value.length; i++) {
+                                const element = value[i];
+                                if (element.length + array_palavras[aux].length < 14) {
+                                    array_palavras[aux] =  array_palavras[aux] + " " +element
+                                } else {
+                                    aux++
+                                    array_palavras[aux] = element
+                                }
+                            }
+                        return array_palavras
+                    },
+                    align: 'right',
+                    style: {
+                        fontSize: '10px',
+                    },
+                },
             },
             noData: emptyChart,
             colors: ['#f8538d'],
@@ -338,7 +394,7 @@ export class ChartIppo {
             },
             colors: ['#f8538d', '#bfc9d4'],
             series: [data.totais.indicaram, data.totais.nao_indicaram],
-            labels: ["Indicaram como veem sua alimentação.", "Não como veem sua alimentação."],
+            labels: ["Indicaram alimentação balanceada e/ou diferenciada.", "Indicaram alimentação desregrada ou dieta recorrente."],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -376,7 +432,7 @@ export class ChartIppo {
 
         var barOptionSaudeCronica = {
             chart: {
-                height: 300,
+                height: 400,
                 type: 'bar',
                 toolbar: {
                     show: false,
@@ -384,6 +440,35 @@ export class ChartIppo {
             },
             dataLabels: {
                 enabled: false,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                }
+            },
+            yaxis: {
+                labels: {
+                    offsetX: 13,
+                    formatter: function (value) {
+                        let aux = 0
+                        let array_palavras = [""]
+                        if (Array.isArray(value))
+                            for (let i = 0; i < value.length; i++) {
+                                const element = value[i];
+                                if (element.length + array_palavras[aux].length < 13) {
+                                    array_palavras[aux] =  array_palavras[aux] + " " +element
+                                } else {
+                                    aux++
+                                    array_palavras[aux] = element
+                                }
+                            }
+                        return array_palavras
+                    },
+                    align: 'right',
+                    style: {
+                        fontSize: '9px',
+                    },
+                },
             },
             noData: emptyChart,
             colors: ['#008eff'],
@@ -457,7 +542,7 @@ export class ChartIppo {
 
         var barOptionSaudeMental = {
             chart: {
-                height: 300,
+                height: 400,
                 type: 'bar',
                 toolbar: {
                     show: false,
@@ -465,6 +550,35 @@ export class ChartIppo {
             },
             dataLabels: {
                 enabled: false,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                }
+            },
+            yaxis: {
+                labels: {
+                    offsetX: 13,
+                    formatter: function (value) {
+                        let aux = 0
+                        let array_palavras = [""]
+                        if (Array.isArray(value))
+                            for (let i = 0; i < value.length; i++) {
+                                const element = value[i];
+                                if (element.length + array_palavras[aux].length < 15) {
+                                    array_palavras[aux] =  array_palavras[aux] + " " +element
+                                } else {
+                                    aux++
+                                    array_palavras[aux] = element
+                                }
+                            }
+                        return array_palavras
+                    },
+                    align: 'right',
+                    style: {
+                        fontSize: '10px',
+                    },
+                },
             },
             noData: emptyChart,
             colors: ['#e95f2b'],
@@ -500,7 +614,7 @@ export class ChartIppo {
             noData: emptyChart,
             colors: ['#e95f2b', '#bfc9d4'],
             series: [data.totais.indicaram, data.totais.nao_indicaram],
-            labels: ["Indicaram algum problema de ordem mental.", "Não indicaram algum problema de ordem mental."],
+            labels: ["Indicaram algum problema de ordem mental.", "Não indicaram problemas de ordem mental."],
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -656,6 +770,19 @@ export class ChartIppo {
         this.donutColaboradoresCadastradosEngajamento.updateSeries([engajamento, cadastrados]);
     }
     renderFelling(data) {
+        function getDate(date) {
+            let dia
+            let mes
+            let year
+            if (date.getDate().toString().length == 1)
+                dia = "0" + date.getDate()
+            else dia = date.getDate().toString()
+            if ((date.getMonth() + 1).toString().length == 1)
+                mes = "0" + (date.getMonth() + 1)
+            else mes = (date.getMonth() + 1).toString()
+            year = date.getFullYear().toString()
+            return `${dia}/${mes}/${year}`
+        }
         const series = returnFellingSeries(data)
         var barFelling = {
             series: [
@@ -686,6 +813,17 @@ export class ChartIppo {
                 height: 350,
                 zoom: {
                     autoScaleYaxis: true
+                },
+                events: {
+                    zoomed: function (chartContext, { xaxis, yaxis }) {
+                        if (document.querySelector('#filterCheck').checked) {
+                            var min = new Date(xaxis.min);
+                            var max = new Date(xaxis.max);
+                            document.getElementById("inputDataInicial").value = getDate(min);
+                            document.getElementById("inputDataFinal").value = getDate(max);
+                            document.getElementById("filtro").click();
+                        }
+                    }
                 }
             },
             grid: {

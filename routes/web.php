@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'] , function() {
     Route::get('/listarFuncionarios', 'Empresa\FuncionarioController@list')->name('funcionario.list');
     Route::get('/funcionario/{id}', 'Empresa\FuncionarioController@show')->name('funcionario.show');
     Route::post('/salvarFuncionario', 'Empresa\FuncionarioController@store')->name('funcionario.store');
+    Route::get('/deletarFuncionario/{id}', 'Empresa\FuncionarioController@delete')->name('funcionario.delete');
     Route::get('/file', 'FileController@downloadModeloFuncionario')->name('file.downloadModeloFuncionario');
 
 /*
@@ -1439,5 +1440,3 @@ Route::get('/register', function() {
 Route::get('/password/reset', function() {
     return redirect('/login');
 });
-
-
